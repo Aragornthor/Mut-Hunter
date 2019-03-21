@@ -1,6 +1,6 @@
 package competences;
 
-public class Acide implements CompetencesMonster {
+public class Acide implements Competences {
 	private String element;
 	private int effet;
 	private int duree;

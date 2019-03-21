@@ -1,6 +1,6 @@
 package competences;
 
-public class Piege implements CompetencesHunter {
+public class Piege implements Competences {
 	private String element;
 	private int effet;
 	private int duree;

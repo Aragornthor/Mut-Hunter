@@ -1,6 +1,6 @@
 package competences;
 
-public class Saut implements CompetencesMonster {
+public class Saut implements Competences {
 	private String element;
 	private int effet;
 	private int duree;

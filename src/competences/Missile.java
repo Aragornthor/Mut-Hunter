@@ -1,6 +1,6 @@
 package competences;
 
-public class Missile implements CompetencesHunter {
+public class Missile implements Competences {
 	private String element;
 	private int effet;
 	private int duree;

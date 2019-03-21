@@ -1,11 +1,21 @@
 package classes;
 
+import competences.Competences;
+import competences.IEM;
+
 public class Chasseur implements Personnage {
 	private int energie;
 	private int maxEnergie;
 	private Competences[] competences;
 	private Position position;
 	private int deplacement;
+	
+	public Chasseur() {
+		this.energie = 75;
+		this.position = new Position(0,0);
+		this.competences = new Competences[] {new IEM(), null};
+		this.deplacement = 1;
+	}
 	
 	@Override
 	public String toString() {
@@ -15,7 +25,11 @@ public class Chasseur implements Personnage {
 	public int getEnergie() {
 		return energie;
 	}
-
+	
+	public int getMaxEnergie() {
+		return maxEnergie;
+	}
+	
 	public Competences[] getCompetences() {
 		return competences;
 	}

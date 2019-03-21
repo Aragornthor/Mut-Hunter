@@ -1,6 +1,6 @@
 package competences;
 
-public interface CompetencesHunter {
+public interface Competences {
 	public String getElement();
 	public int getEffet();
 	public int getDuree();

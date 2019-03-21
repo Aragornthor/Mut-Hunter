@@ -1,6 +1,6 @@
 package competences;
 
-public class Shield implements CompetencesMonster {
+public class Shield implements Competences {
 	private String element;
 	private int effet;
 	private int duree;

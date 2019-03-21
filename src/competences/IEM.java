@@ -1,6 +1,6 @@
 package competences;
 
-public class IEM  implements CompetencesHunter {
+public class IEM  implements Competences {
 	private String element;
 	private int effet;
 	private int duree;
