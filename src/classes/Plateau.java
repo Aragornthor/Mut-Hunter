@@ -133,11 +133,7 @@ public class Plateau {
 		this.plateau[p.getX()][p.getY()].setType(type);
 	}
 	
-<<<<<<< HEAD
-	public int getHauteur() {
-=======
 	public int geHauteur() {
->>>>>>> 2308c39608dd7cac52ce9252bedc666b7b3b8e49
 		return this.plateau.length;
 	}
 	

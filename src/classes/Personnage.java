@@ -5,8 +5,15 @@ import java.util.Scanner;
 import competences.Competences;
 import competences.Shield;
 
+/**
+ * 
+ * @author Quentin Delmarre, Xavier Lezzoche
+ *
+ */
 public class Personnage {
-	
+	/**
+	 * energie test
+	 */
 	private int energie;
 	private int maxEnergie;
 	private Position position;
