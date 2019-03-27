@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Scanner;
+
 import competences.Competences;
 import competences.Shield;
 
@@ -44,9 +46,45 @@ public class Personnage {
 		return vie;
 	}
 	
-	public void seDeplace() {
-		
-		
+	public void seDeplace(Plateau p) {
+		while(!estDeplace(p)) {
+			System.out.println("Vous ne pouvez pas vous d�placer ici.");
+		}
+	}
+	
+	private boolean estDeplace(Plateau p) {
+		Scanner reader = new Scanner(System.in);
+		String entree = reader.next();
+		reader.close();
+		if(entree.equals("z")) { //SE DEPLACE VERS LE HAUT
+			if(this.position.getY()-1<0) return false;
+			else {
+				this.position.setY(this.position.getY()-1);
+				return true;
+			}
+		}
+		if(entree.equals("s")) { //SE DEPLACE VERS LE BAS
+			if(this.position.getY()+1>= p.getHauteur()) return false;
+			else {
+				this.position.setY(this.position.getY()+1);
+				return true;
+			}
+		}
+		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
+			if(this.position.getX()-1<0) return false;
+			else {
+				this.position.setX(this.position.getX()-1);
+				return true;
+			}
+		}
+		if(entree.equals("d")) { //SE DEPLACE VERS LA DROITE
+			if(this.position.getX()+1>=p.getLargeur()) return false;
+			else {
+				this.position.setX(this.position.getX()+1);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void rechargeEnergie() {

@@ -133,11 +133,11 @@ public class Plateau {
 		this.plateau[p.getX()][p.getY()].setType(type);
 	}
 	
-	public int getTabSize1() {
+	public int getHauteur() {
 		return this.plateau.length;
 	}
 	
-	public int getTabSize2() {
+	public int getLargeur() {
 		return this.plateau[0].length;
 	}
 	
