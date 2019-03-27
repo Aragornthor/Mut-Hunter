@@ -79,7 +79,7 @@ public class Plateau {
 	/**
 	 * Permet d'afficher le terrain.
 	 */
-	public void affichePlateau() {
+	public void affichePlateau(Personnage p) {
 		System.out.print("═════════════════════════════════════════\nTour n°"+this.tours+"\n╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗\n║");
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
@@ -88,6 +88,8 @@ public class Plateau {
 			if(i+1 == this.plateau.length) System.out.print("\n╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝\n");
 			else System.out.print("\n╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n║");
 		}
+		System.out.println(p.toString());
+		
 		System.out.println("\n═════════════════════════════════════════");
 	}
 	
@@ -150,7 +152,9 @@ public class Plateau {
 		this.loot = l;
 	}
 	
-	
+	public void ajoutCompetence(Personnage p) {
+		this.loot.changeCompetence(p);
+	}
 	
 	/**
 	 * Change le type de la case passé en parametre si la case passé en parametre est de type Chasseur.
@@ -219,6 +223,15 @@ public class Plateau {
 	}
 	
 	/**
+	 * 
+	 * @param p est la position dont on souhait recuperer le type
+	 * @return le type de la case passé en parametre
+	 */
+	public TypeCase getCaseType(Position p) {
+		return this.plateau[p.getX()][p.getY()].getType();
+	}
+	
+	/**
 	 * @return la hauteur du terrain
 	 */
 	public int getHauteur() {
@@ -249,6 +262,14 @@ public class Plateau {
 	 */
 	public TypeCase getType(Position p) {
 		return this.plateau[p.getX()][p.getY()].getType();
+	}
+	
+	/**
+	 * @param p est la position de la case voulu
+	 * @return la case passé en parametre
+	 */
+	public Case getCase(Position p) {
+		return this.plateau[p.getX()][p.getY()];
 	}
 	
 	/**

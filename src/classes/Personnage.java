@@ -24,13 +24,14 @@ public class Personnage {
 	 * Constructeur du Personnage avec des paramètres prédéfinis
 	 * @param type Prend en paramètre le type du personnage
 	 */
-	public Personnage(String type) {
+	public Personnage(String type,Position p) {
 		this.type = type;
 		this.energie = 75;
-		this.position = new Position(9,9);
+		this.position = p;
 		this.competences = new Competences[] {new Shield(), null};
 		this.deplacement = 1;
 		this.vie = 1;
+		this.maxEnergie = 100;
 	}
 	
 	/**
@@ -55,6 +56,14 @@ public class Personnage {
 	 */
 	public Position getPosition() {
 		return position;
+	}
+	
+	/**
+	 * Remplace la position du joueur par la position passé en parametre.
+	 * @param p est la nouvelle position
+	 */
+	public void setPosition(Position p) {
+		this.position = p;
 	}
 
 	/**
@@ -158,6 +167,17 @@ public class Personnage {
 	 * @param nb Nombre de la competence dans le tableau (soit 0 ou 1)
 	 */
 	public void setCompetence(Competences comp, int nb) {
-		competences[nb] = comp;
+		this.competences[nb] = comp;
+	}
+	
+	/**
+	 * @return le joueur en version texte
+	 */
+	public String toString() {
+		String res = this.type+" : "+this.energie+"/"+this.maxEnergie+"\nCompetences : \n";
+		for(Competences c:this.competences) {
+			if(c != null) res += c.toString()+"\n";
+		}
+		return res;
 	}
 }

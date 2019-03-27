@@ -44,5 +44,17 @@ public class TestCase {
 		c3.setTempsDecouvert();
 		assertEquals(c3.getTempsDecouvert(),1);
 	}
+	
+	@Test
+	public void testSetType() {
+		c1.setType(TypeCase.CHASSEUR_HIDE);
+		assertTrue(c1.getEstChasseur());
+		c2.setType(TypeCase.MONSTRE);
+		assertTrue(c2.getEstMonstre());
+		c3.setType(TypeCase.PORTAIL);
+		assertTrue(c3.getEstPortail());
+		c1.setType(TypeCase.NORMAL);
+		assertFalse(c1.getEstChasseur());
+	}
 
 }
