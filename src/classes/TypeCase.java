@@ -1,7 +1,7 @@
 package classes;
 
 public enum TypeCase {
-	NORMAL(' '),LOOT('O'),PORTAIL('P');
+	NORMAL(' '),LOOT('O'),PORTAIL('P'),MONSTRE('M'),MONSTRE_HIDE(' '),CHASSEUR('C'),CHASSEUR_HIDE(' ');
 	
 	private char icon;
 	
