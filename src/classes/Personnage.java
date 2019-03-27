@@ -138,4 +138,12 @@ public class Personnage {
 		if((this.energie + i) > maxEnergie) this.energie = maxEnergie;
 		else this.energie += i;
 	}
+
+	/**
+	 * 
+	 * @return Retourne le type du personnage
+	 */
+	public String getType() {
+		return type;
+	}
 }

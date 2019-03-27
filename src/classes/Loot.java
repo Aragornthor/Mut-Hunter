@@ -12,7 +12,7 @@ public class Loot {
 		Random rand = new Random();
 		Competences[] comp = p.getCompetences();
 		int i=0;
-		if(p.type == "chasseur") {
+		if(p.getType() == "chasseur") {
 			if(comp[1] == null) return comp[rand.nextInt(competencesChasseur.length-2)+1];
 			else{
 				while(comp[0].equals(competencesChasseur[i]) || comp[1].equals(competencesChasseur[i])){
@@ -21,7 +21,7 @@ public class Loot {
 				return competencesChasseur[i];
 			}
 		}
-		else if(p.type == "monstre") {
+		else if(p.getType() == "monstre") {
 			if(comp[1] == null) return comp[rand.nextInt(competencesMonstre.length-2)+1];
 			else{
 				while(comp[0].equals(competencesMonstre[i]) || comp[1].equals(competencesMonstre[i])){
@@ -30,5 +30,6 @@ public class Loot {
 				return competencesMonstre[i];
 			}			
 		}
+		return null;
 	}
 }
