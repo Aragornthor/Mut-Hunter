@@ -106,6 +106,20 @@ public class Case {
 	 */
 	public void setType(TypeCase type) {
 		this.type = type;
+		if(type == TypeCase.NORMAL) {
+			this.setEstChasseur(false);
+			this.setEstMonstre(false);
+			this.setEstPortail(false);
+			this.loot = false;
+		}else if(type == TypeCase.CHASSEUR || type == TypeCase.CHASSEUR_HIDE) {
+			this.setEstChasseur(true);
+		}else if(type == TypeCase.MONSTRE || type == TypeCase.MONSTRE_HIDE) {
+			this.setEstMonstre(true);
+		}else if(type == TypeCase.PORTAIL) {
+			this.setEstPortail(true);
+		}else if(type == TypeCase.LOOT) {
+			this.changeLoot();
+		}
 	}
 	
 	/**

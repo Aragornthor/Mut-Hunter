@@ -36,6 +36,10 @@ public class Plateau {
 	 * tourMonstre indique si c'est au monstre de jouer.
 	 */
 	private boolean tourMonstre;
+	/**
+	 * Permet de donner au joueur different bonus quand il recupère un loot
+	 */
+	private Loot loot;
 	
 	/**
 	 * On instancie un terrain de 10 par 10 et on régle le nombre de tour sur 1.
@@ -129,6 +133,24 @@ public class Plateau {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @return le bonus actuel
+	 */
+	public Loot getLoot() {
+		return this.loot;
+	}
+	
+	/**
+	 * Remplace le loot par celui passé en parametre.
+	 * @param l  est le loot que l'on souhait avoir
+	 */
+	public void setLoot(Loot l) {
+		this.loot = l;
+	}
+	
+	
 	
 	/**
 	 * Change le type de la case passé en parametre si la case passé en parametre est de type Chasseur.
