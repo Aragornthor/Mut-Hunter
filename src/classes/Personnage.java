@@ -20,7 +20,12 @@ public class Personnage {
 	private int deplacement;
 	private int vie;
 	
-	public Personnage() {
+	/**
+	 * Constructeur du Personnage avec des paramètres prédéfinis
+	 * @param type Prend en paramètre le type du personnage
+	 */
+	public Personnage(String type) {
+		this.type = type;
 		this.energie = 75;
 		this.position = new Position(9,9);
 		this.competences = new Competences[] {new Shield(), null};
