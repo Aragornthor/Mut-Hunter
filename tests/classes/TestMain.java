@@ -25,7 +25,7 @@ public class TestMain {
 		int deplacementsRestant = chasseur.getDeplacement();
 		boolean perdu = false;
 		
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !perdu && deplacementsRestant>0) {
+		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
 			chasseur.seDeplace(jeu);
 			jeu.affichePlateau(chasseur);
 			deplacementsRestant--;
@@ -35,6 +35,7 @@ public class TestMain {
 	public static void tourMonstre() {
 		jeu.hideChasseur(chasseur.getPosition());
 		jeu.showMonstre(monstre.getPosition());
+		jeu.affichePlateau(chasseur);
 		
 		int deplacementsRestant = monstre.getDeplacement();
 		
