@@ -42,7 +42,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p) == TypeCase.PORTAIL) p = pl.teleprtation(p);
+			if(pl.getType(p) == TypeCase.PORTAIL) p = pl.teleportation(p);
 			pl.setCaseType(p, TypeCase.CHASSEUR);
 			break;
 		case "down":
@@ -54,7 +54,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p) == TypeCase.PORTAIL) p = pl.teleprtation(p);
+			if(pl.getType(p) == TypeCase.PORTAIL) p = pl.teleportation(p);
 			pl.setCaseType(p, TypeCase.CHASSEUR);
 			break;
 		case "left":
@@ -66,7 +66,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p) == TypeCase.PORTAIL) pl.teleprtation(p);
+			if(pl.getType(p) == TypeCase.PORTAIL) pl.teleportation(p);
 			pl.setCaseType(p, TypeCase.CHASSEUR);
 			break;
 		case "right":
@@ -78,7 +78,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p) == TypeCase.PORTAIL) p = pl.teleprtation(p);
+			if(pl.getType(p) == TypeCase.PORTAIL) p = pl.teleportation(p);
 			pl.setCaseType(p, TypeCase.CHASSEUR);
 			break;		
 		}
