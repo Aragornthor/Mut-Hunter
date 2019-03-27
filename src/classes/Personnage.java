@@ -7,13 +7,12 @@ import competences.Shield;
 
 /**
  * 
+ * La classe Personnage permet d'instancier des personnages telle qu'un monstre ou un chasseur
  * @author Quentin Delmarre, Xavier Lezzoche
  *
  */
 public class Personnage {
-	/**
-	 * energie test
-	 */
+	private String type;
 	private int energie;
 	private int maxEnergie;
 	private Position position;
@@ -29,36 +28,69 @@ public class Personnage {
 		this.vie = 1;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne le niveau d'énergie du personnage
+	 */
 	public int getEnergie() {
 		return energie;
 	}
 
+	/**
+	 * 
+	 * @return Retourne le niveau maximum du personnage
+	 */
 	public int getMaxEnergie() {
 		return maxEnergie;
 	}
 
+	/**
+	 * 
+	 * @return Retourne la position du personnage sur le Plateau
+	 */
 	public Position getPosition() {
 		return position;
 	}
 
+	/**
+	 * 
+	 * @return Retourne la liste de compétences du personnage
+	 */
 	public Competences[] getCompetences() {
 		return competences;
 	}
 
+	/**
+	 * 
+	 * @return Retourne la vitesse de déplacement du personnage
+	 */
 	public int getDeplacement() {
 		return deplacement;
 	}
 
+	/**
+	 * 
+	 * @return Retourne le statut vitale du personnage
+	 */
 	public int getVie() {
 		return vie;
 	}
 	
+	/**
+	 * 
+	 * @param p Prend un plateau en paramètre
+	 */
 	public void seDeplace(Plateau p) {
 		while(!estDeplace(p)) {
 			System.out.println("Vous ne pouvez pas vous d�placer ici.");
 		}
 	}
 	
+	/**
+	 * 
+	 * @param p Prend un plateau en paramètre
+	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
+	 */
 	private boolean estDeplace(Plateau p) {
 		Scanner reader = new Scanner(System.in);
 		String entree = reader.next();
@@ -97,7 +129,11 @@ public class Personnage {
 	public void rechargeEnergie() {
 		rechargeEnergie(10);
 	}
-
+	
+	/**
+	 * 
+	 * @param i Prend en paramètre la quantité d'énergie à ajouter
+	 */
 	public void rechargeEnergie(int i) {
 		if((this.energie + i) > maxEnergie) this.energie = maxEnergie;
 		else this.energie += i;
