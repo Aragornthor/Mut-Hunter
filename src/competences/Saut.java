@@ -1,6 +1,7 @@
 package competences;
 
 public class Saut implements Competences {
+	private int id = 4;
 	private String element;
 	private int effet;
 	private int duree;
@@ -23,8 +24,17 @@ public class Saut implements Competences {
 		return duree;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	@Override
 	public String toString() {
 		return "["+this.element+":"+this.effet+":"+this.duree+"]";
+	}
+	
+	@Override
+	public boolean equals(Competences c) {
+		return this.id == c.getId();
 	}
 }
