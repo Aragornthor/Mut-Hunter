@@ -13,6 +13,7 @@ import competences.Shield;
  *
  */
 public class Personnage {
+	static Scanner reader = new Scanner(System.in);
 	private String type;
 	private int energie;
 	private int maxEnergie;
@@ -108,38 +109,53 @@ public class Personnage {
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
 	 */
 	private boolean estDeplace(Plateau p) {
-		Scanner reader = new Scanner(System.in);
-		String entree = reader.next();
-		reader.close();
-		if(entree.equals("z")) { //SE DEPLACE VERS LE HAUT
+		String entree = reader.nextLine();
+		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getY()-1<0) return false;
 			else {
+				p.setCaseType(this.position, TypeCase.NORMAL);
 				this.position.setY(this.position.getY()-1);
-				return true;
-			}
-		}
-		if(entree.equals("s")) { //SE DEPLACE VERS LE BAS
-			if(this.position.getY()+1>= p.getHauteur()) return false;
-			else {
-				this.position.setY(this.position.getY()+1);
-				return true;
-			}
-		}
-		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
-			if(this.position.getX()-1<0) return false;
-			else {
-				this.position.setX(this.position.getX()-1);
+				changeCase(p);
 				return true;
 			}
 		}
 		if(entree.equals("d")) { //SE DEPLACE VERS LA DROITE
+			if(this.position.getY()+1>= p.getHauteur()) return false;
+			else {
+				p.setCaseType(this.position, TypeCase.NORMAL);
+				this.position.setY(this.position.getY()+1);
+				changeCase(p);
+				return true;
+			}
+		}
+		if(entree.equals("z")) { //SE DEPLACE VERS LE HAUT
+			if(this.position.getX()-1<0) return false;
+			else {
+				p.setCaseType(this.position, TypeCase.NORMAL);
+				this.position.setX(this.position.getX()-1);
+				changeCase(p);
+				return true;
+			}
+		}
+		if(entree.equals("s")) { //SE DEPLACE VERS LE BAS
 			if(this.position.getX()+1>=p.getLargeur()) return false;
 			else {
+				p.setCaseType(this.position, TypeCase.NORMAL);
 				this.position.setX(this.position.getX()+1);
+				changeCase(p);
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Change la case où se trouve le personnage
+	 * @param p Prend un plateau en paramètre
+	 */
+	private void changeCase(Plateau p) {
+		if(this.type.equals("monstre")) p.setCaseType(this.position, TypeCase.MONSTRE);
+		else if(this.type.equals("chasseur")) p.setCaseType(this.position, TypeCase.CHASSEUR);
 	}
 
 	public void rechargeEnergie() {

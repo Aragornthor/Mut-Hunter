@@ -34,26 +34,7 @@ public class Loot {
 				i++;
 			}
 			return competences[i];
-		}		
-		
-		/*if(p.getType() == "chasseur") {
-			if(comp[1] == null) return competencesChasseur[rand.nextInt(competencesChasseur.length-2)+1];
-			else{
-				while(comp[0].equals(competencesChasseur[i]) || comp[1].equals(competencesChasseur[i])){
-					i++;
-				}
-				return competencesChasseur[i];
-			}
-		}
-		else if(p.getType() == "monstre") {
-			if(comp[1] == null) return competencesMonstre[rand.nextInt(competencesMonstre.length-2)+1];
-			else{
-				while(comp[0].equals(competencesMonstre[i]) || comp[1].equals(competencesMonstre[i])){
-					i++;
-				}
-				return competencesMonstre[i];
-			}			
-		}*/
+		}			
 	}
 	
 	/**
