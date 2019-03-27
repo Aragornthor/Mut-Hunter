@@ -48,7 +48,7 @@ public class TestPlateau {
 		case "down":
 			pl.setCaseType(p, TypeCase.NORMAL);
 			p.setX(p.getX()+1);
-			if(p.getX() >= pl.getTabSize1()) {
+			if(p.getX() >= pl.getHauteur()) {
 				p.setX(p.getX()-1);
 				System.out.println("Sortie du terrain !");
 				deplacementChasseur(pl,p);
@@ -72,7 +72,7 @@ public class TestPlateau {
 		case "right":
 			pl.setCaseType(p, TypeCase.NORMAL);
 			p.setY(p.getY()+1);
-			if(p.getY() >= pl.getTabSize2()) {
+			if(p.getY() >= pl.getLargeur()) {
 				p.setY(p.getY()-1);
 				System.out.println("Sortie du terrain !");
 				deplacementChasseur(pl,p);
