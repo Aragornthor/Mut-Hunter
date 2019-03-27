@@ -151,4 +151,13 @@ public class Personnage {
 	public String getType() {
 		return type;
 	}
+	
+	/**
+	 * Permet de changer l'une des deux competences du personnage avec la competence passee en parametre
+	 * @param comp Competence que l'on veut mettre pour le personnage
+	 * @param nb Nombre de la competence dans le tableau (soit 0 ou 1)
+	 */
+	public void setCompetence(Competences comp, int nb) {
+		competences[nb] = comp;
+	}
 }

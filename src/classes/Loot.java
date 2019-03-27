@@ -20,7 +20,7 @@ public class Loot {
 	 * @param p Personnage par rapport auquel la competence doit etre selectionnee 
 	 * @return Retourne une competence aleatoire selon si le personnage est un chasseur ou un monstre
 	 */
-	Competences competenceAleatoire(Personnage p) {
+	private Competences competenceAleatoire(Personnage p) {
 		Random rand = new Random();
 		Competences[] comp = p.getCompetences();
 		int i=0;
@@ -43,5 +43,23 @@ public class Loot {
 			}			
 		}
 		return null;
+	}
+	
+	/**
+	 * Change la competence vide en une competence aleatoire
+	 * @param p Personnage ou l'on desire changer une de ses competences, en l'occurence la deuxieme qui est vide
+	 */
+	public void changeCompetence(Personnage p) {
+		changeCompetence(p, 2);
+	}
+	
+	/**
+	 * Change la competence desiree en une competence aleatoire
+	 * @param p Personnage ou l'on desire changer une de ses competences, en l'occurence la deuxieme qui est vide
+	 * @param nbChange Numero de la competence a changer (soit 1 pour la premiere, 2 pour la 2eme)
+	 */
+	public void changeCompetence(Personnage p, int nbChange) {
+		nbChange--;
+		p.setCompetence(competenceAleatoire(p), nbChange);
 	}
 }
