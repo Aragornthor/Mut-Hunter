@@ -23,9 +23,21 @@ public class Loot {
 	private Competences competenceAleatoire(Personnage p) {
 		Random rand = new Random();
 		Competences[] comp = p.getCompetences();
+		Competences[] competences;
 		int i=0;
-		if(p.getType() == "chasseur") {
-			if(comp[1] == null) return comp[rand.nextInt(competencesChasseur.length-2)+1];
+		if(p.getType() == "chasseur") competences = competencesChasseur;
+		else competences = competencesMonstre;
+		
+		if(comp[1] == null) return competences[rand.nextInt(competences.length-1)+1];
+		else{
+			while(comp[0].equals(competences[i]) || comp[1].equals(competences[i])){
+				i++;
+			}
+			return competences[i];
+		}		
+		
+		/*if(p.getType() == "chasseur") {
+			if(comp[1] == null) return competencesChasseur[rand.nextInt(competencesChasseur.length-2)+1];
 			else{
 				while(comp[0].equals(competencesChasseur[i]) || comp[1].equals(competencesChasseur[i])){
 					i++;
@@ -34,15 +46,14 @@ public class Loot {
 			}
 		}
 		else if(p.getType() == "monstre") {
-			if(comp[1] == null) return comp[rand.nextInt(competencesMonstre.length-2)+1];
+			if(comp[1] == null) return competencesMonstre[rand.nextInt(competencesMonstre.length-2)+1];
 			else{
 				while(comp[0].equals(competencesMonstre[i]) || comp[1].equals(competencesMonstre[i])){
 					i++;
 				}
 				return competencesMonstre[i];
 			}			
-		}
-		return null;
+		}*/
 	}
 	
 	/**

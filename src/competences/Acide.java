@@ -57,7 +57,7 @@ public class Acide implements Competences {
 	 */
 	@Override
 	public String toString() {
-		return "["+this.element+":"+this.effet+":"+this.duree+"]";
+		return "["+this.id+":"+this.element+":"+this.effet+":"+this.duree+"]";
 	}
 
 	/**

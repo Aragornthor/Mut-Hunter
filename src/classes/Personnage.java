@@ -3,6 +3,7 @@ package classes;
 import java.util.Scanner;
 
 import competences.Competences;
+import competences.IEM;
 import competences.Shield;
 
 /**
@@ -28,7 +29,8 @@ public class Personnage {
 		this.type = type;
 		this.energie = 75;
 		this.position = p;
-		this.competences = new Competences[] {new Shield(), null};
+		if(type == "chasseur") this.competences = new Competences[] {new IEM(), null};
+		else this.competences = new Competences[] {new Shield(), null};
 		this.deplacement = 1;
 		this.vie = 1;
 		this.maxEnergie = 100;

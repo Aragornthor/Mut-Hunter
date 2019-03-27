@@ -5,8 +5,8 @@ public class TestMain {
 		Plateau jeu = new Plateau();
 		jeu.initPlateau();
 		jeu.ajoutLoot(2);
-		Personnage monstre = new Personnage("monstre");
-		Personnage chasseur = new Personnage("chasseur");
+		Personnage monstre = new Personnage("monstre", new Position(0,0));
+		Personnage chasseur = new Personnage("chasseur", new Position(0,0));
 
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 			tourMonstre();
