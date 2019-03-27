@@ -1,5 +1,11 @@
 package competences;
 
+/**
+ * 
+ * L'interface Competences donne toutes les methodes propres aux competences
+ * @author Quentin Delmarre, Robin Gallifa
+ *
+ */
 public interface Competences {
 	public String getElement();
 	public int getEffet();
