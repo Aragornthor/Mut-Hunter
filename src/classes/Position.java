@@ -53,7 +53,7 @@ public class Position {
 
 	/**
 	 * Modifie l'ordonnée de la Postion
-	 * @param x Prend en paramètre l'ordonnée du personnage
+	 * @param y Prend en paramètre l'ordonnée du personnage
 	 */
 	public void setY(int y) {
 		this.y = y;
