@@ -7,7 +7,7 @@ public class TestMain {
 		jeu.ajoutLoot(2);
 		Personnage monstre = new Personnage("monstre");
 		Personnage chasseur = new Personnage("chasseur");
-		
+
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 			tourMonstre();
 			tourChasseur();
