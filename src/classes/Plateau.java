@@ -59,14 +59,14 @@ public class Plateau {
 			}
 		}
 		this.generePortail();
-		this.startPersonnage();
 		
 	}
-	private void startPersonnage() {
-		this.plateau[0][0].setType(TypeCase.CHASSEUR);
-		this.plateau[0][0].setEstChasseur(true);
-		this.plateau[this.plateau.length-1][this.plateau[1].length-1].setType(TypeCase.MONSTRE);
-		this.plateau[this.plateau.length-1][this.plateau[1].length-1].setEstMonstre(true);
+	public void startPersonnage(Personnage chasseur, Personnage monstre) {
+		
+		this.plateau[chasseur.getPosition().getX()][chasseur.getPosition().getY()].setType(TypeCase.CHASSEUR);
+		this.plateau[chasseur.getPosition().getX()][chasseur.getPosition().getY()].setEstChasseur(true);
+		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].setType(TypeCase.MONSTRE);
+		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].setEstMonstre(true);
 	}
 	
 	private void generePortail() {

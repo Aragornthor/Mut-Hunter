@@ -9,6 +9,7 @@ public class TestMain {
 	public static void main(String[] args) {
 		
 		jeu.initPlateau();
+		jeu.startPersonnage(chasseur, monstre);
 		jeu.ajoutLoot(2);
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 			tourMonstre();
