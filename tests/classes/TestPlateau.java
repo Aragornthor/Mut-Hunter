@@ -33,9 +33,9 @@ public class TestPlateau {
 		do {
 			System.out.print("Direction :");
 			choix = sc.nextLine();
-		}while(!choix.equals("up") && !choix.equals("down") && !choix.equals("left") && !choix.equals("right"));
+		}while(!choix.equals("z") && !choix.equals("s") && !choix.equals("q") && !choix.equals("d"));
 		switch(choix) {
-		case "up":
+		case "z":
 			pl.setCaseType(p.getPosition(), TypeCase.NORMAL);
 			p.getPosition().setX(p.getPosition().getX()-1);
 			if(p.getPosition().getX() < 0) {
@@ -48,7 +48,7 @@ public class TestPlateau {
 			if(pl.getCase(p.getPosition()).getLoot()) pl.ajoutCompetence(p);
 			pl.setCaseType(p.getPosition(), TypeCase.CHASSEUR);
 			break;
-		case "down":
+		case "s":
 			pl.setCaseType(p.getPosition(), TypeCase.NORMAL);
 			p.getPosition().setX(p.getPosition().getX()+1);
 			if(p.getPosition().getX() >= pl.getHauteur()) {
@@ -61,7 +61,7 @@ public class TestPlateau {
 			if(pl.getCase(p.getPosition()).getLoot()) pl.ajoutCompetence(p);
 			pl.setCaseType(p.getPosition(), TypeCase.CHASSEUR);
 			break;
-		case "left":
+		case "q":
 			pl.setCaseType(p.getPosition(), TypeCase.NORMAL);
 			p.getPosition().setY(p.getPosition().getY()-1);
 			if(p.getPosition().getY() < 0) {
@@ -74,7 +74,7 @@ public class TestPlateau {
 			if(pl.getCase(p.getPosition()).getLoot()) pl.ajoutCompetence(p);
 			pl.setCaseType(p.getPosition(), TypeCase.CHASSEUR);
 			break;
-		case "right":
+		case "d":
 			pl.setCaseType(p.getPosition(), TypeCase.NORMAL);
 			p.getPosition().setY(p.getPosition().getY()+1);
 			if(p.getPosition().getY() >= pl.getLargeur()) {

@@ -47,6 +47,7 @@ public class Plateau {
 	public Plateau() {
 		this.plateau = new Case[10][10];
 		this.tours = 1;
+		this.loot = new Loot();
 	}
 	
 	/**
