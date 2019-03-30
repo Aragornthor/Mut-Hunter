@@ -98,24 +98,29 @@ public class Personnage {
 	 * @param p Prend un plateau en paramètre
 	 */
 	public void seDeplace(Plateau p) {
-		while(!estDeplace(p)) {
+		while(!estDeplaceJoueur(p)) {
 			System.out.println("Vous ne pouvez pas vous d�placer ici.");
 		}
 	}
 	
+	private boolean estDeplaceJoueur(Plateau p) {
+		String entree = reader.nextLine();
+		return estDeplace(p, entree);
+	}
 	/**
 	 * 
 	 * @param p Prend un plateau en paramètre
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
 	 */
-	private boolean estDeplace(Plateau p) {
-		String entree = reader.nextLine();
+	private boolean estDeplace(Plateau p, String entree) {
 		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getY()-1<0) return false;
 			else {
 				p.setCaseType(this.position, TypeCase.NORMAL);
 				this.position.setY(this.position.getY()-1);
+				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
 				changeCase(p);
+				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
 			}
 		}
@@ -124,7 +129,9 @@ public class Personnage {
 			else {
 				p.setCaseType(this.position, TypeCase.NORMAL);
 				this.position.setY(this.position.getY()+1);
+				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
 				changeCase(p);
+				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
 			}
 		}
@@ -133,7 +140,9 @@ public class Personnage {
 			else {
 				p.setCaseType(this.position, TypeCase.NORMAL);
 				this.position.setX(this.position.getX()-1);
+				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
 				changeCase(p);
+				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
 			}
 		}
@@ -142,7 +151,9 @@ public class Personnage {
 			else {
 				p.setCaseType(this.position, TypeCase.NORMAL);
 				this.position.setX(this.position.getX()+1);
+				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
 				changeCase(p);
+				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
 			}
 		}
