@@ -2,18 +2,18 @@ package classes;
 
 import java.util.Random;
 /**
- * Cette classe a pour but de gérer et manipuler un terrain, représenter par un tableau à deux dimension.
+ * Cette classe a pour but de gérer et manipuler un terrain, représenter par un tableau à deux dimensions.
  * @author Bankaert Benoit
  * @version 1.0
  */
 public class Plateau {
 	
 	/**
-	 * Rand permet de génerer des nombres aléatoire.
+	 * Rand permet de générer des nombres aléatoires.
 	 */
 	private static Random rand = new Random();
 	/**
-	 * plateau est un tableau à deux dimension de Case qui représente le terrain de jeu.
+	 * plateau est un tableau à deux dimensions de Case qui représente le terrain de jeu.
 	 */
 	private Case[][] plateau;
 	/**
@@ -21,7 +21,7 @@ public class Plateau {
 	 */
 	private int tours;
 	/**
-	 * PORTAIL1 repréente la position dans le terrain du premier portail.
+	 * PORTAIL1 représente la position dans le terrain du premier portail.
 	 */
 	private final Position PORTAIL1 = new Position(9,0);
 	/**
@@ -42,7 +42,7 @@ public class Plateau {
 	private Loot loot;
 	
 	/**
-	 * On instancie un terrain de 10 par 10 et on régle le nombre de tour sur 1.
+	 * On instancie un terrain de 10 par 10 et on règle le nombre de tour sur 1.
 	 */
 	public Plateau() {
 		this.plateau = new Case[10][10];
@@ -64,16 +64,12 @@ public class Plateau {
 	}
 	public void startPersonnage(Personnage chasseur, Personnage monstre) {
 		
-		this.plateau[chasseur.getPosition().getX()][chasseur.getPosition().getY()].setType(TypeCase.CHASSEUR);
 		this.plateau[chasseur.getPosition().getX()][chasseur.getPosition().getY()].setEstChasseur(true);
-		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].setType(TypeCase.MONSTRE);
 		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].setEstMonstre(true);
 	}
 	
 	private void generePortail() {
-		this.plateau[this.PORTAIL1.getX()][this.PORTAIL1.getY()].setType(TypeCase.PORTAIL);
 		this.plateau[this.PORTAIL1.getX()][this.PORTAIL1.getY()].setEstPortail(true);
-		this.plateau[this.PORTAIL2.getX()][this.PORTAIL2.getY()].setType(TypeCase.PORTAIL);
 		this.plateau[this.PORTAIL2.getX()][this.PORTAIL2.getY()].setEstPortail(true);
 	}
 	
@@ -81,17 +77,17 @@ public class Plateau {
 	 * Permet d'afficher le terrain.
 	 */
 	public void affichePlateau(Personnage p) {
-		System.out.print("═════════════════════════════════════════\nTour n°"+this.tours+"\n╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗\n║");
+		System.out.print("â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�\nTour nÂ°"+this.tours+"\nâ•”â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•—\nâ•‘");
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
-				System.out.print(" "+this.plateau[i][j].getIcon()+" ║");
+				System.out.print(" "+this.plateau[i][j].getIcon()+" â•‘");
 			}
-			if(i+1 == this.plateau.length) System.out.print("\n╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝\n");
-			else System.out.print("\n╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n║");
+			if(i+1 == this.plateau.length) System.out.print("\nâ•šâ•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•�\n");
+			else System.out.print("\nâ• â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•£\nâ•‘");
 		}
 		System.out.println(p.toString());
 		
-		System.out.println("\n═════════════════════════════════════════");
+		System.out.println("\nâ•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�");
 	}
 	
 	/**
@@ -113,7 +109,7 @@ public class Plateau {
 		int nb = 0;
 		for(int i = 0; i < this.plateau.length; i++)
 			for(int j = 0; j < this.plateau[i].length; j++)
-				if(this.plateau[i][j].getType() == TypeCase.LOOT)
+				if(this.plateau[i][j].getLoot())
 					nb++;
 		return nb;
 	}
@@ -146,7 +142,7 @@ public class Plateau {
 	}
 	
 	/**
-	 * Remplace le loot par celui passé en parametre.
+	 * Remplace le loot par celui passÃ© en parametre.
 	 * @param l  est le loot que l'on souhait avoir
 	 */
 	public void setLoot(Loot l) {
@@ -158,50 +154,8 @@ public class Plateau {
 	}
 	
 	/**
-	 * Change le type de la case passé en parametre si la case passé en parametre est de type Chasseur.
-	 * @param p est la position que l'on souhaite éditer
-	 */
-	public void hideChasseur(Position p) {
-		if(this.plateau[p.getX()][p.getY()].getType() == TypeCase.CHASSEUR) {
-			this.plateau[p.getX()][p.getY()].setType(TypeCase.CHASSEUR_HIDE);
-		}
-		
-	}
-	
-	/**
-	 * Change le type de la case passé en parametre si la case passé en parametre est de type Chasseur_Hide.
-	 * @param p est la position que l'on souhaite éditer
-	 */
-	public void showChasseur(Position p) {
-		if(this.plateau[p.getX()][p.getY()].getType() == TypeCase.CHASSEUR_HIDE) {
-			this.plateau[p.getX()][p.getY()].setType(TypeCase.CHASSEUR);
-		}
-		
-	}
-	
-	/**
-	 * Change le type de la case passé en parametre si la case passé en parametre est de type Monstre.
-	 * @param p est la position que l'on souhaite éditer
-	 */
-	public void hideMonstre(Position p) {
-		if(this.plateau[p.getX()][p.getY()].getType() == TypeCase.MONSTRE) {
-			this.plateau[p.getX()][p.getY()].setType(TypeCase.MONSTRE_HIDE);
-		}
-	}
-	
-	/**
-	 * Change le type de la case passé en parametre si la case passé en parametre est de type Monstre_Hide.
-	 * @param p est la position que l'on souhaite éditer
-	 */
-	public void showMonstre(Position p) {
-		if(this.plateau[p.getX()][p.getY()].getType() == TypeCase.MONSTRE_HIDE) {
-			this.plateau[p.getX()][p.getY()].setType(TypeCase.MONSTRE);
-		}
-	}
-	
-	/**
 	 * 
-	 * @return le nombre de tour écouler depuis le debut de la partie.
+	 * @return le nombre de tour Ã©couler depuis le debut de la partie.
 	 */
 	public int getTours() {
 		return this.tours;
@@ -215,21 +169,25 @@ public class Plateau {
 	}
 	
 	/**
-	 * Change le type de la case dont la position est passé en parametre dans le type passé en parametre.
+	 * Rend la case dont la position lui est donnée en paramètre normale.
 	 * @param p est la position dans le terrain que l'on souhaite éditer
-	 * @param type est le type dans lequel sera change la position passé en parametre
 	 */
-	public void setCaseType(Position p,TypeCase type) {
-		this.plateau[p.getX()][p.getY()].setType(type);
+	public void setCaseNormal(Position p) {
+		this.plateau[p.getX()][p.getY()].setEstChasseur(false);
+		this.plateau[p.getX()][p.getY()].setEstMonstre(false);
+		this.plateau[p.getX()][p.getY()].setEstPortail(false);
+		this.plateau[p.getX()][p.getY()].setLoot(false);
 	}
 	
 	/**
-	 * 
-	 * @param p est la position dont on souhait recuperer le type
-	 * @return le type de la case passé en parametre
+	 * Rend la case dont la position lui est donnée en paramètre normale sauf le fait que ce soit un portail.
+	 * @param p est la position dans le terrain que l'on souhaite éditer
 	 */
-	public TypeCase getCaseType(Position p) {
-		return this.plateau[p.getX()][p.getY()].getType();
+	public void setCaseNormalPortail(Position p) {
+		this.plateau[p.getX()][p.getY()].setEstChasseur(false);
+		this.plateau[p.getX()][p.getY()].setEstMonstre(false);
+		this.plateau[p.getX()][p.getY()].setEstPortail(true);
+		this.plateau[p.getX()][p.getY()].setLoot(false);
 	}
 	
 	/**
@@ -247,10 +205,10 @@ public class Plateau {
 	}
 	
 	/**
-	 * Verifie si la chasseur à gagner la partie.
+	 * Verifie si le chasseur a gagné la partie.
 	 * @param c est la position du chasseur
 	 * @param m est la position du monstre
-	 * @return true si le chasseur se trouve à la même position que le monstre
+	 * @return true si le chasseur se trouve Ã  la mÃªme position que le monstre
 	 */
 	public boolean victoireChasseur(Position c, Position m) {
 		if(c.equals(m)) return true;
@@ -258,15 +216,7 @@ public class Plateau {
 	}
 	
 	/**
-	 * @param p est la position d'une case
-	 * @return le type de la case dont la position est passé en parametre
-	 */
-	public TypeCase getType(Position p) {
-		return this.plateau[p.getX()][p.getY()].getType();
-	}
-	
-	/**
-	 * @param p est la position de la case voulu
+	 * @param p est la position de la case voulue
 	 * @return la case passé en parametre
 	 */
 	public Case getCase(Position p) {
@@ -274,9 +224,9 @@ public class Plateau {
 	}
 	
 	/**
-	 * Permet au jouer de ce téléporter d'un portail à un autre si la position passé en parametre est la posistion d'un portail.
+	 * Permet au joueur de se téléporter d'un portail à un autre si la position passée en paramètre est la position d'un portail.
 	 * @param p est la position du joueur
-	 * @return la position d'un poratil
+	 * @return la position d'un portail
 	 */
 	public Position teleportation(Position p) {
 		if(p.equals(this.PORTAIL1)) return this.PORTAIL2;
@@ -291,7 +241,7 @@ public class Plateau {
 	}
 	
 	/**
-	 * Change le statut de tourChasseur avec le booléen passé en parametre.
+	 * Change le statut de tourChasseur avec le booléen passé en paramètre.
 	 * @param b est le nouveau statut de tourChasseur
 	 */
 	public void setTourChasseur(boolean b){
@@ -306,7 +256,7 @@ public class Plateau {
 	}
 	
 	/**
-	 * Change le statut de tourMonstre avec le booléen passé en parametre. 
+	 * Change le statut de tourMonstre avec le booléen passé en paramètre. 
 	 * @param b est le nouveau statut de tourMonstre
 	 */
 	public void setTourMonstre(boolean b){

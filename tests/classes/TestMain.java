@@ -20,8 +20,8 @@ public class TestMain {
 	}
 
 	public static void tourChasseur() {
-		jeu.showChasseur(chasseur.getPosition());
-		jeu.hideMonstre(monstre.getPosition());
+		jeu.getCase(chasseur.getPosition()).show();
+		jeu.getCase(monstre.getPosition()).hide();
 		jeu.affichePlateau(chasseur);
 		int deplacementsRestant = chasseur.getDeplacement();
 		boolean perdu = false;
@@ -29,20 +29,22 @@ public class TestMain {
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
 			chasseur.seDeplace(jeu);
 			jeu.affichePlateau(chasseur);
+			jeu.ajoutLoot(1);			
 			deplacementsRestant--;
 		}
 	}
 	
 	public static void tourMonstre() {
-		jeu.hideChasseur(chasseur.getPosition());
-		jeu.showMonstre(monstre.getPosition());
-		jeu.affichePlateau(chasseur);
+		jeu.getCase(monstre.getPosition()).show();
+		jeu.getCase(chasseur.getPosition()).hide();
+		jeu.affichePlateau(monstre);
 		
 		int deplacementsRestant = monstre.getDeplacement();
 		
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
 			monstre.seDeplace(jeu);
 			jeu.affichePlateau(monstre);
+			jeu.ajoutLoot(1);
 			deplacementsRestant--;
 		}
 	}

@@ -23,13 +23,18 @@ public class TestCase {
 		c3 = new Case();
 		c4 = new Case();
 	}
+	
+	public boolean estNormale(Case c) {
+		if(!c.getEstChasseur() && !c.getEstMonstre() && !c.getEstPortail() && !c.getLoot()) return true;
+		return false;
+	}
 	@Test
 	public void testChangeLoot() {
 		assertTrue(c1.getLoot() == false);
-		assertEquals(c1.getType(),TypeCase.NORMAL);
+		assertTrue(estNormale(c1));
 		c1.changeLoot();
 		assertTrue(c1.getLoot());
-		assertEquals(c1.getType(),TypeCase.LOOT);
+		assertTrue(c1.getLoot());
 	}
 	
 	@Test
@@ -43,18 +48,6 @@ public class TestCase {
 		assertEquals(c3.getTempsDecouvert(),0);
 		c3.setTempsDecouvert();
 		assertEquals(c3.getTempsDecouvert(),1);
-	}
-	
-	@Test
-	public void testSetType() {
-		c1.setType(TypeCase.CHASSEUR_HIDE);
-		assertTrue(c1.getEstChasseur());
-		c2.setType(TypeCase.MONSTRE);
-		assertTrue(c2.getEstMonstre());
-		c3.setType(TypeCase.PORTAIL);
-		assertTrue(c3.getEstPortail());
-		c1.setType(TypeCase.NORMAL);
-		assertFalse(c1.getEstChasseur());
 	}
 
 }

@@ -44,7 +44,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p.getPosition()) == TypeCase.PORTAIL) p.setPosition(pl.teleportation(p.getPosition())); 
+			if(pl.getCase(p.getPosition()).getEstPortail()) p.setPosition(pl.teleportation(p.getPosition())); 
 			if(pl.getCase(p.getPosition()).getLoot()) pl.ajoutCompetence(p);
 			pl.setCaseType(p.getPosition(), TypeCase.CHASSEUR);
 			break;
@@ -57,7 +57,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p.getPosition()) == TypeCase.PORTAIL) p.setPosition(pl.teleportation(p.getPosition()));
+			if(pl.getCase(p.getPosition()).getEstPortail()) p.setPosition(pl.teleportation(p.getPosition()));
 			if(pl.getCase(p.getPosition()).getLoot()) pl.ajoutCompetence(p);
 			pl.setCaseType(p.getPosition(), TypeCase.CHASSEUR);
 			break;
@@ -70,7 +70,7 @@ public class TestPlateau {
 				deplacementChasseur(pl,p);
 				break;
 			}
-			if(pl.getType(p.getPosition()) == TypeCase.PORTAIL) p.setPosition(pl.teleportation(p.getPosition()));
+			if(pl.getCase(p.getPosition()).getEstPortail()) p.setPosition(pl.teleportation(p.getPosition()));
 			if(pl.getCase(p.getPosition()).getLoot()) pl.ajoutCompetence(p);
 			pl.setCaseType(p.getPosition(), TypeCase.CHASSEUR);
 			break;

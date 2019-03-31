@@ -7,20 +7,19 @@ package classes;
  */
 public class Case {
 
-	private TypeCase type;
 	private boolean estDecouvert;
 	private int tempsDecouvert;
 	private boolean loot;
 	private boolean estPortail;
 	private boolean estChasseur;
 	private boolean estMonstre;
+	private boolean hide;
 	
 	/**
 	 * Initialise une case de type normal.
 	 */
 	public Case() {
 		this.loot = false;
-		this.type = TypeCase.NORMAL;
 		this.estDecouvert = false;
 		this.tempsDecouvert = 0;
 		this.estPortail = false;
@@ -86,41 +85,19 @@ public class Case {
 	public void changeLoot() {
 		if(this.loot) {
 			this.loot = false;
-			this.type = TypeCase.NORMAL;
 		}else {
 			this.loot = true;
-			this.type = TypeCase.LOOT;
 		}
 	}
 	
-	/**
-	 * @return le type de la case
-	 */
-	public TypeCase getType() {
-		return this.type;
+	public void setLoot(boolean loot) {
+		this.loot = loot;
 	}
 	
 	/**
 	 * Change le type de la case avec celui passé en parametre.
 	 * @param type que l'on souhait mettre à la case
 	 */
-	public void setType(TypeCase type) {
-		this.type = type;
-		if(type == TypeCase.NORMAL) {
-			this.setEstChasseur(false);
-			this.setEstMonstre(false);
-			this.setEstPortail(false);
-			this.loot = false;
-		}else if(type == TypeCase.CHASSEUR || type == TypeCase.CHASSEUR_HIDE) {
-			this.setEstChasseur(true);
-		}else if(type == TypeCase.MONSTRE || type == TypeCase.MONSTRE_HIDE) {
-			this.setEstMonstre(true);
-		}else if(type == TypeCase.PORTAIL) {
-			this.setEstPortail(true);
-		}else if(type == TypeCase.LOOT) {
-			this.changeLoot();
-		}
-	}
 	
 	/**
 	 * @return true si la case à était découvert, false sinon
@@ -156,7 +133,41 @@ public class Case {
 	 * @return le caracetre correspondant au type de la case
 	 */
 	public char getIcon() {
-		return this.type.getIcon();
+		if(!this.getHide()) {
+			if(this.getEstChasseur()) return 'C';
+			else if(this.getEstMonstre()) return 'M';
+			else if(this.getEstPortail()) return 'P';
+			else if(this.getLoot()) return 'O';
+			else return ' ';
+		}
+		else if(this.getEstPortail()) return 'P';
+		else if(this.getLoot()) return 'O';
+		else return ' ';
+	}
+	
+	public boolean getHide() {
+		return hide;
+	}
+	
+	public void setHide(boolean hide) {
+		this.hide = hide;
+	}
+	
+	/**
+	 * Rend le personnage cach�.
+	 * 
+	 */
+	public void hide() {
+		this.setHide(true);
+		
+	}
+	
+	/**
+	 * Rend le personnage visible.
+	 * 
+	 */
+	public void show() {
+		this.setHide(false);	
 	}
 
 

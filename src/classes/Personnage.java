@@ -116,9 +116,10 @@ public class Personnage {
 		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getY()-1<0) return false;
 			else {
-				p.setCaseType(this.position, TypeCase.NORMAL);
+				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
+				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
-				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
@@ -127,9 +128,10 @@ public class Personnage {
 		if(entree.equals("d")) { //SE DEPLACE VERS LA DROITE
 			if(this.position.getY()+1>= p.getHauteur()) return false;
 			else {
-				p.setCaseType(this.position, TypeCase.NORMAL);
+				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
+				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
-				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
@@ -138,9 +140,10 @@ public class Personnage {
 		if(entree.equals("z")) { //SE DEPLACE VERS LE HAUT
 			if(this.position.getX()-1<0) return false;
 			else {
-				p.setCaseType(this.position, TypeCase.NORMAL);
+				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
+				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
-				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
@@ -149,9 +152,10 @@ public class Personnage {
 		if(entree.equals("s")) { //SE DEPLACE VERS LE BAS
 			if(this.position.getX()+1>=p.getLargeur()) return false;
 			else {
-				p.setCaseType(this.position, TypeCase.NORMAL);
+				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
+				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
-				if(p.getType(this.position) == TypeCase.PORTAIL) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
 				return true;
@@ -165,8 +169,8 @@ public class Personnage {
 	 * @param p Prend un plateau en paramètre
 	 */
 	private void changeCase(Plateau p) {
-		if(this.type.equals("monstre")) p.setCaseType(this.position, TypeCase.MONSTRE);
-		else if(this.type.equals("chasseur")) p.setCaseType(this.position, TypeCase.CHASSEUR);
+		if(this.type.equals("monstre")) p.getCase(this.position).setEstMonstre(true);
+		else if(this.type.equals("chasseur")) p.getCase(this.position).setEstChasseur(true);
 	}
 
 	public void rechargeEnergie() {
@@ -209,4 +213,5 @@ public class Personnage {
 		}
 		return res;
 	}
+	
 }

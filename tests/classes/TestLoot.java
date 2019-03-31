@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import competences.Competences;
-import competences.Missile;
 
 public class TestLoot {
 
