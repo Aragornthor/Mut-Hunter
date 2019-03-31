@@ -77,17 +77,17 @@ public class Plateau {
 	 * Permet d'afficher le terrain.
 	 */
 	public void affichePlateau(Personnage p) {
-		System.out.print("â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�\nTour nÂ°"+this.tours+"\nâ•”â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•¦â•�â•�â•�â•—\nâ•‘");
+		System.out.print("═════════════════════════════════════════\nTour n°"+this.tours+"\n╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗\n║");
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
 				System.out.print(" "+this.plateau[i][j].getIcon()+" â•‘");
 			}
-			if(i+1 == this.plateau.length) System.out.print("\nâ•šâ•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•©â•�â•�â•�â•�\n");
-			else System.out.print("\nâ• â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•¬â•�â•�â•�â•£\nâ•‘");
+			if(i+1 == this.plateau.length) System.out.print("\n╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝\n");
+			else System.out.print("\n╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n║");
 		}
 		System.out.println(p.toString());
 		
-		System.out.println("\nâ•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�â•�");
+		System.out.println("\n═════════════════════════════════════════");
 	}
 	
 	/**
@@ -208,7 +208,7 @@ public class Plateau {
 	 * Verifie si le chasseur a gagné la partie.
 	 * @param c est la position du chasseur
 	 * @param m est la position du monstre
-	 * @return true si le chasseur se trouve Ã  la mÃªme position que le monstre
+	 * @return true si le chasseur se trouve à la même position que le monstre
 	 */
 	public boolean victoireChasseur(Position c, Position m) {
 		if(c.equals(m)) return true;
