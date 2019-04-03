@@ -77,6 +77,7 @@ public class Plateau {
 	 * Permet d'afficher le terrain.
 	 */
 	public void affichePlateau(Personnage p) {
+		clearScreen();
 		System.out.print("═════════════════════════════════════════\nTour n°"+this.tours+"\n╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗\n║");
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
@@ -261,5 +262,19 @@ public class Plateau {
 	 */
 	public void setTourMonstre(boolean b){
 		this.tourMonstre = b;
-	}	
+	}
+	
+	private static void clearScreen() {
+		try {
+			if(System.getProperty("os.name" ).startsWith("Windows")) {
+				Runtime.getRuntime().exec("cls" );
+			} else {
+			    Runtime.getRuntime().exec("clear" );
+			}
+		} catch(Exception e) {
+			for(int i = 0; i < 100; i++) {
+				System.out.println();
+			}
+		}
+	}
 }
