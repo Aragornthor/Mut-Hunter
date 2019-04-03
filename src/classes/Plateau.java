@@ -43,6 +43,10 @@ public class Plateau {
 	
 	private int dernierLoot;
 	
+	private final int nbCases;
+	
+	private int compteurCasesDecouvertes;
+	
 	/**
 	 * On instancie un terrain de 10 par 10 et on règle le nombre de tour sur 1.
 	 */
@@ -51,6 +55,8 @@ public class Plateau {
 		this.tours = 1;
 		this.loot = new Loot();
 		this.dernierLoot = 0;
+		this.nbCases = this.getHauteur()*this.getLargeur()-2;
+		this.compteurCasesDecouvertes = 1;
 	}
 	
 	/**
@@ -69,6 +75,7 @@ public class Plateau {
 		
 		this.plateau[chasseur.getPosition().getX()][chasseur.getPosition().getY()].setEstChasseur(true);
 		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].setEstMonstre(true);
+		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].decouvrirCase();
 	}
 	
 	private void generePortail() {
@@ -228,6 +235,21 @@ public class Plateau {
 		return false;
 	}
 	
+	public boolean victoireMonstre() {
+		if(this.compteurCasesDecouvertes == this.nbCases) return true;
+		return false;
+	}
+	
+	public boolean defaiteMonstre(Position m) {
+		if(this.getCase(m).getEstDecouvert()) {
+			System.out.println("Vous êtes déjà passé par cette case. Vous avez PERDU !");
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
 	/**
 	 * @param p est la position de la case voulue
 	 * @return la case passé en parametre
@@ -309,5 +331,13 @@ public class Plateau {
 				System.out.println();
 			}
 		}
+	}
+	
+	public int getCompteurCasesDecouvertes() {
+		return this.compteurCasesDecouvertes;
+	}
+	
+	public void setCompteurCasesDecouvertes() {
+		this.compteurCasesDecouvertes++;
 	}
 }

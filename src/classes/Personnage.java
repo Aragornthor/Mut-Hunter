@@ -67,7 +67,8 @@ public class Personnage {
 	 * @param p est la nouvelle position
 	 */
 	public void setPosition(Position p) {
-		this.position = p;
+		this.position.setX(p.getX());
+		this.position.setY(p.getY());
 	}
 
 	/**
@@ -120,7 +121,7 @@ public class Personnage {
 				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
 				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
-				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -135,7 +136,7 @@ public class Personnage {
 				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
 				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
-				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -150,7 +151,7 @@ public class Personnage {
 				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
 				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
-				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -165,7 +166,7 @@ public class Personnage {
 				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
 				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
-				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
+				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);

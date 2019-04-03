@@ -11,7 +11,7 @@ public class TestMain {
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		jeu.ajoutLoot(2);
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !jeu.victoireMonstre() && !jeu.defaiteMonstre(monstre.getPosition())) {
 			tourMonstre();
 			tourChasseur();
 			jeu.addTours();
@@ -26,7 +26,7 @@ public class TestMain {
 		int deplacementsRestant = chasseur.getDeplacement();
 		boolean perdu = false;
 		
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
+		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !jeu.victoireMonstre() && !jeu.defaiteMonstre(monstre.getPosition()) && deplacementsRestant>0) {
 			chasseur.seDeplace(jeu);
 			jeu.affichePlateau(chasseur);
 			if(jeu.getTours()-jeu.getDernierLoot()>5) {
@@ -43,13 +43,14 @@ public class TestMain {
 		
 		int deplacementsRestant = monstre.getDeplacement();
 		
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
+		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !jeu.victoireMonstre() && !jeu.defaiteMonstre(monstre.getPosition()) && deplacementsRestant>0) {
 			monstre.seDeplace(jeu);
 			jeu.affichePlateau(monstre);
 			if(jeu.getTours()-jeu.getDernierLoot()>5) {
 				jeu.ajoutLoot(1);			
 			}
 			deplacementsRestant--;
+			if(! jeu.getCase(monstre.getPosition()).getEstPortail() && jeu.getCase(monstre.getPosition()).getEstDecouvert()) jeu.setCompteurCasesDecouvertes();
 		}
 	}
 }
