@@ -11,39 +11,50 @@ public class TestMain {
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		jeu.ajoutLoot(2);
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !jeu.victoireMonstre() && !jeu.defaiteMonstre(monstre.getPosition())) {
-			tourMonstre();
-			tourChasseur();
+		
+		boolean fini = false;
+		
+		while(!fini) {
+			fini = tourMonstre();
+			if(fini) break;
+			fini = tourChasseur();
 			jeu.addTours();
 		}
+		
+		System.out.println("Partie Finie !");
 
 	}
 
-	public static void tourChasseur() {
+	public static boolean tourChasseur() {
 		jeu.getCase(chasseur.getPosition()).show();
 		jeu.getCase(monstre.getPosition()).hide();
 		jeu.affichePlateau(chasseur);
 		int deplacementsRestant = chasseur.getDeplacement();
-		boolean perdu = false;
 		
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !jeu.victoireMonstre() && !jeu.defaiteMonstre(monstre.getPosition()) && deplacementsRestant>0) {
+		while(deplacementsRestant>0) {
+			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true;
 			chasseur.seDeplace(jeu);
+			chasseur.changeCase(jeu);
 			jeu.affichePlateau(chasseur);
 			if(jeu.getTours()-jeu.getDernierLoot()>5) {
 				jeu.ajoutLoot(1);			
 			}
 			deplacementsRestant--;
 		}
+		return false;
 	}
 	
-	public static void tourMonstre() {
+	public static boolean tourMonstre() {
 		jeu.getCase(monstre.getPosition()).show();
 		jeu.getCase(chasseur.getPosition()).hide();
 		jeu.affichePlateau(monstre);
+		boolean perdu = false;
 		
 		int deplacementsRestant = monstre.getDeplacement();
 		
-		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && !jeu.victoireMonstre() && !jeu.defaiteMonstre(monstre.getPosition()) && deplacementsRestant>0) {
+		while(deplacementsRestant>0) {
+			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true;
+			if(jeu.victoireMonstre()) return true;
 			monstre.seDeplace(jeu);
 			jeu.affichePlateau(monstre);
 			if(jeu.getTours()-jeu.getDernierLoot()>5) {
@@ -51,6 +62,10 @@ public class TestMain {
 			}
 			deplacementsRestant--;
 			if(! jeu.getCase(monstre.getPosition()).getEstPortail() && jeu.getCase(monstre.getPosition()).getEstDecouvert()) jeu.setCompteurCasesDecouvertes();
+			perdu = jeu.defaiteMonstre(monstre.getPosition());
+			monstre.changeCase(jeu);
+			if(perdu) return perdu;
 		}
+		return false;
 	}
 }

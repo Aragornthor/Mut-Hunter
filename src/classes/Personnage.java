@@ -122,7 +122,7 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				changeCase(p);
+				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -137,7 +137,7 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				changeCase(p);
+				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -152,7 +152,7 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				changeCase(p);
+				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -167,7 +167,7 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				changeCase(p);
+				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -182,13 +182,15 @@ public class Personnage {
 	 * Change la case où se trouve le personnage
 	 * @param p Prend un plateau en paramètre
 	 */
-	private void changeCase(Plateau p) {
+	public boolean changeCase(Plateau p) {
+		boolean fini = p.defaiteMonstre(this.position);
 		if(this.type.equals("monstre")) {
 			p.getCase(this.position).setEstMonstre(true);
 			p.getCase(this.position).decouvrirCase();
 			p.getCase(this.position).setTempsDecouvert(p.getTours());
 		}
 		else if(this.type.equals("chasseur")) p.getCase(this.position).setEstChasseur(true);
+		return fini;
 	}
 
 	public void rechargeEnergie() {
