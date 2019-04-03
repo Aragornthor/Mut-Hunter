@@ -25,6 +25,7 @@ public class Personnage {
 	/**
 	 * Constructeur du Personnage avec des paramètres prédéfinis
 	 * @param type Prend en paramètre le type du personnage
+	 * @param p Prend en paramètre la Position du personnage
 	 */
 	public Personnage(String type,Position p) {
 		this.type = type;

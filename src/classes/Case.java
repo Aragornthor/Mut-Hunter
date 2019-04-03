@@ -154,7 +154,7 @@ public class Case {
 	}
 	
 	/**
-	 * Rend le personnage caché.
+	 * Rend le personnage cachÃ©.
 	 * 
 	 */
 	public void hide() {

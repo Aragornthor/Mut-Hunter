@@ -75,6 +75,7 @@ public class Plateau {
 	
 	/**
 	 * Permet d'afficher le terrain.
+	 * @param p prend un personnage en paramètre
 	 */
 	public void affichePlateau(Personnage p) {
 		clearScreen();
