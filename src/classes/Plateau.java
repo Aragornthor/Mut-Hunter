@@ -41,6 +41,8 @@ public class Plateau {
 	 */
 	private Loot loot;
 	
+	private int dernierLoot;
+	
 	/**
 	 * On instancie un terrain de 10 par 10 et on règle le nombre de tour sur 1.
 	 */
@@ -48,6 +50,7 @@ public class Plateau {
 		this.plateau = new Case[10][10];
 		this.tours = 1;
 		this.loot = new Loot();
+		this.dernierLoot = 0;
 	}
 	
 	/**
@@ -88,6 +91,14 @@ public class Plateau {
 			else System.out.print("\n╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n║");
 		}
 		System.out.println(p.toString());
+		
+		if(this.plateau[p.getPosition().getX()][p.getPosition().getY()].getEstChasseur()) {
+			if(this.plateau[p.getPosition().getX()][p.getPosition().getY()].getEstDecouvert()) {
+				System.out.println("Case découverte au tour "+this.plateau[p.getPosition().getX()][p.getPosition().getY()].getTempsDecouvert());
+			}else {
+				System.out.println("Case non découverte");
+			}
+		}
 		
 		System.out.println("\n═════════════════════════════════════════");
 	}
@@ -263,6 +274,27 @@ public class Plateau {
 	 */
 	public void setTourMonstre(boolean b){
 		this.tourMonstre = b;
+	}
+	
+	public void decouvrirCase(Personnage p) {
+		if(this.plateau[p.getPosition().getX()][p.getPosition().getY()].getEstMonstre()) {
+			this.plateau[p.getPosition().getX()][p.getPosition().getY()].decouvrirCase();
+			this.plateau[p.getPosition().getX()][p.getPosition().getY()].setTempsDecouvert(this.getTours());
+		}
+	}
+	
+	/**
+	 * @return le tour auquel le dernier loot a été découvert
+	 */
+	public int getDernierLoot() {
+		return this.dernierLoot;
+	}
+	
+	/**
+	 * Remplace la valeur de dernierLoot pour le tour actuel
+	 */
+	public void setDernierLoot() {
+		this.dernierLoot = this.getTours();
 	}
 	
 	private static void clearScreen() {

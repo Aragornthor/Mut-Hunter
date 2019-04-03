@@ -29,7 +29,9 @@ public class TestMain {
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
 			chasseur.seDeplace(jeu);
 			jeu.affichePlateau(chasseur);
-			jeu.ajoutLoot(1);			
+			if(jeu.getTours()-jeu.getDernierLoot()>5) {
+				jeu.ajoutLoot(1);			
+			}
 			deplacementsRestant--;
 		}
 	}
@@ -44,7 +46,9 @@ public class TestMain {
 		while(!jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition()) && deplacementsRestant>0) {
 			monstre.seDeplace(jeu);
 			jeu.affichePlateau(monstre);
-			jeu.ajoutLoot(1);
+			if(jeu.getTours()-jeu.getDernierLoot()>5) {
+				jeu.ajoutLoot(1);			
+			}
 			deplacementsRestant--;
 		}
 	}

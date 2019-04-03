@@ -122,7 +122,10 @@ public class Personnage {
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
-				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
+				if(p.getCase(this.getPosition()).getLoot()) {
+					p.ajoutCompetence(this);
+					p.setDernierLoot();
+				}
 				return true;
 			}
 		}
@@ -134,7 +137,10 @@ public class Personnage {
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
-				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
+				if(p.getCase(this.getPosition()).getLoot()) {
+					p.ajoutCompetence(this);
+					p.setDernierLoot();
+				}
 				return true;
 			}
 		}
@@ -146,7 +152,10 @@ public class Personnage {
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
-				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
+				if(p.getCase(this.getPosition()).getLoot()) {
+					p.ajoutCompetence(this);
+					p.setDernierLoot();
+				}
 				return true;
 			}
 		}
@@ -158,7 +167,10 @@ public class Personnage {
 				this.position.setX(this.position.getX()+1);
 				if(p.getCase(this.position).getEstPortail()) this.position = p.teleportation(this.position);
 				changeCase(p);
-				if(p.getCase(this.getPosition()).getLoot()) p.ajoutCompetence(this);
+				if(p.getCase(this.getPosition()).getLoot()) {
+					p.ajoutCompetence(this);
+					p.setDernierLoot();
+				}
 				return true;
 			}
 		}
@@ -170,7 +182,11 @@ public class Personnage {
 	 * @param p Prend un plateau en paramètre
 	 */
 	private void changeCase(Plateau p) {
-		if(this.type.equals("monstre")) p.getCase(this.position).setEstMonstre(true);
+		if(this.type.equals("monstre")) {
+			p.getCase(this.position).setEstMonstre(true);
+			p.getCase(this.position).decouvrirCase();
+			p.getCase(this.position).setTempsDecouvert(p.getTours());
+		}
 		else if(this.type.equals("chasseur")) p.getCase(this.position).setEstChasseur(true);
 	}
 

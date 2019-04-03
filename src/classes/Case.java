@@ -90,14 +90,14 @@ public class Case {
 		}
 	}
 	
+	/**
+	 * Remplace la valeur de loot par celle passée en parametre
+	 * @param loot est un booleen
+	 */
 	public void setLoot(boolean loot) {
 		this.loot = loot;
 	}
 	
-	/**
-	 * Change le type de la case avec celui passé en parametre.
-	 * @param type que l'on souhait mettre à la case
-	 */
 	
 	/**
 	 * @return true si la case à était découvert, false sinon
@@ -110,8 +110,7 @@ public class Case {
 	 * @return false si la case à déjà était découvert, true sinon
 	 */
 	public boolean decouvrirCase() {
-		if(this.estDecouvert) return false;
-		else this.estDecouvert = true;
+		this.estDecouvert = true;
 		return true;
 	}
 
@@ -125,8 +124,8 @@ public class Case {
 	/**
 	 * Augement le nombre de tour depuis la decouvert de la case
 	 */
-	public void setTempsDecouvert() {
-		this.tempsDecouvert +=1;
+	public void setTempsDecouvert(int tour) {
+		this.tempsDecouvert = tour;
 	}
 
 	/**
@@ -145,10 +144,18 @@ public class Case {
 		else return ' ';
 	}
 	
+	/**
+	 * 
+	 * @return la valeur de hide
+	 */
 	public boolean getHide() {
 		return hide;
 	}
 	
+	/**
+	 * Remplace la valeur de hide par celle donnée en parametre
+	 * @param hide est un booleen
+	 */
 	public void setHide(boolean hide) {
 		this.hide = hide;
 	}
