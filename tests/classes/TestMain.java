@@ -14,9 +14,9 @@ public class TestMain {
 		
 		boolean fini = false;
 		
-		while(!fini) {
+		while(!fini) { //Tant que la partie n'est pas finie, lance les tours des joueurs
 			fini = tourMonstre();
-			if(fini) break;
+			if(fini) break; //Si le monstre perds ou gagne la partie, fini la partie
 			fini = tourChasseur();
 			jeu.addTours();
 		}
@@ -26,17 +26,17 @@ public class TestMain {
 	}
 
 	public static boolean tourChasseur() {
-		jeu.getCase(chasseur.getPosition()).show();
-		jeu.getCase(monstre.getPosition()).hide();
+		jeu.getCase(chasseur.getPosition()).show(); //Montre le chasseur
+		jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
 		jeu.affichePlateau(chasseur);
 		int deplacementsRestant = chasseur.getDeplacement();
 		
 		while(deplacementsRestant>0) {
-			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true;
-			chasseur.seDeplace(jeu);
-			chasseur.changeCase(jeu);
+			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true;	//si le chasseur gagne, fini le tour
+			chasseur.seDeplace(jeu);	//Le joueur se déplace
+			chasseur.changeCase(jeu);	//Change la case comme chasseur
 			jeu.affichePlateau(chasseur);
-			if(jeu.getTours()-jeu.getDernierLoot()>5) {
+			if(jeu.getTours()-jeu.getDernierLoot()>5) { 	//Si le dernier loot a été pris il y a 6 tours, en ajoute un
 				jeu.ajoutLoot(1);			
 			}
 			deplacementsRestant--;
@@ -45,25 +45,24 @@ public class TestMain {
 	}
 	
 	public static boolean tourMonstre() {
-		jeu.getCase(monstre.getPosition()).show();
-		jeu.getCase(chasseur.getPosition()).hide();
+		jeu.getCase(monstre.getPosition()).show();	//Montre le monstre
+		jeu.getCase(chasseur.getPosition()).hide();	//et cache le chasseur
 		jeu.affichePlateau(monstre);
 		boolean perdu = false;
 		
 		int deplacementsRestant = monstre.getDeplacement();
 		
 		while(deplacementsRestant>0) {
-			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true;
-			if(jeu.victoireMonstre()) return true;
-			monstre.seDeplace(jeu);
+			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true; //Si le monstre est sur la position du chasseur, la partie se fini
+			if(jeu.victoireMonstre()) return true;	//Si le monstre découvre toutes les cases, le partie se fini
+			monstre.seDeplace(jeu);		//Le joueur se déplace
 			jeu.affichePlateau(monstre);
-			if(jeu.getTours()-jeu.getDernierLoot()>5) {
+			if(jeu.getTours()-jeu.getDernierLoot()>5) {		//Si le dernier loot a été pris il y a 6 tours, en ajoute un
 				jeu.ajoutLoot(1);			
 			}
 			deplacementsRestant--;
-			if(! jeu.getCase(monstre.getPosition()).getEstPortail() && jeu.getCase(monstre.getPosition()).getEstDecouvert()) jeu.setCompteurCasesDecouvertes();
-			perdu = jeu.defaiteMonstre(monstre.getPosition());
-			monstre.changeCase(jeu);
+			if(! jeu.getCase(monstre.getPosition()).getEstPortail() && !jeu.getCase(monstre.getPosition()).getEstDecouvert()) jeu.setCompteurCasesDecouvertes();	//Si le monstre est sur une case qui n'est pas découverte et qui n'est pas un portail, incrémente le nombre de cases découvertes
+			perdu = monstre.changeCase(jeu);	//Si le monstre est sur une case qu'il a déjà decouvert, la partie se fini. Sinon, change la case où il se trouve en case monstre
 			if(perdu) return perdu;
 		}
 		return false;
