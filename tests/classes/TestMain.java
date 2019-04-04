@@ -33,6 +33,7 @@ public class TestMain {
 		
 		while(deplacementsRestant>0) {
 			if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) return true;	//si le chasseur gagne, fini le tour
+			if(jeu.victoireMonstre()) return true;	//Si le monstre découvre toutes les cases, le partie se fini
 			chasseur.seDeplace(jeu);	//Le joueur se déplace
 			chasseur.changeCase(jeu);	//Change la case comme chasseur
 			jeu.affichePlateau(chasseur);

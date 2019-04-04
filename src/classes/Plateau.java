@@ -236,7 +236,10 @@ public class Plateau {
 	}
 	
 	public boolean victoireMonstre() {
-		if(this.compteurCasesDecouvertes == this.nbCases) return true;
+		if(this.compteurCasesDecouvertes == this.nbCases) {
+			System.out.println("Vous avez découvert toutes las cases. Vous avez GAGNÉ !");
+			return true;
+		}
 		return false;
 	}
 	
