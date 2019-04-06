@@ -12,15 +12,15 @@ import competences.*;
  */
 
 public class Loot {
-	private Competences[] competencesChasseur = new Competences[]{new IEM(), new Missile(), new Piege()};
-	private Competences[] competencesMonstre = new Competences[]{new Shield(), new Acide(), new Saut()};
+	private static Competences[] competencesChasseur = new Competences[]{new IEM(), new Missile(), new Piege()};
+	private static Competences[] competencesMonstre = new Competences[]{new Shield(), new Acide(), new Saut()};
 	
 	/**
 	 * 
 	 * @param p Personnage par rapport auquel la competence doit etre selectionnee 
 	 * @return Retourne une competence aleatoire selon si le personnage est un chasseur ou un monstre
 	 */
-	private Competences competenceAleatoire(Personnage p) {
+	private static Competences competenceAleatoire(Personnage p) {
 		Random rand = new Random();
 		Competences[] comp = p.getCompetences();
 		Competences[] competences;
@@ -41,7 +41,7 @@ public class Loot {
 	 * Change la competence vide en une competence aleatoire
 	 * @param p Personnage ou l'on desire changer une de ses competences, en l'occurence la deuxieme qui est vide
 	 */
-	public void changeCompetence(Personnage p) {
+	public static void changeCompetence(Personnage p) {
 		changeCompetence(p, 2);
 	}
 	
@@ -50,7 +50,7 @@ public class Loot {
 	 * @param p Personnage ou l'on desire changer une de ses competences, en l'occurence la deuxieme qui est vide
 	 * @param nbChange Numero de la competence a changer (soit 1 pour la premiere, 2 pour la 2eme)
 	 */
-	public void changeCompetence(Personnage p, int nbChange) {
+	public static void changeCompetence(Personnage p, int nbChange) {
 		nbChange--;
 		p.setCompetence(competenceAleatoire(p), nbChange);
 	}

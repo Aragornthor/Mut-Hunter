@@ -36,10 +36,6 @@ public class Plateau {
 	 * tourMonstre indique si c'est au monstre de jouer.
 	 */
 	private boolean tourMonstre;
-	/**
-	 * Permet de donner au joueur different bonus quand il recupère un loot
-	 */
-	private Loot loot;
 	
 	private int dernierLoot;
 	
@@ -53,7 +49,6 @@ public class Plateau {
 	public Plateau() {
 		this.plateau = new Case[10][10];
 		this.tours = 1;
-		this.loot = new Loot();
 		this.dernierLoot = 0;
 		this.nbCases = this.getHauteur()*this.getLargeur()-2;
 		this.compteurCasesDecouvertes = 1;
@@ -153,24 +148,8 @@ public class Plateau {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return le bonus actuel
-	 */
-	public Loot getLoot() {
-		return this.loot;
-	}
-	
-	/**
-	 * Remplace le loot par celui passÃ© en parametre.
-	 * @param l  est le loot que l'on souhait avoir
-	 */
-	public void setLoot(Loot l) {
-		this.loot = l;
-	}
-	
 	public void ajoutCompetence(Personnage p) {
-		this.loot.changeCompetence(p);
+		Loot.changeCompetence(p);
 	}
 	
 	/**
@@ -235,6 +214,10 @@ public class Plateau {
 		return false;
 	}
 	
+	/**
+	 * Verifie si le monstre a gagné la partie.
+	 * @return true si le monstre a découvert toutes les cases
+	 */
 	public boolean victoireMonstre() {
 		if(this.compteurCasesDecouvertes == this.nbCases) {
 			System.out.println("Vous avez découvert toutes las cases. Vous avez GAGNÉ !");
@@ -242,6 +225,12 @@ public class Plateau {
 		}
 		return false;
 	}
+	
+	/**
+	 * Verifie si le monstre a perdu la partie.
+	 * @param m c'est la position du monstre
+	 * @return true si le monstre repasse sur une case
+	 */
 	
 	public boolean defaiteMonstre(Position m) {
 		if(this.getCase(m).getEstDecouvert()) {
@@ -301,6 +290,10 @@ public class Plateau {
 		this.tourMonstre = b;
 	}
 	
+	/**
+	 * Découvre une case en conservant le tour de sa découverte 
+	 * @param p personnage qui devrait être un monstre
+	 */
 	public void decouvrirCase(Personnage p) {
 		if(this.plateau[p.getPosition().getX()][p.getPosition().getY()].getEstMonstre()) {
 			this.plateau[p.getPosition().getX()][p.getPosition().getY()].decouvrirCase();
