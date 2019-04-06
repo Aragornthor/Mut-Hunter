@@ -11,6 +11,10 @@ import competences.IEM;
  */
 public class Monstre extends Personnage {
 
+	/**
+	 * Constructeur du Monstre avec une  position donnée
+	 * @param p Prend en paramètre la position initiale du monstre
+	 */
 	public Monstre(Position p) {
 		super(p);
 		this.setType("monstre");
