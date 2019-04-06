@@ -3,16 +3,14 @@ package classes;
 import java.util.Scanner;
 
 import competences.Competences;
-import competences.IEM;
-import competences.Shield;
 
 /**
  * 
- * La classe Personnage permet d'instancier des personnages telle qu'un monstre ou un chasseur
- * @author Quentin Delmarre, Xavier Lezzoche
+ * La classe Personnage est une classe abstraite regroupant les attributs et les méthodes communs aux personnages
+ * @author Quentin Delmarre, Xavier Lezzoche, Robin Gallifa
  *
  */
-public class Personnage {
+public abstract class Personnage {
 	static Scanner reader = new Scanner(System.in);
 	private String type;
 	private int energie;
@@ -27,12 +25,9 @@ public class Personnage {
 	 * @param type Prend en paramètre le type du personnage
 	 * @param p Prend en paramètre la Position du personnage
 	 */
-	public Personnage(String type,Position p) {
-		this.type = type;
+	public Personnage(Position p) {
 		this.energie = 75;
 		this.position = p;
-		if(type == "chasseur") this.competences = new Competences[] {new IEM(), null};
-		else this.competences = new Competences[] {new Shield(), null};
 		this.deplacement = 1;
 		this.vie = 1;
 		this.maxEnergie = 100;
@@ -96,7 +91,7 @@ public class Personnage {
 	}
 	
 	/**
-	 * 
+	 * Permet de redemander un deplacement tant que ce que donne le jouer n'est pas bon
 	 * @param p Prend un plateau en paramètre
 	 */
 	public void seDeplace(Plateau p) {
@@ -105,12 +100,27 @@ public class Personnage {
 		}
 	}
 	
-	private boolean estDeplaceJoueur(Plateau p) {
+	/**
+	 * Permet le déplacemetn de l'IA
+	 * @param p Prend un plateau en paramètre
+	 */
+	public void seDeplaceIA(Plateau p, String e) {
+		while(!estDeplace(p, e)) {
+		}
+	}
+	
+	/**
+	 * Permet au joueur d'entrer son déplacement(zqsd)
+	 * @param p Prend un plateau en paramètre
+	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
+	 */
+	protected boolean estDeplaceJoueur(Plateau p) {
 		String entree = reader.nextLine();
 		return estDeplace(p, entree);
 	}
+	
 	/**
-	 * 
+	 * Permet un déplacement
 	 * @param p Prend un plateau en paramètre
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
 	 */
@@ -122,7 +132,6 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -137,7 +146,6 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -152,7 +160,6 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -167,7 +174,6 @@ public class Personnage {
 				else p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				//changeCase(p);
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
@@ -214,6 +220,10 @@ public class Personnage {
 		return type;
 	}
 	
+	public void setTableauCompetences(Competences[] comps) {
+		this.competences = comps;
+	}
+	
 	/**
 	 * Permet de changer l'une des deux competences du personnage avec la competence passee en parametre
 	 * @param comp Competence que l'on veut mettre pour le personnage
@@ -232,6 +242,13 @@ public class Personnage {
 			if(c != null) res += c.toString()+"\n";
 		}
 		return res;
+	}
+	
+	/**
+	 * @return le type du joueur soit monstre soit chasseur
+	 */
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

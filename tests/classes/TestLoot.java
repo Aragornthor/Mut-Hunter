@@ -8,7 +8,7 @@ import competences.Competences;
 
 public class TestLoot {
 
-	public Personnage p = new Personnage("chasseur",new Position(0,0));
+	public Personnage p = new Chasseur(new Position(0,0));
 	public Loot l = new Loot();
 	
 	@Test

@@ -46,7 +46,7 @@ public class TestCase {
 	@Test
 	public void testTempsDecouvert() {
 		assertEquals(c3.getTempsDecouvert(),0);
-		c3.setTempsDecouvert();
+		c3.setTempsDecouvert(1);
 		assertEquals(c3.getTempsDecouvert(),1);
 	}
 

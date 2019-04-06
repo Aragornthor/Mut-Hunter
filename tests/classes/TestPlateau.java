@@ -8,8 +8,8 @@ public class TestPlateau {
 	
 	public static void main(String[] args) {
 		//System.out.println("HI");
-		Personnage p = new Personnage("chasseur",new Position(9,9));
-		Personnage p1 = new Personnage("monstre",new Position(0,0));
+		Personnage p = new Chasseur(new Position(9,9));
+		Personnage p1 = new Monstre(new Position(0,0));
 		
 		
 		Plateau pl = new Plateau();
