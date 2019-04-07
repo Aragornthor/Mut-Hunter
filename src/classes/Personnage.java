@@ -91,23 +91,10 @@ public abstract class Personnage {
 	}
 	
 	/**
-	 * Permet de redemander un deplacement tant que ce que donne le jouer n'est pas bon
+	 * Permet de redemander un deplacement tant que ce que donne le joueur n'est pas bon
 	 * @param p Prend un plateau en paramètre
 	 */
-	public void seDeplace(Plateau p) {
-		while(!estDeplaceJoueur(p)) {
-			System.out.println("Vous ne pouvez pas vous d�placer ici.");
-		}
-	}
-	
-	/**
-	 * Permet le déplacemetn de l'IA
-	 * @param p Prend un plateau en paramètre
-	 */
-	public void seDeplaceIA(Plateau p, String e) {
-		while(!estDeplace(p, e)) {
-		}
-	}
+	public abstract void seDeplace(Plateau p);
 	
 	/**
 	 * Permet au joueur d'entrer son déplacement(zqsd)
@@ -124,7 +111,7 @@ public abstract class Personnage {
 	 * @param p Prend un plateau en paramètre
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
 	 */
-	private boolean estDeplace(Plateau p, String entree) {
+	protected boolean estDeplace(Plateau p, String entree) {
 		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getY()-1<0) return false;
 			else {

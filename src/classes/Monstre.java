@@ -1,7 +1,7 @@
 package classes;
 
 import competences.Competences;
-import competences.IEM;
+import competences.Shield;
 
 /**
  * 
@@ -18,6 +18,16 @@ public class Monstre extends Personnage {
 	public Monstre(Position p) {
 		super(p);
 		this.setType("monstre");
-		this.setTableauCompetences(new Competences[] {new IEM(), null});
+		this.setTableauCompetences(new Competences[] {new Shield(), null});
+	}
+	
+	/**
+	 * Permet de redemander un deplacement tant que ce que donne le joueur n'est pas bon
+	 * @param p Prend un plateau en paramètre
+	 */
+	public void seDeplace(Plateau p) {
+		while(!estDeplaceJoueur(p)) {
+			System.out.println("Vous ne pouvez pas vous d�placer ici.");
+		}
 	}
 }

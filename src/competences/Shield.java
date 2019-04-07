@@ -8,6 +8,9 @@ package competences;
  */
 public class Shield extends Competences {
 
+	/**
+	 * Constructeur de la compétence Shield
+	 */
 	public Shield() {
 		this.setId(5);
 		this.setElement("protection");
