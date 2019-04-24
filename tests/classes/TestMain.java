@@ -3,7 +3,7 @@ package classes;
 public class TestMain {
 	
 	static Plateau jeu = new Plateau();
-	static Personnage monstre = new Monstre(new Position(9,9));
+	static Personnage monstre = new IAMonstre(new Position(9,9));
 	static Personnage chasseur = new Chasseur(new Position(0,0));
 	
 	public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class TestMain {
 
 	public static boolean tourChasseur() {
 		jeu.getCase(chasseur.getPosition()).show(); //Montre le chasseur
-		//jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
+		jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
 		int deplacementsRestant = chasseur.getDeplacement();
 		
 		while(deplacementsRestant>0) {
@@ -47,7 +47,7 @@ public class TestMain {
 	
 	public static boolean tourMonstre() {
 		jeu.getCase(monstre.getPosition()).show();	//Montre le monstre
-		//jeu.getCase(chasseur.getPosition()).hide();	//et cache le chasseur
+		jeu.getCase(chasseur.getPosition()).hide();	//et cache le chasseur
 		boolean perdu = false;
 		
 		int deplacementsRestant = monstre.getDeplacement();
