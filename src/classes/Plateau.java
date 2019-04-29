@@ -174,19 +174,7 @@ public class Plateau {
 	public void setCaseNormal(Position p) {
 		this.plateau[p.getX()][p.getY()].setEstChasseur(false);
 		this.plateau[p.getX()][p.getY()].setEstMonstre(false);
-		this.plateau[p.getX()][p.getY()].setEstPortail(false);
-		//this.plateau[p.getX()][p.getY()].setLoot(false);
-	}
-	
-	/**
-	 * Rend la case dont la position lui est donnée en paramètre normale sauf le fait que ce soit un portail.
-	 * @param p est la position dans le terrain que l'on souhaite éditer
-	 */
-	public void setCaseNormalPortail(Position p) {
-		this.plateau[p.getX()][p.getY()].setEstChasseur(false);
-		this.plateau[p.getX()][p.getY()].setEstMonstre(false);
-		this.plateau[p.getX()][p.getY()].setEstPortail(true);
-		//this.plateau[p.getX()][p.getY()].setLoot(false);
+		if(this.plateau[p.getX()][p.getY()].getTypeCase() == TypeCase.LOOT) this.plateau[p.getX()][p.getY()].setLoot(false);
 	}
 	
 	/**

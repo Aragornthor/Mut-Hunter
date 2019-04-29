@@ -115,8 +115,7 @@ public abstract class Personnage {
 		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getY()-1<0) return false;
 			else {
-				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
-				else p.setCaseNormal(this.position);
+				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				if(p.getCase(this.getPosition()).getLoot()) {
@@ -129,8 +128,7 @@ public abstract class Personnage {
 		if(entree.equals("d")) { //SE DEPLACE VERS LA DROITE
 			if(this.position.getY()+1>= p.getHauteur()) return false;
 			else {
-				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
-				else p.setCaseNormal(this.position);
+				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				if(p.getCase(this.getPosition()).getLoot()) {
@@ -143,8 +141,7 @@ public abstract class Personnage {
 		if(entree.equals("z")) { //SE DEPLACE VERS LE HAUT
 			if(this.position.getX()-1<0) return false;
 			else {
-				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
-				else p.setCaseNormal(this.position);
+				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				if(p.getCase(this.getPosition()).getLoot()) {
@@ -157,8 +154,7 @@ public abstract class Personnage {
 		if(entree.equals("s")) { //SE DEPLACE VERS LE BAS
 			if(this.position.getX()+1>=p.getLargeur()) return false;
 			else {
-				if(p.getCase(this.position).getEstPortail()) p.setCaseNormalPortail(this.position);
-				else p.setCaseNormal(this.position);
+				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				if(p.getCase(this.getPosition()).getLoot()) {

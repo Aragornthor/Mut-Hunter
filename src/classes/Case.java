@@ -180,6 +180,10 @@ public class Case {
 	public void show() {
 		this.setHide(false);	
 	}
+	
+	public TypeCase getTypeCase() {
+		return this.typeCase;
+	}
 
 
 }
