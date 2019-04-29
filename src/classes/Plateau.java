@@ -175,7 +175,7 @@ public class Plateau {
 		this.plateau[p.getX()][p.getY()].setEstChasseur(false);
 		this.plateau[p.getX()][p.getY()].setEstMonstre(false);
 		this.plateau[p.getX()][p.getY()].setEstPortail(false);
-		this.plateau[p.getX()][p.getY()].setLoot(false);
+		//this.plateau[p.getX()][p.getY()].setLoot(false);
 	}
 	
 	/**
@@ -186,7 +186,7 @@ public class Plateau {
 		this.plateau[p.getX()][p.getY()].setEstChasseur(false);
 		this.plateau[p.getX()][p.getY()].setEstMonstre(false);
 		this.plateau[p.getX()][p.getY()].setEstPortail(true);
-		this.plateau[p.getX()][p.getY()].setLoot(false);
+		//this.plateau[p.getX()][p.getY()].setLoot(false);
 	}
 	
 	/**
