@@ -7,10 +7,10 @@ package classes;
  */
 public class Case {
 
+	private TypeTerrain typeTerrain;
+	private TypeCase typeCase;
 	private boolean estDecouvert;
 	private int tempsDecouvert;
-	private boolean loot;
-	private boolean estPortail;
 	private boolean estChasseur;
 	private boolean estMonstre;
 	private boolean hide;
@@ -19,10 +19,10 @@ public class Case {
 	 * Initialise une case de type normal.
 	 */
 	public Case() {
-		this.loot = false;
+		this.typeTerrain = TypeTerrain.PLAINE;
+		this.typeCase = TypeCase.VIDE;
 		this.estDecouvert = false;
 		this.tempsDecouvert = 0;
-		this.estPortail = false;
 		this.estChasseur = false;
 		this.estMonstre = false;
 	}
@@ -61,7 +61,8 @@ public class Case {
 	 * @return true si la case est un portail, false sinon
 	 */
 	public boolean getEstPortail() {
-		return this.estPortail;
+		if(this.typeCase.equals(TypeCase.PORTAIL)) return true;
+		else return false;
 	}
 	
 	/**
@@ -69,24 +70,26 @@ public class Case {
 	 * @param portail est le nouveau statut de estPortail
 	 */
 	public void setEstPortail(boolean portail) {
-		this.estPortail = portail;
+		if(portail) this.typeCase = TypeCase.PORTAIL;
+		else this.typeCase = TypeCase.VIDE;
 	}
 	
 	/**
 	 * @return true si la case est un loot, false sinon
 	 */
 	public boolean getLoot() {
-		return this.loot;
+		if(this.typeCase.equals(TypeCase.LOOT)) return true;
+		else return false;
 	}
 	
 	/**
 	 * Change le type de la case : la case devient normal si la case était un loot et un loot si la case était normal.
 	 */
 	public void changeLoot() {
-		if(this.loot) {
-			this.loot = false;
+		if(this.typeCase.equals(TypeCase.LOOT)) {
+			this.typeCase = TypeCase.VIDE;
 		}else {
-			this.loot = true;
+			this.typeCase = TypeCase.LOOT;
 		}
 	}
 	
@@ -95,7 +98,8 @@ public class Case {
 	 * @param loot est un booleen
 	 */
 	public void setLoot(boolean loot) {
-		this.loot = loot;
+		if(loot) this.typeCase = TypeCase.LOOT;
+		else this.typeCase = TypeCase.VIDE;
 	}
 	
 	
