@@ -41,3 +41,6 @@ Nous sommes arrivés à une répartition des rôles pour réaliser la réponse s
 Nous avons prévu de créer un **Type** *Personnage* caractérisé par son type, son niveau actuel et maximum d'énergie, ses deux compétences, sa *Position*, sa vitesse et son statut (vivant ou mort).
 
 Ce *Personnage* se déplaçant, ainsi sur un (**Type**) *Plateau* peut être soit un Monstre devant dévcouvrir toutes les *Case*s du *Plateau* sans repasser sur des cases déjà découvertes, le cas échéant, le Chasseur remporte. Ce dernier peut, par ailleurs, trouver le monstre en suivant sa trace. Une fois qu'il a découvert le Monstre, la partie est terminée, sur la ***VICTOIRE*** du Chasseur
+
+> Le projet est doté d'un fichier jar éxécutable avec la commande suivante :
+> java -jar "<Dossier>/jalon1.jar"
