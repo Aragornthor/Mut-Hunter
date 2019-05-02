@@ -31,7 +31,7 @@ public class Loot {
 		if(comp[1] == null) return competences[rand.nextInt(competences.length-1)+1];
 		else{
 			while(comp[0].equals(competences[i]) || comp[1].equals(competences[i])){
-				i++;
+				i=rand.nextInt(competences.length);
 			}
 			return competences[i];
 		}			
