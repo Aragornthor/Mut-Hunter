@@ -87,7 +87,8 @@ public class Plateau {
 		System.out.print("═════════════════════════════════════════\nTour n°"+this.tours+"\n╔═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╦═══╗\n║");
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
-				System.out.print(" "+this.plateau[i][j].getIcon()+" ║");
+				if(p.getType().equals("monstre") && this.plateau[i][j].getIcon()==' ' && this.plateau[i][j].getEstDecouvert()) System.out.print(" X ║");
+				else System.out.print(" "+this.plateau[i][j].getIcon()+" ║");
 			}
 			if(i+1 == this.plateau.length) System.out.print("\n╚═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╩═══╝\n");
 			else System.out.print("\n╠═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n║");
