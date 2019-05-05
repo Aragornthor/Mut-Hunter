@@ -1,23 +1,39 @@
 package classes;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 public enum TypeTerrain {
 
-	PLAINE(0,0), FORET(0,0), MONTAGNE(0,0), EAU(0,0), DESERT(0,0), VILLE(0,0), PLAINE_ENNEIGEE(0,0),
-		MONTAGNE_ENNEIGEE(0,0), LAC_GELE(0,0), PIC_ARID(0,0), RIVIERE_ASSECHE(0,0), CENTRALE(0,0), MARAIS(0,0) ;
+	PLAINE(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	FORET(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	MONTAGNE(0,0,new Image("file:../../ressources/images/montagnes.png")), 
+	EAU(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	DESERT(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	VILLE(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	PLAINE_ENNEIGEE(0,0,new Image("file:../../ressources/images/plaines.png")),
+	MONTAGNE_ENNEIGEE(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	LAC_GELE(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	PIC_ARID(0,0,new Image("file:../../ressources/images/plaines.png")),
+	RIVIERE_ASSECHE(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	CENTRALE(0,0,new Image("file:../../ressources/images/plaines.png")), 
+	MARAIS(0,0,new Image("file:../../ressources/images/plaines.png"));
 	
-	ImageView affichage;
+	Image image;
 	private int vision;
 	private int deplacement;
 	
-	private TypeTerrain(int vision, int deplacement) {
+	private TypeTerrain(int vision, int deplacement, Image image) {
 		this.vision = vision;
 		this.deplacement = deplacement;
+		this.image = image;
 	}
 	
 	public int getVision() {
 		return this.vision;
+	}
+	
+	public Image getImage() {
+		return this.image;
 	}
 	
 }

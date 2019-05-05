@@ -26,6 +26,15 @@ public class Case {
 		this.estChasseur = false;
 		this.estMonstre = false;
 	}
+	
+	public Case(TypeTerrain terrain) {
+		this.typeTerrain = terrain;
+		this.typeCase = TypeCase.VIDE;
+		this.estDecouvert = false;
+		this.tempsDecouvert = 0;
+		this.estChasseur = false;
+		this.estMonstre = false;
+	}
 
 	/**
 	 * @return true si la case est un chasseur, false sinon.
@@ -183,6 +192,10 @@ public class Case {
 	
 	public TypeCase getTypeCase() {
 		return this.typeCase;
+	}
+	
+	public TypeTerrain getTypeTerrain() {
+		return this.typeTerrain;
 	}
 
 

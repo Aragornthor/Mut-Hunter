@@ -60,7 +60,11 @@ public class Plateau {
 	public void initPlateau() {
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
-				this.plateau[i][j] = new Case();
+				if(rand.nextInt(100)>20) {
+					this.plateau[i][j] = new Case(TypeTerrain.PLAINE);
+				} else {
+					this.plateau[i][j] = new Case(TypeTerrain.MONTAGNE);
+				}
 			}
 		}
 		this.generePortail();
