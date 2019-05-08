@@ -2,6 +2,7 @@ package classes;
 
 import competences.Competences;
 import competences.Shield;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -50,6 +51,12 @@ public class IAMonstre extends Personnage {
 			}
 			else return direction;
 		}
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

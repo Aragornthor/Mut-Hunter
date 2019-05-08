@@ -2,6 +2,7 @@ package classes;
 
 import competences.Competences;
 import competences.Shield;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -29,5 +30,11 @@ public class Monstre extends Personnage {
 		while(!estDeplaceJoueur(p)) {
 			System.out.println("Vous ne pouvez pas vous d�placer ici.");
 		}
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

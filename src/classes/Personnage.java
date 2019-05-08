@@ -3,6 +3,7 @@ package classes;
 import java.util.Scanner;
 
 import competences.Competences;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -40,6 +41,8 @@ public abstract class Personnage {
 	public int getEnergie() {
 		return energie;
 	}
+	
+	abstract public Image getImage();
 
 	/**
 	 * 
@@ -111,7 +114,7 @@ public abstract class Personnage {
 	 * @param p Prend un plateau en paramètre
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
 	 */
-	protected boolean estDeplace(Plateau p, String entree) {
+	public boolean estDeplace(Plateau p, String entree) {
 		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getY()-1<0) return false;
 			else {

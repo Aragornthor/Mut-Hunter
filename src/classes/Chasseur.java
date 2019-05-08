@@ -2,6 +2,7 @@ package classes;
 
 import competences.Competences;
 import competences.IEM;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -15,6 +16,8 @@ public class Chasseur extends Personnage{
 	 * Constructeur du Chasseur avec une  position donnée
 	 * @param p Prend en paramètre la position initiale du chasseur
 	 */
+	Image image = new Image("file:../../ressources/images/ceciEstUneGrosseBoule.png");
+	
 	public Chasseur(Position p) {
 		super(p);
 		this.setType("chasseur");
@@ -30,4 +33,10 @@ public class Chasseur extends Personnage{
 			System.out.println("Vous ne pouvez pas vous d�placer ici.");
 		}
 	}
+
+	public Image getImage() {
+		return this.image;
+	}
+	
+	
 }

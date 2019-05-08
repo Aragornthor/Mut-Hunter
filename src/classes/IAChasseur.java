@@ -4,6 +4,7 @@ import java.util.Random;
 
 import competences.Competences;
 import competences.IEM;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -44,5 +45,11 @@ public class IAChasseur extends Personnage{
 		else direction = "d";
 		
 		return direction;	
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

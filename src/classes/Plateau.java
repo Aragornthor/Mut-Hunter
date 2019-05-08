@@ -60,10 +60,15 @@ public class Plateau {
 	public void initPlateau() {
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
-				if(rand.nextInt(100)>20) {
+				int entierRandom = rand.nextInt(100);
+				if(entierRandom > 60) {
 					this.plateau[i][j] = new Case(TypeTerrain.PLAINE);
-				} else {
+				} else if(entierRandom > 30){
+					this.plateau[i][j] = new Case(TypeTerrain.FORET);
+				} else if(entierRandom > 15) {
 					this.plateau[i][j] = new Case(TypeTerrain.MONTAGNE);
+				} else {
+					this.plateau[i][j] = new Case(TypeTerrain.EAU);
 				}
 			}
 		}
