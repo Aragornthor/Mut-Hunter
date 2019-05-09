@@ -1,5 +1,8 @@
 package competences;
 
+import classes.Personnage;
+import classes.Plateau;
+
 /**
  * 
  * L'interface Competences donne toutes les methodes propres aux competences
@@ -19,6 +22,7 @@ public abstract class Competences {
 	private String element;
 	private int effet;
 	private int duree;
+	protected int cout;
 	
 	/**
 	 * 
@@ -42,6 +46,10 @@ public abstract class Competences {
 	 */
 	public int getDuree() {
 		return duree;
+	}
+	
+	public int getCout() {
+		return this.cout;
 	}
 	
 	/**
@@ -69,6 +77,7 @@ public abstract class Competences {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
+	
 
 	/**
 	 * 
@@ -86,4 +95,6 @@ public abstract class Competences {
 	public boolean equals(Competences c) {
 		return this.id == c.getId();
 	}
+	
+	public abstract void utilisation(Plateau p, Personnage perso, Personnage cible);
 }

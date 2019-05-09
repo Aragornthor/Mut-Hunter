@@ -3,6 +3,7 @@ package classes;
 import java.util.Scanner;
 
 import competences.Competences;
+import competences.Statut;
 import javafx.scene.image.Image;
 
 /**
@@ -20,6 +21,7 @@ public abstract class Personnage {
 	private Competences[] competences;
 	private int deplacement;
 	private int vie;
+	private Statut statut;
 	
 	/**
 	 * Constructeur du Personnage avec des paramètres prédéfinis
@@ -32,6 +34,7 @@ public abstract class Personnage {
 		this.deplacement = 1;
 		this.vie = 1;
 		this.maxEnergie = 100;
+		this.statut = Statut.Vivant;
 	}
 	
 	/**
@@ -245,6 +248,7 @@ public abstract class Personnage {
 		for(Competences c:this.competences) {
 			if(c != null) res += c.toString()+"\n";
 		}
+		res+="Statut : "+this.statut.toString();
 		return res;
 	}
 	
@@ -253,6 +257,14 @@ public abstract class Personnage {
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public Statut getStatut() {
+		return this.statut;	
+	}
+	
+	public void setStatut(Statut s) {
+		this.statut = s;
 	}
 	
 }
