@@ -115,9 +115,14 @@ public abstract class Personnage {
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
 	 */
 	public boolean estDeplace(Plateau p, String entree) {
-		if(entree.equals("q")) { //SE DEPLACE VERS LA GAUCHE
-			if(this.position.getY()-1<0) return false;
-			else {
+		
+		//System.out.println("Debug estDeplace(...)");
+		
+		if(entree.equalsIgnoreCase("q")) { //SE DEPLACE VERS LA GAUCHE
+			if(this.position.getY()-1<0) {
+				return false;
+			} else {
+				System.out.println("Q detect");
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -128,9 +133,12 @@ public abstract class Personnage {
 				return true;
 			}
 		}
-		if(entree.equals("d")) { //SE DEPLACE VERS LA DROITE
-			if(this.position.getY()+1>= p.getHauteur()) return false;
-			else {
+		
+		if(entree.equalsIgnoreCase("d")) { //SE DEPLACE VERS LA DROITE
+			if(this.position.getY()+1>= p.getHauteur()) {
+				return false;
+			} else {
+				System.out.println("D detect");
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -141,9 +149,12 @@ public abstract class Personnage {
 				return true;
 			}
 		}
-		if(entree.equals("z")) { //SE DEPLACE VERS LE HAUT
-			if(this.position.getX()-1<0) return false;
-			else {
+		
+		if(entree.equalsIgnoreCase("z")) { //SE DEPLACE VERS LE HAUT
+			if(this.position.getX()-1<0) {
+				return false;
+			} else {
+				System.out.println("Z detect");
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -154,9 +165,12 @@ public abstract class Personnage {
 				return true;
 			}
 		}
-		if(entree.equals("s")) { //SE DEPLACE VERS LE BAS
-			if(this.position.getX()+1>=p.getLargeur()) return false;
-			else {
+		
+		if(entree.equalsIgnoreCase("s")) { //SE DEPLACE VERS LE BAS
+			if(this.position.getX()+1>=p.getLargeur()) {
+				return false;
+			} else {
+				System.out.println("S detect");
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));

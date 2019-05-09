@@ -72,6 +72,7 @@ public class Plateau {
 				}
 			}
 		}
+		//System.out.println("Fin init");
 		this.generePortail();
 		
 	}
@@ -85,6 +86,7 @@ public class Plateau {
 	private void generePortail() {
 		this.plateau[this.PORTAIL1.getX()][this.PORTAIL1.getY()].setEstPortail(true);
 		this.plateau[this.PORTAIL2.getX()][this.PORTAIL2.getY()].setEstPortail(true);
+		//System.out.println("Fin gen");
 	}
 	
 	/**

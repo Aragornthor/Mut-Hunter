@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -24,8 +25,6 @@ public class Main extends Application{
 	}
 
 	public void start(Stage stage){
-		
-		
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		
@@ -51,25 +50,15 @@ public class Main extends Application{
 			}
 		}
 		
-		pane.setOnKeyTyped(e->{
-			if(e.getCharacter().equalsIgnoreCase("Z")) {
-				chasseur.estDeplace(jeu, "z");
-				affichagePlateau(plateau);
-			} else if(e.getCharacter().equalsIgnoreCase("Q")) {
-				chasseur.estDeplace(jeu, "q");
-				affichagePlateau(plateau);
-			} else if(e.getCharacter().equalsIgnoreCase("S")) {
-				chasseur.estDeplace(jeu, "s");
-				affichagePlateau(plateau);
-			} else if(e.getCharacter().equalsIgnoreCase("D")) {
-				chasseur.estDeplace(jeu, "d");
-				affichagePlateau(plateau);
-			}
-		});
-		
 		pane.getChildren().add(canvas);
 		
 		Scene scene = new Scene(pane, 1000, 1000);
+		
+		stage.addEventHandler(KeyEvent.KEY_PRESSED, e->{
+			System.out.println(e.getCode().toString());
+			chasseur.estDeplace(jeu, e.getCode().toString());
+			affichagePlateau(plateau);
+		});
 		
 		stage.setTitle("Mut'Hunter");
 		stage.setScene(scene);
