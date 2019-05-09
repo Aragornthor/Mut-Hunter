@@ -118,11 +118,11 @@ public abstract class Personnage {
 		
 		//System.out.println("Debug estDeplace(...)");
 		
-		if(entree.equalsIgnoreCase("q")) { //SE DEPLACE VERS LA GAUCHE
+		if(entree.equalsIgnoreCase("z")) { //SE DEPLACE VERS LE HAUT
 			if(this.position.getY()-1<0) {
 				return false;
 			} else {
-				System.out.println("Q detect");
+				//System.out.println("Z detect");
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -130,15 +130,16 @@ public abstract class Personnage {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
 				}
+				changeCase(p);
 				return true;
 			}
 		}
 		
-		if(entree.equalsIgnoreCase("d")) { //SE DEPLACE VERS LA DROITE
+		if(entree.equalsIgnoreCase("s")) { //SE DEPLACE VERS LE BAS
 			if(this.position.getY()+1>= p.getHauteur()) {
 				return false;
 			} else {
-				System.out.println("D detect");
+				//System.out.println("S detect");
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -146,15 +147,16 @@ public abstract class Personnage {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
 				}
+				changeCase(p);
 				return true;
 			}
 		}
 		
-		if(entree.equalsIgnoreCase("z")) { //SE DEPLACE VERS LE HAUT
+		if(entree.equalsIgnoreCase("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getX()-1<0) {
 				return false;
 			} else {
-				System.out.println("Z detect");
+				//System.out.println("Q detect");
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -162,15 +164,16 @@ public abstract class Personnage {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
 				}
+				changeCase(p);
 				return true;
 			}
 		}
 		
-		if(entree.equalsIgnoreCase("s")) { //SE DEPLACE VERS LE BAS
+		if(entree.equalsIgnoreCase("d")) { //SE DEPLACE VERS LA DROITE
 			if(this.position.getX()+1>=p.getLargeur()) {
 				return false;
 			} else {
-				System.out.println("S detect");
+				//System.out.println("D detect");
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
@@ -178,6 +181,7 @@ public abstract class Personnage {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
 				}
+				changeCase(p);
 				return true;
 			}
 		}

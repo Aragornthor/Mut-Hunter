@@ -55,7 +55,7 @@ public class Main extends Application{
 		Scene scene = new Scene(pane, 1000, 1000);
 		
 		stage.addEventHandler(KeyEvent.KEY_PRESSED, e->{
-			System.out.println(e.getCode().toString());
+			//System.out.println(e.getCode().toString());
 			chasseur.estDeplace(jeu, e.getCode().toString());
 			affichagePlateau(plateau);
 		});
@@ -67,6 +67,7 @@ public class Main extends Application{
 	}
 	
 	public void affichagePlateau(GraphicsContext p) {
+		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<jeu.getLargeur(); i++) {
 			for(int j=0; j<jeu.getHauteur(); j++) {
 				
