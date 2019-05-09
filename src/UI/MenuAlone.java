@@ -1,6 +1,6 @@
 package UI;
 
-import javafx.application.Application;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,21 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
-public class MenuAlone extends Application {
-	
-	public static void main(String[] args) {
-		Application.launch(args);
-	}
-	
-	@Override
-	public void start(Stage stage) throws Exception {
-		stage.setScene(MenuAlone.getScene(stage, 720, 480));
-		stage.setTitle("Test");
-		stage.setFullScreen(true);
-		stage.show();
-	}
-	
+public class MenuAlone {
 	
 	public static Scene getScene(Stage s, double width, double height) {
 		VBox root = new VBox();
@@ -40,7 +28,7 @@ public class MenuAlone extends Application {
 	
 	private static Separator getSep() {
 		Separator sep = new Separator();
-		sep.setPadding(new Insets(10));
+		sep.setPadding(new Insets(5));
 		
 		return sep;
 	}
@@ -51,9 +39,33 @@ public class MenuAlone extends Application {
 		Label title = new Label("Difficulté");
 		title.setStyle("-fx-font: 32px Verdana;");
 		Slider slide = new Slider(0, 1, 0);
-		
+		slide.setMaxWidth(200);
+		slide.setBlockIncrement(1.0);
+		slide.setMajorTickUnit(1);
+		slide.setMinorTickCount(0);
+		slide.setShowTickLabels(true);
+		slide.setShowTickMarks(true);
+		slide.setSnapToTicks(true);
+		slide.setLabelFormatter(new StringConverter<Double>() {
+
+			@Override
+			public String toString(Double n) {
+				if(n == 0) return "Normal";
+				if(n == 1) return "Difficile";
+				return "Default";
+			}
+
+			@Override
+			public Double fromString(String string) {
+				if(string.equals("Normal")) return 0d;
+				if(string.equals("Difficile")) return 1d;
+				return -1d;
+			}
+			
+		});
+		slide.setStyle("-fx-font: 14px Verdana;");
 		root.getChildren().addAll(title, slide);
-		root.setMargin(title, new Insets(5));
+		root.setMargin(title, new Insets(25));
 		root.setAlignment(Pos.TOP_CENTER);
 		
 		return root;
@@ -122,8 +134,15 @@ public class MenuAlone extends Application {
 		
 		HBox type = new HBox();
 		Button hunter = new Button("Chasseur");
+		hunter.setMinSize(64, 64);
+		hunter.setMaxSize(64, 64);
 		Button monster = new Button("Monster");
+		monster.setMinSize(64, 64);
+		monster.setMaxSize(64, 64);
 		type.getChildren().addAll(hunter, monster);
+		type.setMargin(hunter, new Insets(30));
+		type.setMargin(monster, new Insets(30));
+		type.setAlignment(Pos.CENTER);
 		
 		root.getChildren().addAll(title, type);
 		root.setMargin(title, new Insets(5));
@@ -141,23 +160,23 @@ public class MenuAlone extends Application {
 				+ "-fx-background-radius: 3 0 0 3;"
 				+ "-fx-outline: none;"
 				+ "-fx-border-color: rgb(179,205,224);"
-				+ "-fx-padding: 5 0 5 0;"
+				+ "-fx-padding: 15 20 15 20;"
 				+ "-fx-background-color: rgb(179,205,224);"
 				+ "-fx-text-fill: rgb(77,100,141);"
 				+ "-fx-focus-color: transparent;"
 				+ "-fx-faint-focus-color: transparent;"
-				+ "-fx-font: 14px Verdana;"
-				+ "-fx-height: 25px;");
+				+ "-fx-font: 24px Verdana;"
+				+ "-fx-height: 55px;");
 		
 		Button start = new Button("Jouer !");
 		start.setStyle("-fx-border-radius: 0 3 3 0;"
 				+ "-fx-background-radius: 0 3 3 0;"
 				+ "-fx-border : 0 0 0 0;"
-				+ "-fx-padding: 6 10 5 0;"
+				+ "-fx-padding: 16 10 15 0;"
 				+ "-fx-background-color: rgb(179,205,224);"
 				+ "-fx-text-fill: rgb(77,100,141);"
-				+ "-fx-font: 14px Verdana;"
-				+ "-fx-height: 25px;");
+				+ "-fx-font: 24px Verdana;"
+				+ "-fx-height: 55px;");
 		
 		root.getChildren().addAll(pseudo, start);
 		root.setAlignment(Pos.TOP_CENTER);
