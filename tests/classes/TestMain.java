@@ -1,5 +1,8 @@
 package classes;
 
+import java.util.Scanner;
+import javafx.scene.image.Image;
+import competences.Competences;
 import competences.Statut;
 
 public class TestMain {
@@ -17,9 +20,37 @@ public class TestMain {
 		boolean fini = false;
 		
 		while(!fini) { //Tant que la partie n'est pas finie, lance les tours des joueurs
-			if(gestionStatuts(monstre)) fini = tourMonstre();
+			if(gestionStatuts(monstre)) {
+				if(choixAction()) fini = tourMonstre();
+				else {
+					jeu.getCase(monstre.getPosition()).show(); //Montre le chasseur
+					jeu.getCase(chasseur.getPosition()).hide();	//et cache le monstre
+					jeu.affichePlateau(monstre);
+					Competences c[] = monstre.getCompetences();
+					if(!choixCompetences(monstre)) {
+						c[0].utilisation(jeu, monstre, chasseur);
+					}
+					else {
+						c[1].utilisation(jeu, monstre, chasseur);
+					}
+				}
+			}
 			if(fini) break; //Si le monstre perds ou gagne la partie, fini la partie
-			fini = tourChasseur();
+			if(gestionStatuts(chasseur)) {
+				if(choixAction()) fini = tourChasseur();
+				else {
+					jeu.getCase(chasseur.getPosition()).show(); //Montre le chasseur
+					jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
+					jeu.affichePlateau(chasseur);
+					Competences c[] = chasseur.getCompetences();
+					if(!choixCompetences(chasseur)) {
+						c[0].utilisation(jeu, chasseur, monstre);
+					}
+					else {
+						c[1].utilisation(jeu, chasseur, monstre);
+					}
+				}
+			}
 			if(monstre.getStatut() == Statut.Mort) fini = true;
 			jeu.addTours();
 		}
@@ -88,5 +119,23 @@ public class TestMain {
 			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
 		}
 		return true;
+	}
+	
+	public static boolean choixAction() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Que voulez vous faire : 1 - Deplacement / 2 - Compétence");
+		int choix = sc.nextInt();
+		sc.close();
+		if(choix == 2) return true;
+		else return false;
+	}
+	
+	public static boolean choixCompetences(Personnage p) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Quelle compétence utiliser : 1 - +"+ p.getCompetences() +" / 2 - Compétence");
+		int choix = sc.nextInt();
+		sc.close();
+		if(choix == 2) return true;
+		else return false;
 	}
 }
