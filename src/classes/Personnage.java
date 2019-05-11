@@ -267,4 +267,8 @@ public abstract class Personnage {
 		this.statut = s;
 	}
 	
+	public void setDeplacement(int d) {
+		this.deplacement = d;
+	}
+	
 }

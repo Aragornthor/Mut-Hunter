@@ -20,13 +20,13 @@ public class Shield extends Competences {
 		this.setElement("protection");
 		this.setEffet(1); //Protection totale -> 1 tour
 		this.setDuree(2);
-		this.cout = 10;
+		this.cout = 50;
 	}
 
 	@Override
 	public void utilisation(Plateau p, Personnage perso, Personnage cible) {
-		// TODO Auto-generated method stub
-		
+		perso.setStatut(Statut.Shield);
+		perso.rechargeEnergie(-(this.cout));
 	}
 
 

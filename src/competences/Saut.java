@@ -25,8 +25,7 @@ public class Saut extends Competences {
 
 	@Override
 	public void utilisation(Plateau p, Personnage perso, Personnage cible) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 

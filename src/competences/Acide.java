@@ -28,7 +28,7 @@ public class Acide extends Competences {
 	@Override
 	public void utilisation(Plateau p, Personnage perso, Personnage cible) {
 		Position tmp = this.demanderPosition();
-		if(tmp.equals(perso.getPosition()) || tmp.getX() > perso.getPosition().getX()+2 ||
+		while(tmp.equals(perso.getPosition()) || tmp.getX() > perso.getPosition().getX()+2 ||
 				tmp.getX() < perso.getPosition().getX()-2 ||tmp.getY() > perso.getPosition().getY()+2 ||
 				tmp.getY() < perso.getPosition().getY()-2 ) {
 			this.utilisation(p, perso,cible);
