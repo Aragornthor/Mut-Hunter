@@ -1,5 +1,7 @@
 package classes;
 
+import competences.Statut;
+
 public class TestMain {
 	
 	static Plateau jeu = new Plateau();
@@ -15,9 +17,10 @@ public class TestMain {
 		boolean fini = false;
 		
 		while(!fini) { //Tant que la partie n'est pas finie, lance les tours des joueurs
-			fini = tourMonstre();
+			if(gestionStatuts(monstre)) fini = tourMonstre();
 			if(fini) break; //Si le monstre perds ou gagne la partie, fini la partie
 			fini = tourChasseur();
+			if(monstre.getStatut() == Statut.Mort) fini = true;
 			jeu.addTours();
 		}
 		
@@ -67,5 +70,23 @@ public class TestMain {
 			if(perdu) return perdu;
 		}
 		return false;
+	}
+	
+	public static boolean gestionStatuts(Personnage p) {
+		if(p.getStatut() == Statut.Stun) {
+			p.getStatut().setTour(p.getStatut().getNbTour()-1);
+			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
+			return false;
+		}
+		else if(p.getStatut() == Statut.Acide) {
+			p.rechargeEnergie(-10);
+			p.getStatut().setTour(p.getStatut().getNbTour()-1);
+			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
+		}
+		else if(p.getStatut() == Statut.Shield) {
+			p.getStatut().setTour(p.getStatut().getNbTour()-1);
+			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
+		}
+		return true;
 	}
 }
