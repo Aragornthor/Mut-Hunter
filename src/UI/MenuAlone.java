@@ -1,6 +1,7 @@
 package UI;
 
 
+import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +15,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class MenuAlone {
+public class MenuAlone extends Application {
+	
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		primaryStage.setScene(MenuAlone.getScene(primaryStage, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.show();
+	}
+	
 	
 	public static Scene getScene(Stage s, double width, double height) {
 		VBox root = new VBox();
