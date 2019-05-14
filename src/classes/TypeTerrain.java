@@ -4,19 +4,19 @@ import javafx.scene.image.Image;
 
 public enum TypeTerrain {
 
-	PLAINE(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	FORET(0,0,new Image("file:../../ressources/images/foret.png")), 
-	MONTAGNE(0,0,new Image("file:../../ressources/images/montagnes.png")), 
-	EAU(0,0,new Image("file:../../ressources/images/eau.png")), 
-	DESERT(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	VILLE(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	PLAINE_ENNEIGEE(0,0,new Image("file:../../ressources/images/plaines.png")),
-	MONTAGNE_ENNEIGEE(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	LAC_GELE(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	PIC_ARID(0,0,new Image("file:../../ressources/images/plaines.png")),
-	RIVIERE_ASSECHE(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	CENTRALE(0,0,new Image("file:../../ressources/images/plaines.png")), 
-	MARAIS(0,0,new Image("file:../../ressources/images/plaines.png"));
+	PLAINE(0,0,new Image("file:ressources/images/plaines.png")), 
+	FORET(0,0,new Image("file:ressources/images/foret.png")), 
+	MONTAGNE(0,0,new Image("file:ressources/images/montagnes.png")), 
+	EAU(0,0,new Image("file:ressources/images/eau.png")), 
+	DESERT(0,0,new Image("file:ressources/images/plaines.png")), 
+	VILLE(0,0,new Image("file:ressources/images/plaines.png")), 
+	PLAINE_ENNEIGEE(0,0,new Image("file:ressources/images/plaines.png")),
+	MONTAGNE_ENNEIGEE(0,0,new Image("file:ressources/images/plaines.png")), 
+	LAC_GELE(0,0,new Image("file:ressources/images/plaines.png")), 
+	PIC_ARID(0,0,new Image("file:ressources/images/plaines.png")),
+	RIVIERE_ASSECHE(0,0,new Image("file:ressources/images/plaines.png")), 
+	CENTRALE(0,0,new Image("file:ressources/images/plaines.png")), 
+	MARAIS(0,0,new Image("file:ressources/images/plaines.png"));
 	
 	Image image;
 	private int vision;
