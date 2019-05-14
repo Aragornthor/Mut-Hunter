@@ -31,6 +31,7 @@ public class Main extends Application{
 		Pane pane = new Pane();
 		//ImageView logo = new ImageView();
 		//logo.setImage(plaine);
+		pane.setPrefSize(1000,1000);
 		
 		Canvas canvas = new Canvas(1000,1000);
 		GraphicsContext plateau = canvas.getGraphicsContext2D();
@@ -47,6 +48,7 @@ public class Main extends Application{
 							((9-j))*(chasseur.getImage().getWidth()/2)+(i*chasseur.getImage().getWidth()/2),
 							  j*chasseur.getImage().getHeight()/6+(i*chasseur.getImage().getHeight()/6));
 				}
+				
 			}
 		}
 		

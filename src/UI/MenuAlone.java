@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -90,13 +92,13 @@ public class MenuAlone extends Application {
 		
 		Label title = new Label("Plateau");
 		title.setStyle("-fx-font: 32px Verdana;");
-		
+
 		HBox size = new HBox(); // Modifier les BUTTONs avec des IMG
 		Button square = new Button("Square");
 		Button rect = new Button("Rect");
 		Button circle = new Button("Circle");
 		size.getChildren().addAll(square, rect, circle);
-		
+
 		square.setMinSize(64, 64);
 		square.setMaxSize(64, 64);
 		size.setMargin(square, new Insets(25));
