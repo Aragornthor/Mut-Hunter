@@ -25,6 +25,8 @@ public class MenuAlone extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setScene(MenuAlone.getScene(primaryStage, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
+		primaryStage.setMinWidth(1280);
+		primaryStage.setMinHeight(720);
 	}
 	
 	
