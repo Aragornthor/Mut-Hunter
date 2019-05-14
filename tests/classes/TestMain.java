@@ -1,17 +1,19 @@
 package classes;
 
 import java.util.Scanner;
-import javafx.scene.image.Image;
+
 import competences.Competences;
 import competences.Statut;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class TestMain {
+public class TestMain extends Application{
 	
 	static Plateau jeu = new Plateau();
 	static Personnage monstre = new IAMonstre(new Position(9,9));
 	static Personnage chasseur = new Chasseur(new Position(0,0));
 	
-	public static void main(String[] args) {
+	public void start(Stage stage) {
 		
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
@@ -138,4 +140,9 @@ public class TestMain {
 		if(choix == 2) return true;
 		else return false;
 	}
+	
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+
 }
