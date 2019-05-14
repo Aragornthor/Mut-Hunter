@@ -1,11 +1,14 @@
 package classes;
 
 import java.util.Scanner;
+
+import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import competences.Competences;
 import competences.Statut;
 
-public class TestMain {
+public class TestMain extends Application{
 	
 	static Plateau jeu = new Plateau();
 	static Personnage monstre = new IAMonstre(new Position(9,9));
@@ -20,7 +23,7 @@ public class TestMain {
 		boolean fini = false;
 		
 		while(!fini) { //Tant que la partie n'est pas finie, lance les tours des joueurs
-			if(gestionStatuts(monstre)) {
+			if(monstre.gestionStatuts()) {
 				if(choixAction()) fini = tourMonstre();
 				else {
 					jeu.getCase(monstre.getPosition()).show(); //Montre le chasseur
@@ -36,7 +39,7 @@ public class TestMain {
 				}
 			}
 			if(fini) break; //Si le monstre perds ou gagne la partie, fini la partie
-			if(gestionStatuts(chasseur)) {
+			if(chasseur.gestionStatuts()) {
 				if(choixAction()) fini = tourChasseur();
 				else {
 					jeu.getCase(chasseur.getPosition()).show(); //Montre le chasseur
@@ -103,24 +106,6 @@ public class TestMain {
 		return false;
 	}
 	
-	public static boolean gestionStatuts(Personnage p) {
-		if(p.getStatut() == Statut.Stun) {
-			p.getStatut().setTour(p.getStatut().getNbTour()-1);
-			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
-			return false;
-		}
-		else if(p.getStatut() == Statut.Acide) {
-			p.rechargeEnergie(-10);
-			p.getStatut().setTour(p.getStatut().getNbTour()-1);
-			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
-		}
-		else if(p.getStatut() == Statut.Shield) {
-			p.getStatut().setTour(p.getStatut().getNbTour()-1);
-			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
-		}
-		return true;
-	}
-	
 	public static boolean choixAction() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Que voulez vous faire : 1 - Deplacement / 2 - Compétence");
@@ -137,5 +122,11 @@ public class TestMain {
 		sc.close();
 		if(choix == 2) return true;
 		else return false;
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
