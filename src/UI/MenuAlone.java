@@ -1,7 +1,7 @@
 package UI;
 
 
-import javafx.application.Application;
+//import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,16 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class MenuAlone extends Application {
+public class MenuAlone /*extends Application*/ {
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Application.launch(args);
 	}
 	
@@ -29,7 +27,7 @@ public class MenuAlone extends Application {
 		primaryStage.show();
 		primaryStage.setMinWidth(1280);
 		primaryStage.setMinHeight(720);
-	}
+	}*/
 	
 	
 	public static Scene getScene(Stage s, double width, double height) {
