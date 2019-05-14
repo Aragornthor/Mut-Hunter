@@ -24,29 +24,38 @@ public class TestMain extends Application{
 		
 		while(!fini) { //Tant que la partie n'est pas finie, lance les tours des joueurs
 			if(monstre.gestionStatuts()) {
-				if(choixAction()) fini = tourMonstre();
+				if(choixAction()) {
+					System.out.println("TEST1");
+					fini = tourMonstre();
+				}
 				else {
 					jeu.getCase(monstre.getPosition()).show(); //Montre le chasseur
 					jeu.getCase(chasseur.getPosition()).hide();	//et cache le monstre
 					jeu.affichePlateau(monstre);
 					Competences c[] = monstre.getCompetences();
-					if(!choixCompetences(monstre)) {
+					if(choixCompetences(monstre)) {
+						System.out.println("SAMERE MONSTRE");
 						c[0].utilisation(jeu, monstre, chasseur);
 					}
 					else {
 						c[1].utilisation(jeu, monstre, chasseur);
 					}
+					System.out.println("AHHHH"+monstre.getStatut());
 				}
 			}
 			if(fini) break; //Si le monstre perds ou gagne la partie, fini la partie
 			if(chasseur.gestionStatuts()) {
-				if(choixAction()) fini = tourChasseur();
+				if(choixAction()) {
+					System.out.println("TEST2");
+					fini = tourChasseur();
+				}
 				else {
 					jeu.getCase(chasseur.getPosition()).show(); //Montre le chasseur
 					jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
 					jeu.affichePlateau(chasseur);
 					Competences c[] = chasseur.getCompetences();
 					if(!choixCompetences(chasseur)) {
+						System.out.println("SAMERE CHASSEUR");
 						c[0].utilisation(jeu, chasseur, monstre);
 					}
 					else {
@@ -110,17 +119,15 @@ public class TestMain extends Application{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Que voulez vous faire : 1 - Deplacement / 2 - Compétence");
 		int choix = sc.nextInt();
-		sc.close();
-		if(choix == 2) return true;
+		if(choix == 1) return true;
 		else return false;
 	}
 	
 	public static boolean choixCompetences(Personnage p) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Quelle compétence utiliser : 1 - +"+ p.getCompetences() +" / 2 - Compétence");
+		System.out.println("Quelle compétence utiliser : 1 - +"+ p.getCompetences()[0] +" / 2 - "+p.getCompetences()[1] );
 		int choix = sc.nextInt();
-		sc.close();
-		if(choix == 2) return true;
+		if(choix == 1) return true;
 		else return false;
 	}
 
