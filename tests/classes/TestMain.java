@@ -3,12 +3,9 @@ package classes;
 import java.util.Scanner;
 
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import competences.Competences;
 import competences.Statut;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 public class TestMain extends Application{
 	
