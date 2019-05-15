@@ -39,9 +39,7 @@ public class Missile extends Competences {
 		int j = tmp.getY();
 		boolean flag = false;
 		while(i<tmp.getX()+3 && !flag) {
-			System.out.println("TOUR1 : "+i);
 			while (j<tmp.getY()+3 && !flag){
-				System.out.println("TOUR2 : "+j);
 				if((new Position(i,j)).equals(cible.getPosition())) {
 					if(cible.getStatut() != Statut.Shield) cible.setStatut(Statut.Mort);
 					flag = true;
