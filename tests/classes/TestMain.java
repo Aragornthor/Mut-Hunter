@@ -2,6 +2,12 @@ package classes;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
+=======
+import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+>>>>>>> d33cc4aafa7a33cedb501af114026e7b733da05b
 import competences.Competences;
 import competences.Statut;
 import javafx.application.Application;
@@ -22,30 +28,39 @@ public class TestMain extends Application{
 		boolean fini = false;
 		
 		while(!fini) { //Tant que la partie n'est pas finie, lance les tours des joueurs
-			if(gestionStatuts(monstre)) {
-				if(choixAction()) fini = tourMonstre();
+			if(monstre.gestionStatuts()) {
+				if(choixAction()) {
+					System.out.println("TEST1");
+					fini = tourMonstre();
+				}
 				else {
 					jeu.getCase(monstre.getPosition()).show(); //Montre le chasseur
 					jeu.getCase(chasseur.getPosition()).hide();	//et cache le monstre
 					jeu.affichePlateau(monstre);
 					Competences c[] = monstre.getCompetences();
-					if(!choixCompetences(monstre)) {
+					if(choixCompetences(monstre)) {
+						System.out.println("SAMERE MONSTRE");
 						c[0].utilisation(jeu, monstre, chasseur);
 					}
 					else {
 						c[1].utilisation(jeu, monstre, chasseur);
 					}
+					System.out.println("AHHHH"+monstre.getStatut());
 				}
 			}
 			if(fini) break; //Si le monstre perds ou gagne la partie, fini la partie
-			if(gestionStatuts(chasseur)) {
-				if(choixAction()) fini = tourChasseur();
+			if(chasseur.gestionStatuts()) {
+				if(choixAction()) {
+					System.out.println("TEST2");
+					fini = tourChasseur();
+				}
 				else {
 					jeu.getCase(chasseur.getPosition()).show(); //Montre le chasseur
 					jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
 					jeu.affichePlateau(chasseur);
 					Competences c[] = chasseur.getCompetences();
 					if(!choixCompetences(chasseur)) {
+						System.out.println("SAMERE CHASSEUR");
 						c[0].utilisation(jeu, chasseur, monstre);
 					}
 					else {
@@ -105,44 +120,33 @@ public class TestMain extends Application{
 		return false;
 	}
 	
-	public static boolean gestionStatuts(Personnage p) {
-		if(p.getStatut() == Statut.Stun) {
-			p.getStatut().setTour(p.getStatut().getNbTour()-1);
-			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
-			return false;
-		}
-		else if(p.getStatut() == Statut.Acide) {
-			p.rechargeEnergie(-10);
-			p.getStatut().setTour(p.getStatut().getNbTour()-1);
-			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
-		}
-		else if(p.getStatut() == Statut.Shield) {
-			p.getStatut().setTour(p.getStatut().getNbTour()-1);
-			if(p.getStatut().getNbTour() == 0) p.setStatut(Statut.Vivant);
-		}
-		return true;
-	}
-	
 	public static boolean choixAction() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Que voulez vous faire : 1 - Deplacement / 2 - Compétence");
 		int choix = sc.nextInt();
-		sc.close();
-		if(choix == 2) return true;
+		if(choix == 1) return true;
 		else return false;
 	}
 	
 	public static boolean choixCompetences(Personnage p) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Quelle compétence utiliser : 1 - +"+ p.getCompetences() +" / 2 - Compétence");
+		System.out.println("Quelle compétence utiliser : 1 - +"+ p.getCompetences()[0] +" / 2 - "+p.getCompetences()[1] );
 		int choix = sc.nextInt();
-		sc.close();
-		if(choix == 2) return true;
+		if(choix == 1) return true;
 		else return false;
 	}
+<<<<<<< HEAD
 	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
 
+=======
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+>>>>>>> d33cc4aafa7a33cedb501af114026e7b733da05b
 }
