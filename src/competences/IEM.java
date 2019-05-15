@@ -32,19 +32,20 @@ public class IEM  extends Competences {
 		boolean flag = false;
 		while(i<tmp.getX()+3 && !flag) {
 			while (j<tmp.getY()+3 && !flag){
-				if(tmp.equals(cible.getPosition())) {
+				if((new Position(i,j)).equals(cible.getPosition())) {
 					if(cible.getStatut() != Statut.Shield) {
 						if(cible.getStatut().equals(Statut.Stun)) {
 							cible.getStatut().setTour(cible.getStatut().getNbTour()+this.getDuree());
 						}else {
 							cible.setStatut(Statut.Stun);
+							cible.getStatut().setTour(this.getDuree());
 						}
 					}
 					flag = true;
 				}
 				j++;
 			}
-			j=tmp.getX();
+			j=tmp.getY();
 			i++;
 		}
 		perso.rechargeEnergie(-(this.cout));

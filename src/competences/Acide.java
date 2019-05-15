@@ -31,7 +31,7 @@ public class Acide extends Competences {
 		while(tmp.equals(perso.getPosition()) || tmp.getX() > perso.getPosition().getX()+2 ||
 				tmp.getX() < perso.getPosition().getX()-2 ||tmp.getY() > perso.getPosition().getY()+2 ||
 				tmp.getY() < perso.getPosition().getY()-2 ) {
-			this.utilisation(p, perso,cible);
+			tmp = this.demanderPosition();
 		}
 		if(tmp.equals(cible.getPosition())) {
 			if(cible.getStatut().equals(Statut.Acide)) {

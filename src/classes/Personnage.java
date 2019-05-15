@@ -274,17 +274,26 @@ public abstract class Personnage {
 	public boolean gestionStatuts() {
 		if(this.getStatut() == Statut.Stun) {
 			this.getStatut().setTour(this.getStatut().getNbTour()-1);
-			if(this.getStatut().getNbTour() == 0) this.setStatut(Statut.Vivant);
+			if(this.getStatut().getNbTour() == -1) {
+				this.setStatut(Statut.Vivant);
+				this.getStatut().setTour(0);
+			}
 			return false;
 		}
 		else if(this.getStatut() == Statut.Acide) {
 			this.rechargeEnergie(-10);
 			this.getStatut().setTour(this.getStatut().getNbTour()-1);
-			if(this.getStatut().getNbTour() == 0) this.setStatut(Statut.Vivant);
+			if(this.getStatut().getNbTour() == -1) {
+				this.setStatut(Statut.Vivant);
+				this.getStatut().setTour(0);
+			}
 		}
 		else if(this.getStatut() == Statut.Shield) {
 			this.getStatut().setTour(this.getStatut().getNbTour()-1);
-			if(this.getStatut().getNbTour() == 0) this.setStatut(Statut.Vivant);
+			if(this.getStatut().getNbTour() == -1) {
+				this.setStatut(Statut.Vivant);
+				this.getStatut().setTour(0);
+			}
 		}
 		return true;
 	}

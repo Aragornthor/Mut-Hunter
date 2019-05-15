@@ -30,21 +30,25 @@ public class Missile extends Competences {
 		while(tmp.equals(perso.getPosition()) || tmp.getX() > perso.getPosition().getX()+2 ||
 				tmp.getX() < perso.getPosition().getX()-2 ||tmp.getY() > perso.getPosition().getY()+2 ||
 				tmp.getY() < perso.getPosition().getY()-2 ) {
-			this.utilisation(p, perso,cible);
+			tmp = this.demanderPosition();
 		}
+		
+		tmp = new Position(tmp.getX()-1, tmp.getY()-1);
 		
 		int i = tmp.getX();
 		int j = tmp.getY();
 		boolean flag = false;
 		while(i<tmp.getX()+3 && !flag) {
+			System.out.println("TOUR1 : "+i);
 			while (j<tmp.getY()+3 && !flag){
-				if(tmp.equals(cible.getPosition())) {
+				System.out.println("TOUR2 : "+j);
+				if((new Position(i,j)).equals(cible.getPosition())) {
 					if(cible.getStatut() != Statut.Shield) cible.setStatut(Statut.Mort);
 					flag = true;
 				}
 				j++;
 			}
-			j=tmp.getX();
+			j=tmp.getY();
 			i++;
 		}
 		perso.rechargeEnergie(-(this.cout));
@@ -56,8 +60,7 @@ public class Missile extends Competences {
 		int x = sc.nextInt();
 		System.out.println("en y : ");
 		int y = sc.nextInt();
-		sc.close();
-		return new Position(x-1,y-1);
+		return new Position(x,y);
 	}
 
 

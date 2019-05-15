@@ -336,4 +336,9 @@ public class Plateau {
 	public void setCompteurCasesDecouvertes() {
 		this.compteurCasesDecouvertes++;
 	}
+	
+	public boolean contains(Position p) {
+		if(p.getX()<this.getLargeur() && p.getY()<this.getHauteur() && p.getX()>=0 && p.getY()>=0) return true;
+		else return false;
+	}
 }

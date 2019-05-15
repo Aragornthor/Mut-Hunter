@@ -31,7 +31,7 @@ public class Saut extends Competences {
 		while(tmp.equals(perso.getPosition()) || tmp.getX() > perso.getPosition().getX()+2 ||
 				tmp.getX() < perso.getPosition().getX()-2 ||tmp.getY() > perso.getPosition().getY()+2 ||
 				tmp.getY() < perso.getPosition().getY()-2 ) {
-			this.utilisation(p, perso,cible);
+			tmp = this.demanderPosition();
 		}
 		
 		perso.setPosition(tmp);
@@ -43,7 +43,7 @@ public class Saut extends Competences {
 		boolean flag = false;
 		while(i<zone.getX()+3 && !flag) {
 			while (j<zone.getY()+3 && !flag){
-				if(zone.equals(cible.getPosition())) {
+				if((new Position(i,j)).equals(cible.getPosition())) {
 					if(cible.getStatut() != Statut.Shield) {
 						if(cible.getStatut().equals(Statut.Stun)) {
 							cible.getStatut().setTour(cible.getStatut().getNbTour()+this.getDuree());
@@ -56,7 +56,7 @@ public class Saut extends Competences {
 				}
 				j++;
 			}
-			j=zone.getX();
+			j=zone.getY();
 			i++;
 		}
 		perso.rechargeEnergie(-(this.cout));
