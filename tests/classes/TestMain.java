@@ -2,12 +2,9 @@ package classes;
 
 import java.util.Scanner;
 
-<<<<<<< HEAD
-=======
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
->>>>>>> d33cc4aafa7a33cedb501af114026e7b733da05b
 import competences.Competences;
 import competences.Statut;
 import javafx.application.Application;
@@ -19,7 +16,7 @@ public class TestMain extends Application{
 	static Personnage monstre = new IAMonstre(new Position(9,9));
 	static Personnage chasseur = new Chasseur(new Position(0,0));
 	
-	public void start(Stage stage) {
+	public static void main(String[] args) {
 		
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
@@ -39,7 +36,7 @@ public class TestMain extends Application{
 					jeu.affichePlateau(monstre);
 					Competences c[] = monstre.getCompetences();
 					if(choixCompetences(monstre)) {
-						System.out.println("SAMERE MONSTRE");
+						System.out.println("LE MONSTRE");
 						c[0].utilisation(jeu, monstre, chasseur);
 					}
 					else {
@@ -60,7 +57,7 @@ public class TestMain extends Application{
 					jeu.affichePlateau(chasseur);
 					Competences c[] = chasseur.getCompetences();
 					if(!choixCompetences(chasseur)) {
-						System.out.println("SAMERE CHASSEUR");
+						System.out.println("LE CHASSEUR");
 						c[0].utilisation(jeu, chasseur, monstre);
 					}
 					else {
@@ -135,18 +132,10 @@ public class TestMain extends Application{
 		if(choix == 1) return true;
 		else return false;
 	}
-<<<<<<< HEAD
 	
-	public static void main(String[] args) {
-		Application.launch(args);
-	}
-
-=======
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
->>>>>>> d33cc4aafa7a33cedb501af114026e7b733da05b
 }
