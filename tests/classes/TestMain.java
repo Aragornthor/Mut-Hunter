@@ -2,6 +2,7 @@ package classes;
 
 import java.util.Scanner;
 
+import IA.IAMonstreConsole;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import competences.Competences;
@@ -10,7 +11,7 @@ import competences.Statut;
 public class TestMain extends Application{
 	
 	static Plateau jeu = new Plateau();
-	static Personnage monstre = new IAMonstre(new Position(9,9));
+	static Personnage monstre = new IAMonstreConsole(new Position(9,9));
 	static Personnage chasseur = new Chasseur(new Position(0,0));
 	
 	public static void main(String[] args) {

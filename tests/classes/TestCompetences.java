@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import IA.IAMonstreConsole;
 import competences.Acide;
 import competences.IEM;
 import competences.Missile;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 public class TestCompetences extends Application{
 	static Plateau jeu = new Plateau();
-	static Personnage monstre = new IAMonstre(new Position(9,9));
+	static Personnage monstre = new IAMonstreConsole(new Position(9,9));
 	static Personnage chasseur = new Chasseur(new Position(0,0));
 	
 	

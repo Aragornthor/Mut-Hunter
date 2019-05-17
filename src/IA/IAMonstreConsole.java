@@ -1,5 +1,8 @@
-package classes;
+package IA;
 
+import classes.Personnage;
+import classes.Plateau;
+import classes.Position;
 import competences.Competences;
 import competences.Shield;
 import javafx.scene.image.Image;
@@ -10,7 +13,7 @@ import javafx.scene.image.Image;
  * @author Robin Gallifa
  *
  */
-public class IAMonstre extends Personnage {
+public class IAMonstreConsole extends Personnage {
 
 	String direction = "z";
 	
@@ -18,7 +21,7 @@ public class IAMonstre extends Personnage {
 	 * Constructeur du Chasseur avec une  position donnée
 	 * @param p Prend en paramètre la position initiale du chasseur
 	 */
-	public IAMonstre(Position p) {
+	public IAMonstreConsole(Position p) {
 		super(p);
 		this.setType("monstre");
 		this.setTableauCompetences(new Competences[] {new Shield(), null});		

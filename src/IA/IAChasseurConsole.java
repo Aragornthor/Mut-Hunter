@@ -1,7 +1,10 @@
-package classes;
+package IA;
 
 import java.util.Random;
 
+import classes.Personnage;
+import classes.Plateau;
+import classes.Position;
 import competences.Competences;
 import competences.IEM;
 import javafx.scene.image.Image;
@@ -12,14 +15,14 @@ import javafx.scene.image.Image;
  * @author Robin Gallifa
  *
  */
-public class IAChasseur extends Personnage{
+public class IAChasseurConsole extends Personnage{
 	String direction = "z";
 	
 	/**
 	 * Constructeur du Chasseur avec une  position donnée
 	 * @param p Prend en paramètre la position initiale du chasseur
 	 */
-	public IAChasseur(Position p) {
+	public IAChasseurConsole(Position p) {
 		super(p);
 		this.setType("chasseur");
 		this.setTableauCompetences(new Competences[] {new IEM(), null});		
