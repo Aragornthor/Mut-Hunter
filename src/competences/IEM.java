@@ -23,8 +23,8 @@ public class IEM  extends Competences {
 	}
 
 	@Override
-	public void utilisation(Plateau p, Personnage perso, Personnage cible) {
-		Position tmp = new Position(perso.getPosition().getX()-1, perso.getPosition().getY()-1);
+	public void utilisation(Plateau p, Personnage perso, Personnage cible, Position tmp) {
+		tmp = new Position(perso.getPosition().getX()-1, perso.getPosition().getY()-1);
 		
 		int i = tmp.getX();
 		int j = tmp.getY();

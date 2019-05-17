@@ -35,10 +35,10 @@ public class TestMain extends Application{
 					Competences c[] = monstre.getCompetences();
 					if(choixCompetences(monstre)) {
 						System.out.println("LE MONSTRE");
-						c[0].utilisation(jeu, monstre, chasseur);
+						c[0].utilisation(jeu, monstre, chasseur, demanderPosition());
 					}
 					else {
-						c[1].utilisation(jeu, monstre, chasseur);
+						c[1].utilisation(jeu, monstre, chasseur, demanderPosition());
 					}
 					System.out.println("AHHHH"+monstre.getStatut());
 				}
@@ -56,10 +56,10 @@ public class TestMain extends Application{
 					Competences c[] = chasseur.getCompetences();
 					if(choixCompetences(chasseur)) {
 						System.out.println("LE CHASSEUR");
-						c[0].utilisation(jeu, chasseur, monstre);
+						c[0].utilisation(jeu, chasseur, monstre, demanderPosition());
 					}
 					else {
-						c[1].utilisation(jeu, chasseur, monstre);
+						c[1].utilisation(jeu, chasseur, monstre, demanderPosition());
 					}
 				}
 			}
@@ -135,5 +135,14 @@ public class TestMain extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private static Position demanderPosition() {
+		System.out.println("Où voulez vous tirer ?\n en x :");
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		System.out.println("en y : ");
+		int y = sc.nextInt();
+		return new Position(x,y);
 	}
 }

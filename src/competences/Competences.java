@@ -2,6 +2,7 @@ package competences;
 
 import classes.Personnage;
 import classes.Plateau;
+import classes.Position;
 
 /**
  * 
@@ -83,5 +84,5 @@ public abstract class Competences {
 		return this.id == c.getId();
 	}
 	
-	public abstract void utilisation(Plateau p, Personnage perso, Personnage cible);
+	public abstract void utilisation(Plateau p, Personnage perso, Personnage cible, Position pos);
 }

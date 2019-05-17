@@ -30,7 +30,7 @@ public class TestCompetences extends Application{
 		jeu.startPersonnage(chasseur, monstre);
 		jeu.ajoutLoot(2);
 		
-		monstre.getCompetences()[0].utilisation(jeu, monstre, chasseur);
+		monstre.getCompetences()[0].utilisation(jeu, monstre, chasseur, new Position(0,0));
 		System.out.println("Shield début : " + monstre.getStatut());
 		for(int i=0; i<3; i++) {
 			monstre.gestionStatuts();
@@ -39,8 +39,7 @@ public class TestCompetences extends Application{
 		
 		monstre.getCompetences()[1]= new Acide();
 		chasseur.setPosition(new Position(8,9));
-		System.out.println("Tirez en 8,9");
-		monstre.getCompetences()[1].utilisation(jeu, monstre, chasseur);
+		monstre.getCompetences()[1].utilisation(jeu, monstre, chasseur, new Position(8,9));
 		System.out.println("Acide début : " + chasseur.getStatut());
 		for(int i=0; i<4; i++) {
 			chasseur.gestionStatuts();
@@ -48,9 +47,8 @@ public class TestCompetences extends Application{
 		System.out.println("Acide fin : " + chasseur.getStatut());
 		
 		monstre.getCompetences()[1]= new Saut();
-		System.out.println("Sautez en 7,9");
 		System.out.println("Saut coordonnees monstre debut : " + monstre.getPosition()+ " " + chasseur.getStatut().getNbTour());
-		monstre.getCompetences()[1].utilisation(jeu, monstre, chasseur);
+		monstre.getCompetences()[1].utilisation(jeu, monstre, chasseur, new Position(7,9));
 		System.out.println("Saut coordonnees monstre fin : " + monstre.getPosition()+ " " + chasseur.getStatut().getNbTour());
 		System.out.println("Saut début : " + chasseur.getStatut()+ " " + chasseur.getStatut().getNbTour());
 		for(int i=0; i<3; i++) {
@@ -59,7 +57,7 @@ public class TestCompetences extends Application{
 		}
 		System.out.println("Saut fin : " + chasseur.getStatut()+ " " + chasseur.getStatut().getNbTour());
 		
-		chasseur.getCompetences()[0].utilisation(jeu, chasseur, monstre);
+		chasseur.getCompetences()[0].utilisation(jeu, chasseur, monstre, new Position(0,0));
 		System.out.println("IEM début : " + monstre.getStatut()+ " " + monstre.getStatut().getNbTour());
 		for(int i=0; i<3; i++) {
 			monstre.gestionStatuts();
@@ -70,13 +68,13 @@ public class TestCompetences extends Application{
 		chasseur.getCompetences()[1]= new Missile();
 		System.out.println("Tirez en 6,9");
 		System.out.println("Missile debut : " + monstre.getStatut()+ " " + monstre.getStatut().getNbTour() +" " + chasseur.getPosition());
-		chasseur.getCompetences()[1].utilisation(jeu, chasseur, monstre);
+		chasseur.getCompetences()[1].utilisation(jeu, chasseur, monstre, new Position(6,9));
 		System.out.println("Missile fin : " + monstre.getStatut() + " " + monstre.getStatut().getNbTour());
 		
 		monstre.setStatut(Statut.Vivant);
 		
 		chasseur.getCompetences()[1]= new Piege();
-		chasseur.getCompetences()[1].utilisation(jeu, chasseur, monstre);
+		chasseur.getCompetences()[1].utilisation(jeu, chasseur, monstre, new Position(0,0));
 		System.out.println("Est piege : "+jeu.getCase(chasseur.getPosition()).getTypeCase());
 		chasseur.estDeplace(jeu, "z");
 		monstre.estDeplace(jeu, "d");
@@ -89,11 +87,11 @@ public class TestCompetences extends Application{
 		}
 		System.out.println("Piege fin : " + monstre.getStatut()+ " " + monstre.getStatut().getNbTour());
 		
-		monstre.getCompetences()[0].utilisation(jeu, monstre, chasseur);
+		monstre.getCompetences()[0].utilisation(jeu, monstre, chasseur, new Position(0,0));
 		System.out.println("Shield début : " + monstre.getStatut()+ " " + monstre.getStatut().getNbTour());
-		chasseur.getCompetences()[0].utilisation(jeu, chasseur, monstre);
+		chasseur.getCompetences()[0].utilisation(jeu, chasseur, monstre, new Position(0,0));
 		System.out.println("Shield milieu : " + monstre.getStatut()+ " " + monstre.getStatut().getNbTour());
-		monstre.getCompetences()[0].utilisation(jeu, monstre, chasseur);
+		monstre.getCompetences()[0].utilisation(jeu, monstre, chasseur, new Position(0,0));
 		System.out.println("Shield fin : " + monstre.getStatut()+ " " + monstre.getStatut().getNbTour());
 	}
 

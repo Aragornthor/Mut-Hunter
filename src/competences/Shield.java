@@ -23,7 +23,7 @@ public class Shield extends Competences {
 	}
 
 	@Override
-	public void utilisation(Plateau p, Personnage perso, Personnage cible) {
+	public void utilisation(Plateau p, Personnage perso, Personnage cible, Position tmp) {
 		if(perso.getStatut() == Statut.Shield) perso.getStatut().setTour(perso.getStatut().getNbTour()+this.getDuree());
 		else {
 			perso.setStatut(Statut.Shield);
