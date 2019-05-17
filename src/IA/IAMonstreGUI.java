@@ -15,12 +15,16 @@ public class IAMonstreGUI extends Monstre implements IA {
 
 	@Override
 	public void jouer(Plateau p) {
-		Position pos = super.getPosition();
-		
+				
 	}
 	
-	private boolean dirPossible() {
+	private boolean dirPossible(Plateau p, Position pos) {
+		if(dir == Direction.HAUT && pos.getY() - 1 < 0) return false;
+		if(dir == Direction.BAS && pos.getY() + 1 >= p.getHauteur()) return false;
+		if(dir == Direction.GAUCHE && pos.getX() - 1 < 0) return false;
+		if(dir == Direction.DROITE && pos.getX() + 1 >= p.getLargeur()) return false;
 		
+		return true;
 	}
 	
 	@Override
