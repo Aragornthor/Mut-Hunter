@@ -53,7 +53,7 @@ public class TestMain extends Application{
 					jeu.getCase(monstre.getPosition()).hide();	//et cache le monstre
 					jeu.affichePlateau(chasseur);
 					Competences c[] = chasseur.getCompetences();
-					if(!choixCompetences(chasseur)) {
+					if(choixCompetences(chasseur)) {
 						System.out.println("LE CHASSEUR");
 						c[0].utilisation(jeu, chasseur, monstre);
 					}

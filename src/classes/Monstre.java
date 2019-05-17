@@ -37,4 +37,12 @@ public class Monstre extends Personnage {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean changeCase(Plateau p) {
+		p.getCase(this.getPosition()).setEstMonstre(true);
+		p.getCase(this.getPosition()).decouvrirCase();
+		p.getCase(this.getPosition()).setTempsDecouvert(p.getTours());
+		return p.defaiteMonstre(this.getPosition());
+	}
 }

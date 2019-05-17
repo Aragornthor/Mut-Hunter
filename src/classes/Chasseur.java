@@ -37,6 +37,12 @@ public class Chasseur extends Personnage{
 	public Image getImage() {
 		return this.image;
 	}
+
+	@Override
+	public boolean changeCase(Plateau p) {
+		p.getCase(this.getPosition()).setEstChasseur(true);
+		return false;
+	}
 	
 	
 }

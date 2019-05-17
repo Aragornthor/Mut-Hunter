@@ -195,16 +195,7 @@ public abstract class Personnage {
 	 * Change la case où se trouve le personnage
 	 * @param p Prend un plateau en paramètre
 	 */
-	public boolean changeCase(Plateau p) {
-		boolean fini = p.defaiteMonstre(this.position);
-		if(this.type.equals("monstre")) {
-			p.getCase(this.position).setEstMonstre(true);
-			p.getCase(this.position).decouvrirCase();
-			p.getCase(this.position).setTempsDecouvert(p.getTours());
-		}
-		else if(this.type.equals("chasseur")) p.getCase(this.position).setEstChasseur(true);
-		return fini;
-	}
+	public abstract boolean changeCase(Plateau p);
 
 	public void rechargeEnergie() {
 		rechargeEnergie(10);

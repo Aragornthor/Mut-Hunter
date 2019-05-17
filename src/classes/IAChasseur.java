@@ -52,4 +52,10 @@ public class IAChasseur extends Personnage{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public boolean changeCase(Plateau p) {
+		p.getCase(this.getPosition()).setEstChasseur(true);
+		return false;
+	}
 }
