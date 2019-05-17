@@ -19,8 +19,7 @@ public class Missile extends Competences {
 	 */
 	public Missile() {
 		this.setId(2);
-		this.setElement("vie");
-		this.setEffet(-1); //Mort instantanée
+		this.setNom("Missile");
 		this.setDuree(0);
 		this.cout = 100;
 	}

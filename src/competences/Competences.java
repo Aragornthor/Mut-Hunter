@@ -19,8 +19,7 @@ import classes.Plateau;
 public abstract class Competences {
 	
 	private int id;
-	private String element;
-	private int effet;
+	private String nom;
 	private int duree;
 	protected int cout;
 	
@@ -28,16 +27,8 @@ public abstract class Competences {
 	 * 
 	 * @return Retourne l'element de la competence
 	 */
-	public String getElement() {
-		return element;
-	}
-
-	/**
-	 * 
-	 * @return Retourne l'effet de la competence
-	 */
-	public int getEffet() {
-		return effet;
+	public String getNom() {
+		return nom;
 	}
 
 	/**
@@ -66,14 +57,10 @@ public abstract class Competences {
 		this.id = id;
 	}
 
-	public void setElement(String element) {
-		this.element = element;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
-
-	public void setEffet(int effet) {
-		this.effet = effet;
-	}
-
+	
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
@@ -85,7 +72,7 @@ public abstract class Competences {
 	 */
 	@Override
 	public String toString() {
-		return "["+this.id+":"+this.element+":"+this.effet+":"+this.duree+"]";
+		return "["+this.id+":"+this.nom+":"+this.duree+"]";
 	}
 	
 	/**

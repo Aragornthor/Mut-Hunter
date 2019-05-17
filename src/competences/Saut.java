@@ -19,8 +19,7 @@ public class Saut extends Competences {
 	 */
 	public Saut() {
 		this.setId(4);
-		this.setElement("deplacement");
-		this.setEffet(0); //Immobilisation -> 2 tours
+		this.setNom("Saut");
 		this.setDuree(2);
 		this.cout = 30;
 	}

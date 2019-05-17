@@ -17,8 +17,7 @@ public class IEM  extends Competences {
 	 */
 	public IEM() {
 		this.setId(1);
-		this.setElement("deplacement");
-		this.setEffet(0);
+		this.setNom("IEM");
 		this.setDuree(1);
 		this.cout = 40;
 	}

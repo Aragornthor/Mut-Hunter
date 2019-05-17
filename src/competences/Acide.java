@@ -19,8 +19,7 @@ public class Acide extends Competences {
 	 */
 	public Acide() {
 		this.setId(0);
-		this.setElement("énergie");
-		this.setEffet(-10); //Perte d'énergie (nettoyage) -> 3 tours
+		this.setNom("Acide");
 		this.setDuree(3);
 		this.cout = 20;
 	}

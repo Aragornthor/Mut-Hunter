@@ -17,8 +17,7 @@ public class Piege extends Competences {
 	 */
 	public Piege() {
 		this.setId(3);
-		this.setElement("deplacement");
-		this.setEffet(0);
+		this.setNom("Piege");
 		this.setDuree(0);
 		this.cout = 10;
 	}
