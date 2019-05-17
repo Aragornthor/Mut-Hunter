@@ -2,6 +2,6 @@ package classes;
 
 public enum TypeCase {
 
-	VIDE, PORTAIL, LOOT;
+	VIDE, PORTAIL, LOOT, PIEGE;
 	
 }

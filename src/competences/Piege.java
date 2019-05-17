@@ -2,7 +2,7 @@ package competences;
 
 import classes.Personnage;
 import classes.Plateau;
-import classes.Position;
+import classes.TypeCase;
 
 /**
  * 
@@ -24,8 +24,7 @@ public class Piege extends Competences {
 
 	@Override
 	public void utilisation(Plateau p, Personnage perso, Personnage cible) {
-		// TODO Auto-generated method stub
-		
+		if(!p.getCase(perso.getPosition()).getEstPortail() && !p.getCase(perso.getPosition()).getEstPiege()) p.getCase(perso.getPosition()).setTypeCase(TypeCase.PIEGE);
 	}
 
 

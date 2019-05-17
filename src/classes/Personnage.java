@@ -129,9 +129,16 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				if(p.getCase(this.getPosition()).getLoot()) {
+				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
+				}
+				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
+					if(!this.getStatut().equals(Statut.Shield)) {
+						this.setStatut(Statut.Stun);
+						this.getStatut().setTour(2);
+					}
+					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
 				return true;
@@ -146,9 +153,16 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				if(p.getCase(this.getPosition()).getLoot()) {
+				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
+				}
+				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
+					if(!this.getStatut().equals(Statut.Shield)) {
+						this.setStatut(Statut.Stun);
+						this.getStatut().setTour(2);
+					}
+					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
 				return true;
@@ -163,9 +177,16 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				if(p.getCase(this.getPosition()).getLoot()) {
+				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
+				}
+				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
+					if(!this.getStatut().equals(Statut.Shield)) {
+						this.setStatut(Statut.Stun);
+						this.getStatut().setTour(2);
+					}
+					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
 				return true;
@@ -183,6 +204,18 @@ public abstract class Personnage {
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
+				}
+				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
+				else if(p.getCase(this.getPosition()).getLoot()) {
+					p.ajoutCompetence(this);
+					p.setDernierLoot();
+				}
+				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
+					if(!this.getStatut().equals(Statut.Shield)) {
+						this.setStatut(Statut.Stun);
+						this.getStatut().setTour(2);
+					}
+					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
 				return true;
@@ -288,5 +321,6 @@ public abstract class Personnage {
 		}
 		return true;
 	}
+	
 	
 }

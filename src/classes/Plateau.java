@@ -153,7 +153,7 @@ public class Plateau {
 				do {
 					x = rand.nextInt(this.plateau.length);
 					y = rand.nextInt(this.plateau[0].length);
-				}while(this.plateau[x][y].getLoot() && this.plateau[x][y].getEstPortail() && this.plateau[x][y].getEstMonstre() && this.plateau[x][y].getEstChasseur());
+				}while(this.plateau[x][y].getLoot() && this.plateau[x][y].getEstPortail() && this.plateau[x][y].getEstMonstre() && this.plateau[x][y].getEstChasseur() && this.plateau[x][y].getEstPiege());
 				
 				this.plateau[x][y].changeLoot();
 			}

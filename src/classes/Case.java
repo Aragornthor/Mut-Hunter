@@ -194,9 +194,20 @@ public class Case {
 		return this.typeCase;
 	}
 	
+	public void setTypeCase(TypeCase tc) {
+		typeCase = tc;
+	}
+	
 	public TypeTerrain getTypeTerrain() {
 		return this.typeTerrain;
 	}
 
+	/**
+	 * @return true si la case est un piege, false sinon
+	 */
+	public boolean getEstPiege() {
+		if(this.typeCase.equals(TypeCase.PIEGE)) return true;
+		else return false;
+	}
 
 }
