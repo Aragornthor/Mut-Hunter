@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
  */
 public class Monstre extends Personnage {
 
-	Image image = new Image("file:ressources/images/ceciEstUneGrosseBoule.png");
+	Image image = new Image("file:ressources/images/monstre.png");
 	
 	/**
 	 * Constructeur du Monstre avec une  position donnée

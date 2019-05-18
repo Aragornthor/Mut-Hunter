@@ -45,9 +45,9 @@ public class TestPlayerInfo extends Application{
 		for(int i=0; i<jeu.getLargeur(); i++) {
 			for(int j=0; j<jeu.getHauteur(); j++) {
 				
-				plateau.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImage(),
-						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getWidth()/2),
-						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getHeight()/6));
+				plateau.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible(),
+						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2),
+						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6));
 				
 				if(jeu.getPlateau()[i][j].getEstChasseur()) {
 					plateau.drawImage(chasseur.getImage(),
@@ -82,9 +82,9 @@ public class TestPlayerInfo extends Application{
 		for(int i=0; i<jeu.getLargeur(); i++) {
 			for(int j=0; j<jeu.getHauteur(); j++) {
 				
-				p.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImage(),
-						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getWidth()/2),
-						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getHeight()/6));
+				p.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible(),
+						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2),
+						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6));
 				
 				if(jeu.getPlateau()[i][j].getEstChasseur()) {
 					p.drawImage(chasseur.getImage(),

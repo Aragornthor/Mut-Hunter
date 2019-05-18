@@ -16,7 +16,7 @@ public class Chasseur extends Personnage{
 	 * Constructeur du Chasseur avec une  position donnée
 	 * @param p Prend en paramètre la position initiale du chasseur
 	 */
-	Image image = new Image("file:ressources/images/ceciEstUneGrosseBoule.png");
+	Image image = new Image("file:ressources/images/mech.png");
 	
 	public Chasseur(Position p) {
 		super(p);
