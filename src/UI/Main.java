@@ -7,6 +7,7 @@ import classes.Monstre;
 import classes.Plateau;
 import classes.Position;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,6 +20,7 @@ public class Main extends Application{
 	Plateau jeu = new Plateau();
 	Chasseur chasseur = new Chasseur(new Position(0,0));
 	Monstre monstre = new Monstre(new Position(9,9));
+	boolean tourChasseur = true;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -29,38 +31,43 @@ public class Main extends Application{
 		jeu.startPersonnage(chasseur, monstre);
 		
 		Pane pane = new Pane();
-		//ImageView logo = new ImageView();
-		//logo.setImage(plaine);
 		pane.setPrefSize(1000,1000);
 		
 		Canvas canvas = new Canvas(1000,1000);
 		GraphicsContext plateau = canvas.getGraphicsContext2D();
 		
-		for(int i=0; i<jeu.getLargeur(); i++) {
-			for(int j=0; j<jeu.getHauteur(); j++) {
-				
-				plateau.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImage(),
-						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getWidth()/2),
-						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImage().getHeight()/6));
-				
-				if(jeu.getPlateau()[i][j].getEstChasseur()) {
-					plateau.drawImage(chasseur.getImage(),
-							((9-j))*(chasseur.getImage().getWidth()/2)+(i*chasseur.getImage().getWidth()/2),
-							  j*chasseur.getImage().getHeight()/6+(i*chasseur.getImage().getHeight()/6));
-				}
-				
-			}
-		}
+		affichagePlateau(plateau);
 		
 		pane.getChildren().add(canvas);
 		
 		Scene scene = new Scene(pane, 1000, 1000);
 		
-		stage.addEventHandler(KeyEvent.KEY_PRESSED, e->{
-			//System.out.println(e.getCode().toString());
-			chasseur.estDeplace(jeu, e.getCode().toString());
-			affichagePlateau(plateau);
-		});
+		class KeyListenerMovement implements EventHandler<KeyEvent>{
+			public void handle(KeyEvent event) {
+				if(KeyEvent.KEY_PRESSED != null) {
+					if(tourChasseur) {
+						chasseur.estDeplace(jeu, event.getCode().toString());
+						affichagePlateau(plateau);
+						chasseur.setDeplacement(chasseur.getDeplacement()-jeu.getCase(chasseur.getPosition()).getTypeTerrain().getDeplacement());
+						if(chasseur.getDeplacement() <= 0) {
+							chasseur.resetMouvement();
+							tourChasseur = false;
+						}
+					} else {
+						monstre.estDeplace(jeu, event.getCode().toString());
+						affichagePlateau(plateau);
+						monstre.setDeplacement(monstre.getDeplacement()-1);
+						if(monstre.getDeplacement() <= 0) {
+							monstre.resetMouvement();
+							tourChasseur = true;
+						}
+					}	
+				}
+			}
+		}
+		
+		stage.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement());
+		
 		
 		stage.setTitle("Mut'Hunter");
 		stage.setScene(scene);
@@ -81,6 +88,11 @@ public class Main extends Application{
 					p.drawImage(chasseur.getImage(),
 							((9-j))*(chasseur.getImage().getWidth()/2)+(i*chasseur.getImage().getWidth()/2),
 							  j*chasseur.getImage().getHeight()/6+(i*chasseur.getImage().getHeight()/6));
+				}
+				if(jeu.getPlateau()[i][j].getEstMonstre()) {
+					p.drawImage(monstre.getImage(),
+							((9-j))*(monstre.getImage().getWidth()/2)+(i*monstre.getImage().getWidth()/2),
+							  j*monstre.getImage().getHeight()/6+(i*monstre.getImage().getHeight()/6));
 				}
 			}
 		}

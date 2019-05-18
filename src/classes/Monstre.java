@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
  */
 public class Monstre extends Personnage {
 
+	Image image = new Image("file:ressources/images/ceciEstUneGrosseBoule.png");
+	
 	/**
 	 * Constructeur du Monstre avec une  position donnée
 	 * @param p Prend en paramètre la position initiale du monstre
@@ -34,8 +36,7 @@ public class Monstre extends Personnage {
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.image;
 	}
 
 	@Override

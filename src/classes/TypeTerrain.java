@@ -32,6 +32,10 @@ public enum TypeTerrain {
 		return this.vision;
 	}
 	
+	public int getDeplacement() {
+		return this.deplacement;
+	}
+	
 	public Image getImage() {
 		return this.image;
 	}

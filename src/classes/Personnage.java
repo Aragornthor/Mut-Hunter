@@ -31,7 +31,7 @@ public abstract class Personnage {
 	public Personnage(Position p) {
 		this.energie = 75;
 		this.position = p;
-		this.deplacement = 1;
+		this.deplacement = 3;
 		this.vie = 1;
 		this.maxEnergie = 100;
 		this.statut = Statut.Vivant;
@@ -205,11 +205,6 @@ public abstract class Personnage {
 					p.ajoutCompetence(this);
 					p.setDernierLoot();
 				}
-				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				else if(p.getCase(this.getPosition()).getLoot()) {
-					p.ajoutCompetence(this);
-					p.setDernierLoot();
-				}
 				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
 					if(!this.getStatut().equals(Statut.Shield)) {
 						this.setStatut(Statut.Stun);
@@ -293,6 +288,10 @@ public abstract class Personnage {
 	
 	public void setDeplacement(int d) {
 		this.deplacement = d;
+	}
+	
+	public void resetMouvement() {
+		this.deplacement = 3;
 	}
 	
 	public boolean gestionStatuts() {
