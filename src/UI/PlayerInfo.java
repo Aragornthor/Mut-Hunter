@@ -7,28 +7,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import competences.Competences;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class PlayerInfo /*extends Application*/{
 	
-	private BoutonCompetence comp1;
-	private Button comp2;
+	private List<BoutonCompetence> bt_Comp;
 	private TextArea info;
 	private Label infoTitle;
-	private Slider energy;
-	private Label valueEnergy;
-/*
+	private EnergyBar valueEnergy;
+	private Label playerStatuts;
+
+	/*
 	public static void main(String[] args) {
 		Application.launch(args);
 
@@ -36,13 +37,17 @@ public class PlayerInfo /*extends Application*/{
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		stage.setScene(getScene());
+		VBox root = new VBox();
+		
+		root.getChildren().addAll(getGridPane(),new EnergyBar().getEnergyBar());
+		
+		stage.setScene(new Scene(root,1000,1000));
 		stage.setTitle("Player Info");
 		stage.show();
 		
 	}
-*/
-	
+
+	*/
 	
 	public GridPane getGridPane() {
 		GridPane playerInfo = new GridPane();
@@ -50,34 +55,39 @@ public class PlayerInfo /*extends Application*/{
 		Canvas playerIcon = new Canvas(100,100);
 		GraphicsContext gc = playerIcon.getGraphicsContext2D();
 		gc.setFill(Color.ORANGE);
-		gc.fillRect(0, 0, 100, 100);
-		this.valueEnergy = new Label();
-		valueEnergy.setWrapText(true);
+		gc.fillRect(0, -10, 100, 100);
+		
+		this.playerStatuts = new Label("Statut :");
+		
+		this.valueEnergy = new EnergyBar();
+		
 		this.infoTitle = new Label("Info : ");
 		this.info = this.initTextArea();
-		info.setEditable(false);	
+		this.info.setEditable(false);	
 		
 		
-		this.energy = this.initSlider(this.valueEnergy,75);
-		this.comp1 = this.initComp1(this.infoTitle);
-		this.comp2 = this.initComp2(this.infoTitle);	
+		this.bt_Comp = new ArrayList<BoutonCompetence>();
+		this.bt_Comp.add(this.initComp1(this.infoTitle));
+		this.bt_Comp.add(this.initComp2(this.infoTitle));
 		
 		
 		GridPane.setMargin(playerIcon, new Insets(5));
-		GridPane.setMargin(this.energy, new Insets(5));
 		GridPane.setMargin(this.valueEnergy, new Insets(5));
-		GridPane.setMargin(this.comp1, new Insets(5));
-		GridPane.setMargin(this.comp2, new Insets(5));
+		GridPane.setMargin(this.bt_Comp.get(0), new Insets(5));
+		GridPane.setMargin(this.bt_Comp.get(1), new Insets(5));
 		GridPane.setMargin(this.infoTitle, new Insets(5));
 		GridPane.setMargin(this.info, new Insets(5));
+		GridPane.setMargin(this.playerStatuts, new Insets(5));
 		
 		playerInfo.add(playerIcon, 0, 0, 1, 2);
-		playerInfo.add(this.comp1, 1, 0, 1, 1);
-		playerInfo.add(this.comp2, 1, 1, 1, 1);
+		playerInfo.add(this.bt_Comp.get(0), 1, 0, 1, 1);
+		playerInfo.add(this.bt_Comp.get(1), 1, 1, 1, 1);
 		playerInfo.add(this.infoTitle, 2, 0, 1, 1);
-		playerInfo.add(this.energy, 0, 2, 2, 1);
-		playerInfo.add(this.valueEnergy, 0, 3, 3, 1);
+		playerInfo.add(this.playerStatuts, 0, 2, 3, 1);
+		playerInfo.add(this.valueEnergy.getEnergyBar(),  0, 3, 2, 1);
 		playerInfo.add(this.info, 2, 1, 1, 3);
+		
+		this.valueEnergy.setEnergyWidth(75*2);
 		
 		return playerInfo;
 	}
@@ -104,9 +114,8 @@ public class PlayerInfo /*extends Application*/{
 	}
 	
 	
-	
-	private Button initComp2(Label infoTitle) {
-		Button comp2 = new Button("Competences 2");
+	private BoutonCompetence initComp2(Label infoTitle) {
+		BoutonCompetence comp2 = new BoutonCompetence("Competences 2");
 		comp2.setMinSize(150, 25);
 		comp2.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
 			this.infoTitle.setText("Info : Comp2");
@@ -120,34 +129,30 @@ public class PlayerInfo /*extends Application*/{
 		return comp2;
 	}
 	
-	private Slider initSlider(Label valueEnergy,int energie) {
-		Slider energy = new Slider(0,100,energie);
-		this.valueEnergy.setText("Energie : "+(int)energy.getValue()+"/100");
-		energy.addEventHandler(MouseEvent.MOUSE_DRAGGED, e ->{
-			this.valueEnergy.setText("Energie : "+(int)energy.getValue()+"/100");
-		});
-		return energy;
-	}
 	
-	
-	public static void ajoutCompetence(Competences c,BoutonCompetence bt,TextArea txtA,Label info,Slider s,Label energyValue) {
-		bt.setComp(c);
-		bt.setText(c.getNom());
-		bt.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
-			info.setText("Info : "+c.getNom());
-			txtA.setText(PlayerInfo.getCompDesc(c.getNom()));
+	public void ajoutCompetence(Competences c,int idx) {
+		this.bt_Comp.get(0).setComp(c);
+		this.bt_Comp.get(0).setText(c.getNom());
+		this.bt_Comp.get(0).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
+			this.infoTitle.setText("Info : "+c.getNom());
+			this.info.setText(PlayerInfo.getCompDesc(c.getNom()));
 		});
-		bt.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-			if(s.getValue() > c.getCout()) {
-				s.setValue(s.getValue()-c.getCout());
-				energyValue.setText("Energie : "+(int)s.getValue()+"/100");
+		this.bt_Comp.get(0).addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+			if(this.valueEnergy.getEnergyWidth()/2 > c.getCout()) {
+				//System.out.println(this.valueEnergy.getEnergyWidth()/2);
+				this.valueEnergy.setEnergyWidth((this.valueEnergy.getEnergyWidth()) - c.getCout()*2);
+				//System.out.println(this.valueEnergy.getEnergyWidth()/2);
 			}		
 		});
 		
 	}
 	
 	public BoutonCompetence getComp1() {
-		return this.comp1;
+		return this.bt_Comp.get(0);
+	}
+	
+	public BoutonCompetence getComp2() {
+		return this.bt_Comp.get(1);
 	}
 	
 	public TextArea getInfo() {
@@ -158,12 +163,17 @@ public class PlayerInfo /*extends Application*/{
 		return this.infoTitle;
 	}
 	
-	public Slider getEnergy() {
-		return this.energy;
+	
+	public Pane getEnergyValue() {
+		return this.valueEnergy;
 	}
 	
-	public Label getEnergyValue() {
-		return this.valueEnergy;
+	public Label getPlayerStatu() {
+		return this.playerStatuts;
+	}
+	
+	public void setPlayerStatut(String s) {
+		this.playerStatuts.setText(s);
 	}
 	
 	@SuppressWarnings("resource")

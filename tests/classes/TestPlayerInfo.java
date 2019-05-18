@@ -29,7 +29,7 @@ public class TestPlayerInfo extends Application{
 		VBox root = new VBox();
 		PlayerInfo pI = new PlayerInfo();
 		GridPane playerInfo = pI.getGridPane();
-		PlayerInfo.ajoutCompetence(new Acide(), pI.getComp1(), pI.getInfo(),pI.getInfoTitle(),pI.getEnergy(),pI.getEnergyValue());
+		pI.ajoutCompetence(new Acide(),0);
 		
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
@@ -69,6 +69,7 @@ public class TestPlayerInfo extends Application{
 			chasseur.estDeplace(jeu, e.getCode().toString());
 			affichagePlateau(plateau);
 		});
+		
 		
 		stage.setTitle("Mut'Hunter");
 		stage.setScene(scene);
