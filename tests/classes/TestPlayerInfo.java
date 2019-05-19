@@ -30,6 +30,8 @@ public class TestPlayerInfo extends Application{
 		PlayerInfo pI = new PlayerInfo();
 		GridPane playerInfo = pI.getGridPane();
 		pI.ajoutCompetence(new Acide(),0);
+		pI.setPlayerStatut(pI.getPlayerStatut().getText()+chasseur.getStatut().name().toLowerCase());
+		pI.setPlayerIcon(chasseur.getImage());
 		
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
