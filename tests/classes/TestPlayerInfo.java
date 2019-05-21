@@ -3,6 +3,7 @@ package classes;
 import UI.PlayerInfo;
 import competences.Acide;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -36,12 +37,16 @@ public class TestPlayerInfo extends Application{
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		
-		Pane pane = new Pane();
+		VBox pane = new VBox();
 		//ImageView logo = new ImageView();
 		//logo.setImage(plaine);
 		pane.setPrefSize(1000,1000);
 		
-		Canvas canvas = new Canvas(1000,1000);
+		Canvas canvas = new Canvas(700,500);
+		
+		/* TMP */
+		
+		
 		GraphicsContext plateau = canvas.getGraphicsContext2D();
 		
 		for(int i=0; i<jeu.getLargeur(); i++) {
@@ -62,7 +67,14 @@ public class TestPlayerInfo extends Application{
 		
 		pane.getChildren().add(canvas);
 		
+		
+		pane.setAlignment(Pos.CENTER);
+		
+		playerInfo.setAlignment(Pos.CENTER);
+		playerInfo.setMaxWidth(Double.MAX_VALUE);
+		
 		root.getChildren().addAll(pane,playerInfo);
+		
 		
 		Scene scene = new Scene(root, 1000, 1000);
 		
