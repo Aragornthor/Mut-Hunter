@@ -82,7 +82,7 @@ public class PlayerInfo /*extends Application*/{
 		playerInfo.add(this.valueEnergy.getEnergyBar(),  0, 3, 2, 1);
 		playerInfo.add(this.infoComp, 2, 0, 1, 4);
 		
-		this.valueEnergy.setEnergyWidth(75*2);
+		this.valueEnergy.setEnergyWidth(75);
 		
 		return playerInfo;
 	}
@@ -130,20 +130,28 @@ public class PlayerInfo /*extends Application*/{
 	
 	
 	public void ajoutCompetence(Competences c,int idx) {
-		this.bt_Comp.get(0).setComp(c);
-		this.bt_Comp.get(0).setText(c.getNom());
-		this.bt_Comp.get(0).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
-			this.infoComp.setText("Info - "+c.getNom());
-			this.infoComp.changeText(getCompDesc(c.getNom()));
+		if(idx < 2 || idx >= 0) {
+			this.bt_Comp.get(idx).setComp(c);
+			this.bt_Comp.get(idx).setText(c.getNom());
+			this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
+				this.infoComp.setText("Info - "+c.getNom());
+				this.infoComp.changeText(getCompDesc(c.getNom()));
 
-		});
-		this.bt_Comp.get(0).addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-			if(this.valueEnergy.getEnergyWidth()/2 > c.getCout()) {
-				this.valueEnergy.perdreEnergy(c.getCout());
-				
-			}		
-		});
+			});
+			this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+				if(this.valueEnergy.getEnergyWidth()/2 > c.getCout()) {
+					this.valueEnergy.perdreEnergy(c.getCout());
+					
+				}		
+			});
+		}
+
 		
+	}
+	
+	public void ajoutCompetence(Competences[] comp) {
+		this.ajoutCompetence(comp[0], 0);
+		this.ajoutCompetence(comp[1], 1);
 	}
 	
 	public BoutonCompetence getComp1() {

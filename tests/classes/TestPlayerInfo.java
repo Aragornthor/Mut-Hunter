@@ -2,6 +2,7 @@ package classes;
 
 import UI.PlayerInfo;
 import competences.Acide;
+import competences.Missile;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,17 +10,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TestPlayerInfo extends Application{
 
-	Plateau jeu = new Plateau();
-	Chasseur chasseur = new Chasseur(new Position(0,0));
-	Monstre monstre = new Monstre(new Position(9,9));
+	static Plateau jeu = new Plateau();
+	static Chasseur chasseur = new Chasseur(new Position(0,0));
+	static Monstre monstre = new Monstre(new Position(9,9));
 	
 	public static void main(String[] args) {
+		chasseur.setCompetence(new Missile(), 1);
 		Application.launch(args);
 		
 
@@ -30,7 +31,7 @@ public class TestPlayerInfo extends Application{
 		VBox root = new VBox();
 		PlayerInfo pI = new PlayerInfo();
 		GridPane playerInfo = pI.getGridPane();
-		pI.ajoutCompetence(new Acide(),0);
+		pI.ajoutCompetence(chasseur.getCompetences());
 		pI.setPlayerStatut(pI.getPlayerStatut().getText()+chasseur.getStatut().name().toLowerCase());
 		pI.setPlayerIcon(chasseur.getImage());
 		
