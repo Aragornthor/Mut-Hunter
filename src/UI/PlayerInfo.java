@@ -10,7 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import classes.Chasseur;
+import classes.Monstre;
+import classes.Plateau;
+import classes.Position;
+import competences.Acide;
 import competences.Competences;
+import competences.Missile;
+import competences.Saut;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,6 +35,11 @@ public class PlayerInfo /*extends Application*/{
 	private EnergyBar valueEnergy;
 	private Label playerStatuts;
 	private Canvas playerIcon;
+	
+	private Plateau plateau;
+	private Chasseur chasseur;
+	private Monstre monstre;
+	private boolean tourChasseur;
 
 	/*
 	public static void main(String[] args) {
@@ -48,6 +60,13 @@ public class PlayerInfo /*extends Application*/{
 	}
 
 	*/
+	
+	public PlayerInfo(Plateau p, Chasseur c, Monstre m) {
+		this.plateau = p;
+		this.chasseur = c;
+		this.monstre = m;
+		this.tourChasseur = true;
+	}
 	
 	public GridPane getGridPane() {
 		GridPane playerInfo = new GridPane();
@@ -130,28 +149,61 @@ public class PlayerInfo /*extends Application*/{
 	
 	
 	public void ajoutCompetence(Competences c,int idx) {
-		if(idx < 2 || idx >= 0) {
-			this.bt_Comp.get(idx).setComp(c);
-			this.bt_Comp.get(idx).setText(c.getNom());
-			this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
-				this.infoComp.setText("Info - "+c.getNom());
-				this.infoComp.changeText(getCompDesc(c.getNom()));
+		if(c == null) {
+			if(idx < 2 || idx >= 0) {
+				this.bt_Comp.get(idx).setComp(null);
+				this.bt_Comp.get(idx).setText(" ");
+				this.bt_Comp.get(idx).setDisable(true);
+				this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
+					this.infoComp.setText("Info");
+					this.infoComp.changeText("");
+				});
 
-			});
-			this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-				if(this.valueEnergy.getEnergyWidth()/2 > c.getCout()) {
-					this.valueEnergy.perdreEnergy(c.getCout());
-					
-				}		
-			});
+			}
+		}else {
+			if(idx < 2 || idx >= 0) {
+				this.bt_Comp.get(idx).setDisable(false);
+				this.bt_Comp.get(idx).setComp(c);
+				this.bt_Comp.get(idx).setText(c.getNom());
+				this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
+					this.infoComp.setText("Info - "+c.getNom());
+					this.infoComp.changeText(getCompDesc(c.getNom()));
+
+				});
+				this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+					if(this.valueEnergy.getEnergyWidth()/2 > this.bt_Comp.get(idx).getComp().getCout()) {
+						this.valueEnergy.perdreEnergy(this.bt_Comp.get(idx).getComp().getCout());
+						if(this.tourChasseur) {
+							if(this.bt_Comp.get(idx).getComp().equals(new Saut()) || this.bt_Comp.get(idx).getComp().equals(new Acide()) || this.bt_Comp.get(idx).getComp().equals(new Missile())) {
+								
+							}else {
+								this.bt_Comp.get(idx).getComp().utilisation(this.plateau, this.chasseur, this.monstre, new Position(0,0));
+							}
+						}else {
+							if(this.bt_Comp.get(idx).getComp().equals(new Saut()) || this.bt_Comp.get(idx).getComp().equals(new Acide()) || this.bt_Comp.get(idx).getComp().equals(new Missile())) {
+								
+							}else {
+								this.bt_Comp.get(idx).getComp().utilisation(this.plateau, this.monstre, this.chasseur, new Position(0,0));
+							}
+						}
+						
+					}		
+				});
+			}
 		}
+		
 
 		
 	}
 	
 	public void ajoutCompetence(Competences[] comp) {
 		this.ajoutCompetence(comp[0], 0);
-		this.ajoutCompetence(comp[1], 1);
+		if(comp[1] != null) {
+			this.ajoutCompetence(comp[1], 1);
+		}else {
+			this.ajoutCompetence(null, 1);
+		}
+		
 	}
 	
 	public BoutonCompetence getComp1() {
@@ -175,7 +227,7 @@ public class PlayerInfo /*extends Application*/{
 	}
 	
 	public void setPlayerStatut(String s) {
-		this.playerStatuts.setText(s);
+		this.playerStatuts.setText("Statut : "+s);
 	}
 	
 	public Canvas getPlayerIcon() {
@@ -183,9 +235,22 @@ public class PlayerInfo /*extends Application*/{
 	}
 	
 	public void setPlayerIcon(Image img) {
+		this.playerIcon.getGraphicsContext2D().clearRect(0, 0, this.playerIcon.getWidth(), this.playerIcon.getHeight());
 		this.playerIcon.getGraphicsContext2D().drawImage(img,
 				(this.playerIcon.getWidth()/2) - img.getWidth()/2,
 				(this.playerIcon.getHeight()/2) - img.getHeight()/2);
+	}
+	
+	public void setTourChasseur(boolean b) {
+		this.tourChasseur = b;
+	}
+	
+	public void displayEnergy() {
+		if(this.tourChasseur) {
+			this.valueEnergy.setEnergyWidth(this.chasseur.getEnergie());
+		}else {
+			this.valueEnergy.setEnergyWidth(this.monstre.getEnergie());
+		}
 	}
 	
 	@SuppressWarnings("resource")

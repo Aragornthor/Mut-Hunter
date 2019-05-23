@@ -4,6 +4,7 @@ package UI;
 
 import classes.Chasseur;
 import classes.Monstre;
+import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
 import javafx.application.Application;
@@ -18,8 +19,8 @@ import javafx.stage.Stage;
 public class Main extends Application{
 	
 	Plateau jeu = new Plateau();
-	Chasseur chasseur = new Chasseur(new Position(0,0));
-	Monstre monstre = new Monstre(new Position(9,9));
+	Personnage chasseur = new Chasseur(new Position(0,0));
+	Personnage monstre = new Monstre(new Position(9,9));
 	boolean tourChasseur = true;
 
 	public static void main(String[] args) {
@@ -48,18 +49,15 @@ public class Main extends Application{
 					if(tourChasseur) {
 						chasseur.estDeplace(jeu, event.getCode().toString());
 						affichagePlateauVisionChasseur(plateau);
-						chasseur.setDeplacement(chasseur.getDeplacement()-jeu.getCase(chasseur.getPosition()).getTypeTerrain().getDeplacement());
-						System.out.println(chasseur.getDeplacement());
-						if(chasseur.getDeplacement() <= 0) {
+						System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
+						if(chasseur.getDeplacement() == 0) {
 							chasseur.resetMouvement();
 							tourChasseur = false;
 							affichagePlateauVisionMonstre(plateau);
 						}
-						
 					} else {
 						monstre.estDeplace(jeu, event.getCode().toString());
 						affichagePlateauVisionMonstre(plateau);
-						monstre.setDeplacement(monstre.getDeplacement()-jeu.getCase(monstre.getPosition()).getTypeTerrain().getDeplacement());
 						System.out.println(monstre.getDeplacement());
 						if(monstre.getDeplacement() <= 0) {
 							monstre.resetMouvement();

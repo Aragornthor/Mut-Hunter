@@ -120,14 +120,18 @@ public abstract class Personnage {
 	public boolean estDeplace(Plateau p, String entree) {
 		
 		//System.out.println("Debug estDeplace(...)");
+		Position pos = new Position(this.position.getX(), this.position.getY());
+		int deplacement = this.deplacement;
+		boolean reussite = false;
 		
 		if(entree.equalsIgnoreCase("z")) { //SE DEPLACE VERS LE HAUT
 			if(this.position.getY()-1<0) {
-				return false;
+				reussite = false;
 			} else {
 				//System.out.println("Z detect");
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
+				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -141,17 +145,18 @@ public abstract class Personnage {
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
-				return true;
+				reussite = true;
 			}
 		}
 		
 		if(entree.equalsIgnoreCase("s")) { //SE DEPLACE VERS LE BAS
 			if(this.position.getY()+1>= p.getHauteur()) {
-				return false;
+				reussite = false;
 			} else {
 				//System.out.println("S detect");
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
+				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -165,17 +170,18 @@ public abstract class Personnage {
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
-				return true;
+				reussite = true;
 			}
 		}
 		
 		if(entree.equalsIgnoreCase("q")) { //SE DEPLACE VERS LA GAUCHE
 			if(this.position.getX()-1<0) {
-				return false;
+				reussite = false;
 			} else {
 				//System.out.println("Q detect");
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
+				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -189,17 +195,18 @@ public abstract class Personnage {
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
-				return true;
+				reussite = true;
 			}
 		}
 		
 		if(entree.equalsIgnoreCase("d")) { //SE DEPLACE VERS LA DROITE
 			if(this.position.getX()+1>=p.getLargeur()) {
-				return false;
+				reussite = false;
 			} else {
 				//System.out.println("D detect");
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
+				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -213,10 +220,17 @@ public abstract class Personnage {
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
 				changeCase(p);
-				return true;
+				reussite = true;
 			}
 		}
-		return false;
+		if(this.deplacement<0) {
+			p.setCaseNormal(this.position);
+			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
+			this.deplacement = deplacement;
+			this.setPosition(pos);
+			changeCase(p);
+		}
+		return reussite;
 	}
 	
 	/**
