@@ -1,6 +1,6 @@
-Acide:Ceci est un test pour l'affichage de la description des competences en l'occurence Acide
-IEM:oihezfgefihezoifheiheifhzepfihsliefhe
-Missile:goezhelihg
-Piege:fezlghzelfhzelf
-Saut:zelghzgelhzelkfh
-Shield:efoizheglizheflze
+Acide:Tire un jet d'acide.\nPortée : 2\nRayon : 1*1\nPerte d'énergie du chasseur de 10 : 3 tours
+IEM:Envoie une impulsion électromagnétique.\nPortée : 1\nStun du monstre : 2 tours 
+Missile:Tire un missile.\nPortée : 2\nRayon : 3*3\nMort du monstre
+Piege:Pose un piège.\nStun du monstre 2 tours
+Saut:Saute sur une case.\nPortée : 2\nSaute sur une case et stun le chasseur : 2 tours
+Shield:Obtient un bouclier.\nProtège le monstre : 2 tours
