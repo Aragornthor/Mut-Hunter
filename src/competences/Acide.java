@@ -29,7 +29,6 @@ public class Acide extends Competences {
 		while(tmp.equals(perso.getPosition()) || tmp.getX() > perso.getPosition().getX()+2 ||
 				tmp.getX() < perso.getPosition().getX()-2 ||tmp.getY() > perso.getPosition().getY()+2 ||
 				tmp.getY() < perso.getPosition().getY()-2 ) {
-			tmp = this.demanderPosition();
 		}
 		if(tmp.equals(cible.getPosition())) {
 			if(cible.getStatut().equals(Statut.Acide)) {
@@ -40,14 +39,4 @@ public class Acide extends Competences {
 		}
 		perso.rechargeEnergie(-(this.cout));
 	}
-	
-	private Position demanderPosition() {
-		System.out.println("Où voulez vous tirer ?\n en x :");
-		Scanner sc = new Scanner(System.in);
-		int x = sc.nextInt();
-		System.out.println("en y : ");
-		int y = sc.nextInt();
-		return new Position(x,y);
-	}
-
 }

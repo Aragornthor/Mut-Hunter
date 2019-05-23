@@ -1,7 +1,5 @@
 package competences;
 
-import java.util.Scanner;
-
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
@@ -44,15 +42,4 @@ public class Missile extends Competences {
 		}
 		perso.rechargeEnergie(-(this.cout));
 	}
-	
-	private Position demanderPosition() {
-		System.out.println("Où voulez vous tirer ?\n en x :");
-		Scanner sc = new Scanner(System.in);
-		int x = sc.nextInt();
-		System.out.println("en y : ");
-		int y = sc.nextInt();
-		return new Position(x,y);
-	}
-
-
 }
