@@ -41,9 +41,10 @@ public class Monstre extends Personnage {
 
 	@Override
 	public boolean changeCase(Plateau p) {
+		boolean passeParLa = p.defaiteMonstre(this.getPosition());
 		p.getCase(this.getPosition()).setEstMonstre(true);
 		p.getCase(this.getPosition()).decouvrirCase();
 		p.getCase(this.getPosition()).setTempsDecouvert(p.getTours());
-		return p.defaiteMonstre(this.getPosition());
+		return passeParLa;
 	}
 }
