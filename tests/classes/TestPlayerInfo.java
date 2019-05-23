@@ -1,9 +1,10 @@
 package classes;
 
+import UI.DisplayPlateau;
 import UI.PlayerInfo;
-import competences.Acide;
 import competences.Missile;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +19,8 @@ public class TestPlayerInfo extends Application{
 	static Plateau jeu = new Plateau();
 	static Chasseur chasseur = new Chasseur(new Position(0,0));
 	static Monstre monstre = new Monstre(new Position(9,9));
+	boolean tourChasseur = true;
+
 	
 	public static void main(String[] args) {
 		chasseur.setCompetence(new Missile(), 1);
@@ -29,12 +32,14 @@ public class TestPlayerInfo extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		VBox root = new VBox();
-		PlayerInfo pI = new PlayerInfo();
+		PlayerInfo pI = new PlayerInfo(jeu,chasseur,monstre);
 		GridPane playerInfo = pI.getGridPane();
 		pI.ajoutCompetence(chasseur.getCompetences());
-		pI.setPlayerStatut(pI.getPlayerStatut().getText()+chasseur.getStatut().name().toLowerCase());
+		pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
 		pI.setPlayerIcon(chasseur.getImage());
 		
+		DisplayPlateau disP = new DisplayPlateau(jeu, chasseur, monstre);
+
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		
@@ -45,26 +50,10 @@ public class TestPlayerInfo extends Application{
 		
 		Canvas canvas = new Canvas(700,500);
 		
-		/* TMP */
-		
 		
 		GraphicsContext plateau = canvas.getGraphicsContext2D();
 		
-		for(int i=0; i<jeu.getLargeur(); i++) {
-			for(int j=0; j<jeu.getHauteur(); j++) {
-				
-				plateau.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible(),
-						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2),
-						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6));
-				
-				if(jeu.getPlateau()[i][j].getEstChasseur()) {
-					plateau.drawImage(chasseur.getImage(),
-							((9-j))*(chasseur.getImage().getWidth()/2)+(i*chasseur.getImage().getWidth()/2),
-							  j*chasseur.getImage().getHeight()/6+(i*chasseur.getImage().getHeight()/6));
-				}
-				
-			}
-		}
+		disP.affichagePlateau(plateau);
 		
 		pane.getChildren().add(canvas);
 		
@@ -79,11 +68,46 @@ public class TestPlayerInfo extends Application{
 		
 		Scene scene = new Scene(root, 1000, 1000);
 		
-		stage.addEventHandler(KeyEvent.KEY_PRESSED, e->{
-			//System.out.println(e.getCode().toString());
-			chasseur.estDeplace(jeu, e.getCode().toString());
-			affichagePlateau(plateau);
-		});
+		class KeyListenerMovement implements EventHandler<KeyEvent>{
+			public void handle(KeyEvent event) {
+				if(KeyEvent.KEY_PRESSED != null) {
+					if(tourChasseur) {
+						chasseur.estDeplace(jeu, event.getCode().toString());
+						disP.affichagePlateauVisionChasseur(plateau);
+						chasseur.setDeplacement(chasseur.getDeplacement()-jeu.getCase(chasseur.getPosition()).getTypeTerrain().getDeplacement());
+						System.out.println(chasseur.getDeplacement());
+						if(chasseur.getDeplacement() <= 0) {
+							chasseur.resetMouvement();
+							tourChasseur = false;
+							disP.affichagePlateauVisionMonstre(plateau);
+							pI.ajoutCompetence(monstre.getCompetences());
+							pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
+							pI.setPlayerIcon(monstre.getImage());
+							pI.setTourChasseur(tourChasseur);
+							pI.displayEnergy();
+						}
+						
+					} else {
+						monstre.estDeplace(jeu, event.getCode().toString());
+						disP.affichagePlateauVisionMonstre(plateau);
+						monstre.setDeplacement(monstre.getDeplacement()-jeu.getCase(monstre.getPosition()).getTypeTerrain().getDeplacement());
+						System.out.println(monstre.getDeplacement());
+						if(monstre.getDeplacement() <= 0) {
+							monstre.resetMouvement();
+							tourChasseur = true;
+							disP.affichagePlateauVisionChasseur(plateau);
+							pI.ajoutCompetence(chasseur.getCompetences());
+							pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
+							pI.setPlayerIcon(chasseur.getImage());
+							pI.setTourChasseur(tourChasseur);
+							pI.displayEnergy();
+						}
+					}	
+				}
+			}
+		}
+		
+		stage.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement());
 		
 		
 		stage.setTitle("Mut'Hunter");
@@ -93,22 +117,6 @@ public class TestPlayerInfo extends Application{
 		
 	}
 	
-	public void affichagePlateau(GraphicsContext p) {
-		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
-		for(int i=0; i<jeu.getLargeur(); i++) {
-			for(int j=0; j<jeu.getHauteur(); j++) {
-				
-				p.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible(),
-						((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getWidth()/2),
-						  j*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageVisible().getHeight()/6));
-				
-				if(jeu.getPlateau()[i][j].getEstChasseur()) {
-					p.drawImage(chasseur.getImage(),
-							((9-j))*(chasseur.getImage().getWidth()/2)+(i*chasseur.getImage().getWidth()/2),
-							  j*chasseur.getImage().getHeight()/6+(i*chasseur.getImage().getHeight()/6));
-				}
-			}
-		}
-	}
+	
 
 }
