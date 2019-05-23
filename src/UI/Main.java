@@ -58,7 +58,6 @@ public class Main extends Application{
 					} else {
 						monstre.estDeplace(jeu, event.getCode().toString());
 						affichagePlateauVisionMonstre(plateau);
-						monstre.setDeplacement(monstre.getDeplacement()-jeu.getCase(monstre.getPosition()).getTypeTerrain().getDeplacement());
 						System.out.println(monstre.getDeplacement());
 						if(monstre.getDeplacement() <= 0) {
 							monstre.resetMouvement();
