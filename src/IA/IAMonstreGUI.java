@@ -57,7 +57,9 @@ public class IAMonstreGUI extends Monstre {
 		dir = tmp;
 		histPos.add(getPosition());
 		if(p.getCase(getPosition()).getEstPortail()) super.estDeplace(p, Character.toString(dir.getDirection()));
-		return super.estDeplace(p, Character.toString(dir.getDirection()));
+		boolean res = super.estDeplace(p, Character.toString(dir.getDirection()));
+		super.resetMouvement();
+		return res;
 	}
 	
 	/**

@@ -50,7 +50,9 @@ public class IAChasseurGUI extends Chasseur {
 			System.out.println("\tPositions : " + super.getPosition());
 		} while(!dirPossible(p, super.getPosition()));
 		
-		return super.estDeplace(p, Character.toString(dir.getDirection()));
+		boolean res = super.estDeplace(p, Character.toString(dir.getDirection()));
+		super.resetMouvement();
+		return res;
 	}
 	
 	/**
