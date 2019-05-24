@@ -272,7 +272,7 @@ public class PlayerInfo /*extends Application*/{
 		}
 		while(c!=null) {
 			if(c.contains(compName)) {
-				desc = c.split(":", c.length())[1];
+				desc = c.split(";", c.length())[1];
 			}
 			try {
 				c = br.readLine();
@@ -286,6 +286,9 @@ public class PlayerInfo /*extends Application*/{
 		} catch (IOException e) {
 			return null;
 		}
+		
+		desc.replaceAll("\n", "\n");
+		
 		return desc;
 	}
 	

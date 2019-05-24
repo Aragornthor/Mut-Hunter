@@ -1,6 +1,6 @@
-Acide:Tire un jet d'acide.\nPortée : 2\nRayon : 1*1\nPerte d'énergie du chasseur de 10 : 3 tours
-IEM:Envoie une impulsion électromagnétique.\nPortée : 1\nStun du monstre : 2 tours 
-Missile:Tire un missile.\nPortée : 2\nRayon : 3*3\nMort du monstre
-Piege:Pose un piège.\nStun du monstre 2 tours
-Saut:Saute sur une case.\nPortée : 2\nSaute sur une case et stun le chasseur : 2 tours
-Shield:Obtient un bouclier.\nProtège le monstre : 2 tours
+Acide;Tire un jet d'acide.\n Portée : 2 \n Rayon : 1*1 \n Perte d'énergie du chasseur de 10 : 3 tours
+IEM;Envoie une impulsion électromagnétique. \n Portée : 1 \n Stun du monstre : 2 tours 
+Missile;Tire un missile. \n Portée : 2 \n Rayon : 3*3 \n Mort du monstre
+Piege;Pose un piège.\nStun du monstre 2 tours
+Saut;Saute sur une case.\nPortée : 2\nSaute sur une case et stun le chasseur : 2 tours
+Shield;Obtient un bouclier.\nProtège le monstre : 2 tours
