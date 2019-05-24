@@ -1,6 +1,7 @@
 package UI;
 
 
+import javafx.application.Application;
 //import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,9 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class MenuAlone /*extends Application*/ {
+public class MenuAlone extends Application {
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		Application.launch(args);
 	}
 	
@@ -27,7 +28,7 @@ public class MenuAlone /*extends Application*/ {
 		primaryStage.show();
 		primaryStage.setMinWidth(1280);
 		primaryStage.setMinHeight(720);
-	}*/
+	}
 	
 	
 	public static Scene getScene(Stage s, double width, double height) {
@@ -79,7 +80,7 @@ public class MenuAlone /*extends Application*/ {
 		});
 		slide.setStyle("-fx-font: 14px Verdana;");
 		root.getChildren().addAll(title, slide);
-		root.setMargin(title, new Insets(25));
+		VBox.setMargin(title, new Insets(25));
 		root.setAlignment(Pos.TOP_CENTER);
 		
 		return root;
@@ -99,13 +100,13 @@ public class MenuAlone /*extends Application*/ {
 
 		square.setMinSize(64, 64);
 		square.setMaxSize(64, 64);
-		size.setMargin(square, new Insets(25));
+		HBox.setMargin(square, new Insets(25));
 		rect.setMinSize(64, 64);
 		rect.setMaxSize(64, 64);
-		size.setMargin(rect, new Insets(25));
+		HBox.setMargin(rect, new Insets(25));
 		circle.setMinSize(64, 64);
 		circle.setMaxSize(64, 64);
-		size.setMargin(circle, new Insets(25));
+		HBox.setMargin(circle, new Insets(25));
 		
 		size.setAlignment(Pos.CENTER);
 		
@@ -118,23 +119,23 @@ public class MenuAlone /*extends Application*/ {
 		
 		temp.setMinSize(64, 64);
 		temp.setMaxSize(64, 64);
-		type.setMargin(temp, new Insets(5));
+		HBox.setMargin(temp, new Insets(5));
 		desert.setMinSize(64, 64);
 		desert.setMaxSize(64, 64);
-		type.setMargin(desert, new Insets(5));
+		HBox.setMargin(desert, new Insets(5));
 		frozen.setMinSize(64, 64);
 		frozen.setMaxSize(64, 64);
-		type.setMargin(frozen, new Insets(5));
+		HBox.setMargin(frozen, new Insets(5));
 		mel.setMinSize(64, 64);
 		mel.setMaxSize(64, 64);
-		type.setMargin(mel, new Insets(5));
+		HBox.setMargin(mel, new Insets(5));
 		
 		type.setAlignment(Pos.CENTER);
 		
 		root.getChildren().addAll(title, size, type);
-		root.setMargin(title, new Insets(5));
-		root.setMargin(size, new Insets(5));
-		root.setMargin(type, new Insets(5));
+		VBox.setMargin(title, new Insets(5));
+		VBox.setMargin(size, new Insets(5));
+		VBox.setMargin(type, new Insets(5));
 		root.setAlignment(Pos.TOP_CENTER);
 		
 		return root;
@@ -154,12 +155,12 @@ public class MenuAlone /*extends Application*/ {
 		monster.setMinSize(64, 64);
 		monster.setMaxSize(64, 64);
 		type.getChildren().addAll(hunter, monster);
-		type.setMargin(hunter, new Insets(30));
-		type.setMargin(monster, new Insets(30));
+		HBox.setMargin(hunter, new Insets(30));
+		HBox.setMargin(monster, new Insets(30));
 		type.setAlignment(Pos.CENTER);
 		
 		root.getChildren().addAll(title, type);
-		root.setMargin(title, new Insets(5));
+		VBox.setMargin(title, new Insets(5));
 		root.setAlignment(Pos.TOP_CENTER);
 		
 		return root;

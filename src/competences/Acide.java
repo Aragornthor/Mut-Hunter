@@ -1,7 +1,5 @@
 package competences;
 
-import java.util.Scanner;
-
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
