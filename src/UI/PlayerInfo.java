@@ -22,7 +22,6 @@ import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -126,7 +125,7 @@ public class PlayerInfo /*extends Application*/{
 		
 		comp1.addEventHandler(MouseEvent.MOUSE_EXITED, e ->{
 			this.infoComp.setText("Info");
-			this.infoComp.changeText(" ");
+			this.infoComp.changeText(this.infoComp.getTxtBase());
 		});
 		return comp1;
 	}
@@ -142,7 +141,7 @@ public class PlayerInfo /*extends Application*/{
 		
 		comp2.addEventHandler(MouseEvent.MOUSE_EXITED, e ->{
 			this.infoComp.setText("Info");
-			this.infoComp.changeText(" ");
+			this.infoComp.changeText(this.infoComp.getTxtBase());
 		});
 		return comp2;
 	}
@@ -214,10 +213,6 @@ public class PlayerInfo /*extends Application*/{
 		return this.bt_Comp.get(1);
 	}
 	
-	public TitledPane getInfoComp() {
-		return this.infoComp;
-	}
-	
 	public EnergyBar getEnergyValue() {
 		return this.valueEnergy;
 	}
@@ -232,6 +227,10 @@ public class PlayerInfo /*extends Application*/{
 	
 	public Canvas getPlayerIcon() {
 		return this.playerIcon;
+	}
+	
+	public InfoDisplay getInfoDisplay() {
+		return this.infoComp;
 	}
 	
 	public void setPlayerIcon(Image img) {
@@ -255,7 +254,7 @@ public class PlayerInfo /*extends Application*/{
 	
 	@SuppressWarnings("resource")
 	private static String getCompDesc(String compName) {
-		String desc = null;
+		String desc = "";
 		File f = new File("ressources/Desc_Comp");
 		FileReader fr = null;
 		try {
@@ -287,8 +286,7 @@ public class PlayerInfo /*extends Application*/{
 			return null;
 		}
 		
-		desc.replaceAll("\n", "\n");
-		
+		desc = desc.replaceAll("#", "\n");
 		return desc;
 	}
 	

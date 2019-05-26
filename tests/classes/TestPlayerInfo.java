@@ -65,6 +65,7 @@ public class TestPlayerInfo extends Application{
 		
 		root.getChildren().addAll(pane,playerInfo);
 		
+		pI.getInfoDisplay().setTxtBase(jeu.getTours(),false,0);
 		
 		Scene scene = new Scene(root, 1000, 1000);
 		
@@ -85,6 +86,7 @@ public class TestPlayerInfo extends Application{
 							pI.setPlayerIcon(monstre.getImage());
 							pI.setTourChasseur(tourChasseur);
 							pI.displayEnergy();
+							pI.getInfoDisplay().setTxtBase(jeu.getTours(),true,jeu.getCompteurCasesDecouvertes());
 						}
 						
 					} else {
@@ -101,6 +103,7 @@ public class TestPlayerInfo extends Application{
 							pI.setPlayerIcon(chasseur.getImage());
 							pI.setTourChasseur(tourChasseur);
 							pI.displayEnergy();
+							pI.getInfoDisplay().setTxtBase(jeu.getTours(),false,0);
 						}
 					}	
 				}
