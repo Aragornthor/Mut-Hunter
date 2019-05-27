@@ -2,6 +2,7 @@ package classes;
 
 import java.util.Scanner;
 
+import Exception.ManqueDeplacementException;
 import competences.Competences;
 import competences.Statut;
 import javafx.scene.image.Image;
@@ -109,13 +110,19 @@ public abstract class Personnage {
 	 */
 	protected boolean estDeplaceJoueur(Plateau p) {
 		String entree = reader.nextLine();
-		return estDeplace(p, entree);
+		//try {
+			return estDeplace(p, entree);
+		/*} catch (ManqueDeplacementException e) {
+			e.getMessage();
+			return false;
+		}*/
 	}
 	
 	/**
 	 * Permet un déplacement
 	 * @param p Prend un plateau en paramètre
 	 * @return Retourne VRAI si le mouvement est effectué, sinon FAUX
+	 * @throws ManqueDeplacementException 
 	 */
 	public boolean estDeplace(Plateau p, String entree) {
 		
@@ -132,6 +139,10 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
+				/*if(this.deplacement < 0) {
+					throw new ManqueDeplacementException();
+					
+				}*/
 				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
 				else if(p.getCase(this.getPosition()).getLoot()) {
 					p.ajoutCompetence(this);
@@ -144,7 +155,6 @@ public abstract class Personnage {
 					}
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
-				changeCase(p);
 				reussite = true;
 			}
 		}
@@ -169,7 +179,6 @@ public abstract class Personnage {
 					}
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
-				changeCase(p);
 				reussite = true;
 			}
 		}
@@ -194,7 +203,6 @@ public abstract class Personnage {
 					}
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
-				changeCase(p);
 				reussite = true;
 			}
 		}
@@ -219,7 +227,6 @@ public abstract class Personnage {
 					}
 					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
 				}
-				changeCase(p);
 				reussite = true;
 			}
 		}
@@ -228,7 +235,6 @@ public abstract class Personnage {
 			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
 			this.deplacement = deplacement;
 			this.setPosition(pos);
-			changeCase(p);
 		}
 		return reussite;
 	}
