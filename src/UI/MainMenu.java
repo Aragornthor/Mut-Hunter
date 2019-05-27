@@ -1,9 +1,5 @@
 package UI;
 
-
-
-
-
 import java.io.File;
 
 import javafx.geometry.Insets;
@@ -19,6 +15,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * 
+ * @author Benoit Bankaert
+ *
+ */
 public class MainMenu /*extends Application*/{
 
 	private VBox root;
@@ -68,10 +69,17 @@ public class MainMenu /*extends Application*/{
 	}
 	*/
 	
+	/**
+	 * Instancie MainMenu
+	 */
 	public MainMenu() {
 		initRoot();
 	}
 	
+	/**
+	 * Créer et renvoyer la fenêtre d'accueil
+	 * @return Renvoie la fénêtre d'accueil
+	 */
 	private VBox initRoot() {
 		this.root  = new VBox();
 		this.title = new Label("Mut'Hunter");
@@ -105,6 +113,10 @@ public class MainMenu /*extends Application*/{
 		return root;
 	}
 	
+	/**
+	 * Créer et renvoyer un écran de "chargement"
+	 * @return Renvoie un écran de "chargement"
+	 */
 	private Canvas initPersonnage() {
 		Canvas personnage = new Canvas(700,400);
 		personnage.getGraphicsContext2D().setFill(Color.BLACK);
@@ -119,6 +131,10 @@ public class MainMenu /*extends Application*/{
 		
 	}
 	
+	/**
+	 * Créer et renvoyer une interface de choix de mode de jeu
+	 * @return Renvoie l'interface de choix du mode de jeu
+	 */
 	private HBox initNbPlayer() {
 		this.nbPlayer = new HBox();
 		this.nbPlayer.getChildren().addAll(this.onePlayer,this.twoPlayer);
@@ -130,47 +146,91 @@ public class MainMenu /*extends Application*/{
 
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le bouton en mode Solo
+	 */
 	private Button initOnePlayer() {
 		Button onePlayer = new Button("Un joueur");;
 		return onePlayer;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'image associée à une entité
+	 */
 	public Canvas getPersonnage() {
 		return this.personnage;
 	}
 	
+	/**
+	 * 
+	 * @return TRUE si le menu est affiché sinon FALSE
+	 */
 	public boolean getIsMenuDisplay() {
 		return this.isMenuDisplay;
 	}
 	
+	/**
+	 * Changer la visibilité du menu
+	 * @param b TRUE pour afficher le menu
+	 */
 	public void setIsMenuDisplay(boolean b) {
 		this.isMenuDisplay = b;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le conteneur principal de la fenêtre
+	 */
 	public VBox getRoot() {
 		return this.root;
 	}
 	
+	/**
+	 * Permet de changer le conteneur principal de la fenêtre
+	 * @param newRoot Le nouveau conteneur principal à afficher
+	 */
 	public void setRoot(VBox newRoot) {
 		this.root = newRoot;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le titre de la page
+	 */
 	public Label getTitle() {
 		return this.title;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le nombre de joueurs
+	 */
 	public HBox getNbPlayer() {
 		return this.nbPlayer;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le bouton pour accéder aux règles du jeu
+	 */
 	public Button getRegle() {
 		return this.regle;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le bouton pour jouer en Solo
+	 */
 	public Button getOnePlayer() {
 		return this.onePlayer;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le bouton pour jouer en Duo
+	 */
 	public Button getTwoPlayer() {
 		return this.twoPlayer;
 	}

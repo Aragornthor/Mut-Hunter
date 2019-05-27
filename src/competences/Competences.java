@@ -40,6 +40,10 @@ public abstract class Competences {
 		return duree;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le coût (en énergie) d'utilisation de la compétence
+	 */
 	public int getCout() {
 		return this.cout;
 	}
@@ -52,16 +56,26 @@ public abstract class Competences {
 		return id;
 	}
 	
-	
-	
+	/**
+	 * Permet de changer l'ID de la compétence
+	 * @param id Nouvel ID à attribuer
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Permet de changer le NOM de la compétence
+	 * @param nom Nouveau NOM à attribuer
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
+	/**
+	 * Permet de changer la DUREE de la compétence
+	 * @param duree Nouvelle DUREE de la compétence
+	 */
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
@@ -84,5 +98,12 @@ public abstract class Competences {
 		return this.id == c.getId();
 	}
 	
+	/**
+	 * Permet l'utilisation de la compétence
+	 * @param p Plateau du jeu
+	 * @param perso Personnage qui a la compétence
+	 * @param cible Personnage qui va subir la compétence
+	 * @param pos Position de lancement de la compétence
+	 */
 	public abstract void utilisation(Plateau p, Personnage perso, Personnage cible, Position pos);
 }

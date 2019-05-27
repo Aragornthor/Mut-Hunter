@@ -17,6 +17,10 @@ public class DisplayPlateau {
 		this.monstre = m;
 	}
 	
+	/**
+	 * Afficher le plateau de jeu en entier
+	 * @param p Le plateau de jeu
+	 */
 	public void affichagePlateau(GraphicsContext p) {
 		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<this.jeu.getLargeur(); i++) {
@@ -40,6 +44,10 @@ public class DisplayPlateau {
 		}
 	}
 	
+	/**
+	 * Cacher les caches hors du champ de vision du Chasseur
+	 * @param p Le plateau
+	 */
 	public void affichagePlateauVisionChasseur(GraphicsContext p) {
 		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<this.jeu.getLargeur(); i++) {
@@ -71,6 +79,10 @@ public class DisplayPlateau {
 		}
 	}
 	
+	/**
+	 * Cacher les caches hors du champ de vision du Monstre
+	 * @param p Le plateau
+	 */
 	public void affichagePlateauVisionMonstre(GraphicsContext p) {
 		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<this.jeu.getLargeur(); i++) {

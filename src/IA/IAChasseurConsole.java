@@ -15,7 +15,7 @@ import javafx.scene.image.Image;
  * @author Robin Gallifa
  *
  */
-public class IAChasseurConsole extends Personnage{
+public class IAChasseurConsole extends Personnage {
 	String direction = "z";
 	
 	/**

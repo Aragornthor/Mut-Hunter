@@ -1,7 +1,5 @@
 package UI;
 
-
-
 import classes.Chasseur;
 import classes.Monstre;
 import classes.Personnage;
@@ -16,6 +14,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Xavier Lezzoche
+ *
+ */
 public class Main extends Application{
 	
 	Plateau jeu = new Plateau();
@@ -78,6 +81,10 @@ public class Main extends Application{
 		
 	}
 	
+	/**
+	 * Permet l'affichage du plateau en entier
+	 * @param p Plateau de jeu
+	 */
 	public void affichagePlateau(GraphicsContext p) {
 		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<jeu.getLargeur(); i++) {
@@ -101,6 +108,10 @@ public class Main extends Application{
 		}
 	}
 	
+	/**
+	 * Cacher les caches hors du champ de vision du Chasseur
+	 * @param p Le plateau
+	 */
 	public void affichagePlateauVisionChasseur(GraphicsContext p) {
 		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<jeu.getLargeur(); i++) {
@@ -132,6 +143,10 @@ public class Main extends Application{
 		}
 	}
 	
+	/**
+	 * Cacher les caches hors du champ de vision du Monstre
+	 * @param p Le plateau
+	 */
 	public void affichagePlateauVisionMonstre(GraphicsContext p) {
 		p.clearRect(0, 0, p.getCanvas().getWidth(), p.getCanvas().getHeight());
 		for(int i=0; i<jeu.getLargeur(); i++) {

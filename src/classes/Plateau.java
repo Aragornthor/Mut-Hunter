@@ -76,6 +76,12 @@ public class Plateau {
 		this.generePortail();
 		
 	}
+	
+	/**
+	 * Positionne les entités sur leurs points de départ respectifs
+	 * @param chasseur Le chasseur
+	 * @param monstre Le monstre
+	 */
 	public void startPersonnage(Personnage chasseur, Personnage monstre) {
 		
 		this.plateau[chasseur.getPosition().getX()][chasseur.getPosition().getY()].setEstChasseur(true);
@@ -83,6 +89,9 @@ public class Plateau {
 		this.plateau[monstre.getPosition().getX()][monstre.getPosition().getY()].decouvrirCase();
 	}
 	
+	/**
+	 * Ajoute les portails à leurs coordonnées sur le plateau
+	 */
 	private void generePortail() {
 		this.plateau[this.PORTAIL1.getX()][this.PORTAIL1.getY()].setEstPortail(true);
 		this.plateau[this.PORTAIL2.getX()][this.PORTAIL2.getY()].setEstPortail(true);
@@ -132,6 +141,10 @@ public class Plateau {
 		this.plateau = tab;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le nombre de case à Items présente sur le plateau
+	 */
 	private int nbLoot() {
 		int nb = 0;
 		for(int i = 0; i < this.plateau.length; i++)
@@ -160,6 +173,10 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * Permet l'ajout d'une compétence à un personnage
+	 * @param p Le personnage à qui ajouter la compétences
+	 */
 	public void ajoutCompetence(Personnage p) {
 		Loot.changeCompetence(p);
 	}
@@ -173,7 +190,7 @@ public class Plateau {
 	}
 	
 	/**
-	 * Augement le nombre de tour d'un.
+	 * Augmente le nombre de tour d'un.
 	 */
 	public void addTours() {
 		this.tours++;
@@ -229,9 +246,8 @@ public class Plateau {
 	/**
 	 * Verifie si le monstre a perdu la partie.
 	 * @param m c'est la position du monstre
-	 * @return true si le monstre repasse sur une case
+	 * @return TRUE si le monstre repasse sur une case sinon FALSE
 	 */
-	
 	public boolean defaiteMonstre(Position m) {
 		if(this.getCase(m).getEstDecouvert()) {
 			System.out.println("Vous êtes déjà passé par cette case. Vous avez PERDU !");
@@ -315,6 +331,9 @@ public class Plateau {
 		this.dernierLoot = this.getTours();
 	}
 	
+	/**
+	 * Permet le rafraichissement de la console
+	 */
 	private static void clearScreen() {
 		try {
 			if(System.getProperty("os.name" ).startsWith("Windows")) {
@@ -329,14 +348,26 @@ public class Plateau {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le nombre de cases découvertes sur le plateau
+	 */
 	public int getCompteurCasesDecouvertes() {
 		return this.compteurCasesDecouvertes;
 	}
 	
+	/**
+	 * Incrémente de 1 le nombre de cases découvertes sur le plateau
+	 */
 	public void setCompteurCasesDecouvertes() {
 		this.compteurCasesDecouvertes++;
 	}
 	
+	/**
+	 * 
+	 * @param p Une position à vérifier
+	 * @return Renvoie TRUE si la position en paramètre est dans le plateau
+	 */
 	public boolean contains(Position p) {
 		if(p.getX()<this.getLargeur() && p.getY()<this.getHauteur() && p.getX()>=0 && p.getY()>=0) return true;
 		else return false;

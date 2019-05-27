@@ -27,6 +27,10 @@ public class Case {
 		this.estMonstre = false;
 	}
 	
+	/**
+	 * Initialise une case du type spécifié
+	 * @param terrain Type de la case
+	 */
 	public Case(TypeTerrain terrain) {
 		this.typeTerrain = terrain;
 		this.typeCase = TypeCase.VIDE;
@@ -190,14 +194,26 @@ public class Case {
 		this.setHide(false);	
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le type de la case courante
+	 */
 	public TypeCase getTypeCase() {
 		return this.typeCase;
 	}
 	
+	/**
+	 * Permet de changer le type de la case par celui spécifié
+	 * @param tc Type de la case à modifier
+	 */
 	public void setTypeCase(TypeCase tc) {
 		typeCase = tc;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le type de terrain
+	 */
 	public TypeTerrain getTypeTerrain() {
 		return this.typeTerrain;
 	}

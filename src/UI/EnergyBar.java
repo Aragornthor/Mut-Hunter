@@ -124,6 +124,9 @@ public class EnergyBar extends HBox {
 		this.colorRec();
 	}
 	
+	/**
+	 * Changer la couleur de la barre d'énergie en fonction de sa valeur
+	 */
 	private void colorRec() {
 		if(this.energy.getWidth()/this.MULTIPICATEUR <= this.MAX_ENERGY*0.2) {
 			this.energy.setFill(Color.RED);

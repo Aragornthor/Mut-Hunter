@@ -60,6 +60,12 @@ public class PlayerInfo /*extends Application*/{
 
 	*/
 	
+	/**
+	 * Instancie PlayerInfo
+	 * @param p Le plateau de jeu
+	 * @param c Le chasseur
+	 * @param m Le monstre
+	 */
 	public PlayerInfo(Plateau p, Chasseur c, Monstre m) {
 		this.plateau = p;
 		this.chasseur = c;
@@ -67,6 +73,10 @@ public class PlayerInfo /*extends Application*/{
 		this.tourChasseur = true;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'interface de l'entité en jeu
+	 */
 	public GridPane getGridPane() {
 		GridPane playerInfo = new GridPane();
 		
@@ -105,6 +115,10 @@ public class PlayerInfo /*extends Application*/{
 		return playerInfo;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'interface de détail de la compétence
+	 */
 	private InfoDisplay initInfoComp() {
 		InfoDisplay tP = new InfoDisplay();
 		tP.setCollapsible(false);
@@ -115,6 +129,10 @@ public class PlayerInfo /*extends Application*/{
 		return tP;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie un bouton avec une compétence assignée 
+	 */
 	private BoutonCompetence initComp1() {
 		BoutonCompetence comp1 = new BoutonCompetence("Competences 1");
 		comp1.setMinSize(150, 25);
@@ -130,7 +148,10 @@ public class PlayerInfo /*extends Application*/{
 		return comp1;
 	}
 	
-	
+	/**
+	 * 
+	 * @return Renvoie un bouton avec une compétence assignée
+	 */
 	private BoutonCompetence initComp2() {
 		BoutonCompetence comp2 = new BoutonCompetence("Competences 2");
 		comp2.setMinSize(150, 25);
@@ -146,7 +167,11 @@ public class PlayerInfo /*extends Application*/{
 		return comp2;
 	}
 	
-	
+	/**
+	 * Permet l'ajout d'une compétence à une entité
+	 * @param c La compétence à ajouter
+	 * @param idx La priorité de la compétence
+	 */
 	public void ajoutCompetence(Competences c,int idx) {
 		if(c == null) {
 			if(idx < 2 || idx >= 0) {
@@ -159,7 +184,7 @@ public class PlayerInfo /*extends Application*/{
 				});
 
 			}
-		}else {
+		} else {
 			if(idx < 2 || idx >= 0) {
 				this.bt_Comp.get(idx).setDisable(false);
 				this.bt_Comp.get(idx).setComp(c);
@@ -175,13 +200,13 @@ public class PlayerInfo /*extends Application*/{
 						if(this.tourChasseur) {
 							if(this.bt_Comp.get(idx).getComp().equals(new Saut()) || this.bt_Comp.get(idx).getComp().equals(new Acide()) || this.bt_Comp.get(idx).getComp().equals(new Missile())) {
 								
-							}else {
+							} else {
 								this.bt_Comp.get(idx).getComp().utilisation(this.plateau, this.chasseur, this.monstre, new Position(0,0));
 							}
-						}else {
+						} else {
 							if(this.bt_Comp.get(idx).getComp().equals(new Saut()) || this.bt_Comp.get(idx).getComp().equals(new Acide()) || this.bt_Comp.get(idx).getComp().equals(new Missile())) {
 								
-							}else {
+							} else {
 								this.bt_Comp.get(idx).getComp().utilisation(this.plateau, this.monstre, this.chasseur, new Position(0,0));
 							}
 						}
@@ -190,11 +215,12 @@ public class PlayerInfo /*extends Application*/{
 				});
 			}
 		}
-		
-
-		
 	}
 	
+	/**
+	 * Permet l'ajout de plusieurs compétences
+	 * @param comp La compétence à ajouter
+	 */
 	public void ajoutCompetence(Competences[] comp) {
 		this.ajoutCompetence(comp[0], 0);
 		if(comp[1] != null) {
@@ -202,37 +228,68 @@ public class PlayerInfo /*extends Application*/{
 		}else {
 			this.ajoutCompetence(null, 1);
 		}
-		
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le bouton de la 1ère compétence
+	 */
 	public BoutonCompetence getComp1() {
 		return this.bt_Comp.get(0);
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le bouton de la 2nde compétence
+	 */
 	public BoutonCompetence getComp2() {
 		return this.bt_Comp.get(1);
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'interface de niveau d'énergie de l'entité en jeu
+	 */
 	public EnergyBar getEnergyValue() {
 		return this.valueEnergy;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'interface de Statut de l'entité en jeu
+	 */
 	public Label getPlayerStatut() {
 		return this.playerStatuts;
 	}
 	
+	/**
+	 * Permet d'actualiser le Statut de l'entité en jeu dans l'interface
+	 * @param s
+	 */
 	public void setPlayerStatut(String s) {
 		this.playerStatuts.setText("Statut : "+s);
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'icon de l'entité en jeu
+	 */
 	public Canvas getPlayerIcon() {
 		return this.playerIcon;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'interface d'information de la compétence survolée
+	 */
 	public InfoDisplay getInfoDisplay() {
 		return this.infoComp;
 	}
 	
+	/**
+	 * Permet de modifier l'icon de l'entité en jeu
+	 * @param img La nouvelle icon
+	 */
 	public void setPlayerIcon(Image img) {
 		this.playerIcon.getGraphicsContext2D().clearRect(0, 0, this.playerIcon.getWidth(), this.playerIcon.getHeight());
 		this.playerIcon.getGraphicsContext2D().drawImage(img,
@@ -240,18 +297,30 @@ public class PlayerInfo /*extends Application*/{
 				(this.playerIcon.getHeight()/2) - img.getHeight()/2);
 	}
 	
+	/**
+	 * Permet de gérer qui joue
+	 * @param b TRUE si c'est au chasseur sinon FALSE
+	 */
 	public void setTourChasseur(boolean b) {
 		this.tourChasseur = b;
 	}
 	
+	/**
+	 * Gère la barre d'énergie de l'interface
+	 */
 	public void displayEnergy() {
 		if(this.tourChasseur) {
 			this.valueEnergy.setEnergyWidth(this.chasseur.getEnergie());
-		}else {
+		} else {
 			this.valueEnergy.setEnergyWidth(this.monstre.getEnergie());
 		}
 	}
 	
+	/**
+	 * Permet l'accès aux descriptions des compétences
+	 * @param compName La compétence souhaitée
+	 * @return Renvoie la description de la compétence spécifiée
+	 */
 	@SuppressWarnings("resource")
 	private static String getCompDesc(String compName) {
 		String desc = "";

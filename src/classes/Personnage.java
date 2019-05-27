@@ -45,6 +45,10 @@ public abstract class Personnage {
 		return energie;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'image associée à l'entité
+	 */
 	abstract public Image getImage();
 
 	/**
@@ -238,7 +242,10 @@ public abstract class Personnage {
 	 * @param p Prend un plateau en paramètre
 	 */
 	public abstract boolean changeCase(Plateau p);
-
+	
+	/**
+	 * Recharge de 10 unités l'énergie des entités
+	 */
 	public void rechargeEnergie() {
 		rechargeEnergie(10);
 	}
@@ -260,6 +267,10 @@ public abstract class Personnage {
 		return type;
 	}
 	
+	/**
+	 * Définit les compétences de l'entité
+	 * @param comps Compétences à attribuer à l'entité
+	 */
 	public void setTableauCompetences(Competences[] comps) {
 		this.competences = comps;
 	}
@@ -292,22 +303,41 @@ public abstract class Personnage {
 		this.type = type;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le statut de l'entité
+	 */
 	public Statut getStatut() {
 		return this.statut;	
 	}
 	
+	/**
+	 * Définit le statut de l'entité
+	 * @param s Statut à attribuer à l'entité
+	 */
 	public void setStatut(Statut s) {
 		this.statut = s;
 	}
 	
+	/**
+	 * Définit la longueur de déplacement de l'entité
+	 * @param d Longueur à attribuer à l'entité
+	 */
 	public void setDeplacement(int d) {
 		this.deplacement = d;
 	}
 	
+	/**
+	 * Remet la longueur du déplacement d'une entité à sa valeur d'origine : 3
+	 */
 	public void resetMouvement() {
 		this.deplacement = 3;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie VRAI si le joueur est affecté par une compétence sinon FAUX
+	 */
 	public boolean gestionStatuts() {
 		if(this.getStatut() == Statut.Stun) {
 			this.getStatut().setTour(this.getStatut().getNbTour()-1);

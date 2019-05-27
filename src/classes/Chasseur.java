@@ -34,10 +34,16 @@ public class Chasseur extends Personnage{
 		}
 	}
 
+	/**
+	 * @return Renvoie l'image associée à l'entité 
+	 */
 	public Image getImage() {
 		return this.image;
 	}
 
+	/**
+	 * Modifie la case de présence du chasseur
+	 */
 	@Override
 	public boolean changeCase(Plateau p) {
 		p.getCase(this.getPosition()).setEstChasseur(true);

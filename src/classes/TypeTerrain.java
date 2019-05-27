@@ -2,6 +2,11 @@ package classes;
 
 import javafx.scene.image.Image;
 
+/**
+ * 
+ * @author Xavier Lezzoche
+ *
+ */
 public enum TypeTerrain {
 
 	PLAINE(2,1,new Image("file:ressources/images/plaines.png"),new Image("file:ressources/images/plainesNonVisible.png")), 
@@ -23,6 +28,13 @@ public enum TypeTerrain {
 	private int vision;
 	private int deplacement;
 	
+	/**
+	 * Instancie l'énumération TypeTerrain
+	 * @param vision Distance de vision depuis la case courante
+	 * @param deplacement Coût en déplacement à travers la case courante
+	 * @param imageVisible Image de référence lors d'une présence dans la distance de vision
+	 * @param imageNonVisible Image de référence lors d'une présence hors de la distance de vision
+	 */
 	private TypeTerrain(int vision, int deplacement, Image imageVisible, Image imageNonVisible) {
 		this.vision = vision;
 		this.deplacement = deplacement;
@@ -30,18 +42,34 @@ public enum TypeTerrain {
 		this.imageNonVisible = imageNonVisible;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie la distance de vision depuis la case courante
+	 */
 	public int getVision() {
 		return this.vision;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie le coût de déplacement de la case courante
+	 */
 	public int getDeplacement() {
 		return this.deplacement;
 	}
 	
+	/**
+	 * 
+	 * @return Renvoie l'image de référence lors d'une présence dans la distance de vision
+	 */
 	public Image getImageVisible() {
 		return this.imageVisible;
 	}
 	
+	/**
+	 * 
+	 * @return Image de référence lors d'une présence hors de la distance de vision
+	 */
 	public Image getImageNonVisible() {
 		return this.imageNonVisible;
 	}

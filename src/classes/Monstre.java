@@ -33,12 +33,18 @@ public class Monstre extends Personnage {
 			System.out.println("Vous ne pouvez pas vous d�placer ici.");
 		}
 	}
-
+	
+	/**
+	 * @return Renvoie l'image associée à l'entité
+	 */
 	@Override
 	public Image getImage() {
 		return this.image;
 	}
 
+	/**
+	 * Modifie la case de présence du monstre
+	 */
 	@Override
 	public boolean changeCase(Plateau p) {
 		boolean passeParLa = p.defaiteMonstre(this.getPosition());

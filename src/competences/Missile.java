@@ -21,7 +21,8 @@ public class Missile extends Competences {
 		this.setDuree(0);
 		this.cout = 100;
 	}
-
+	
+	@Override
 	public void utilisation(Plateau p, Personnage perso, Personnage cible, Position tmp) {
 		
 		tmp = new Position(tmp.getX()-1, tmp.getY()-1);
