@@ -246,6 +246,10 @@ public class PlayerInfo /*extends Application*/{
 		return this.bt_Comp.get(1);
 	}
 	
+	public List<BoutonCompetence> getListBouton(){
+		return this.bt_Comp;
+	}
+	
 	/**
 	 * 
 	 * @return Renvoie l'interface de niveau d'énergie de l'entité en jeu
