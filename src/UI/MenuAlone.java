@@ -26,15 +26,15 @@ public class MenuAlone extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setScene(MenuAlone.getScene(primaryStage, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
-		primaryStage.setMinWidth(1280);
-		primaryStage.setMinHeight(720);
+		//primaryStage.setMinWidth(1280);
+		//primaryStage.setMinHeight(720);
 	}
 	
 	
 	public static Scene getScene(Stage s, double width, double height) {
 		VBox root = new VBox();
 		
-		root.getChildren().addAll(getDifficulty(), getSep(), getPlateau(), getSep(), getPlayerType(), getSep(), getPseudo());
+		root.getChildren().addAll(getDifficulty(), getSep(), getPlateau(), getSep(), getPlayerType(), getSep(), getPseudo(s));
 		root.setAlignment(Pos.CENTER);
 		if(isFullscreen(s)) root.setPadding(new Insets(500));
 		else root.setPadding(new Insets(200));
@@ -166,7 +166,7 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
-	private static HBox getPseudo() {
+	private static HBox getPseudo(Stage s) {
 		HBox root = new HBox();
 		
 		TextField pseudo = new TextField();
@@ -192,6 +192,10 @@ public class MenuAlone extends Application {
 				+ "-fx-text-fill: rgb(77,100,141);"
 				+ "-fx-font: 24px Verdana;"
 				+ "-fx-height: 55px;");
+		start.setOnAction(e->{
+			Main m = new Main();
+			m.start(s);
+		});
 		
 		root.getChildren().addAll(pseudo, start);
 		root.setAlignment(Pos.TOP_CENTER);
