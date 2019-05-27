@@ -9,9 +9,18 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class TestPlayerInfo extends Application{
@@ -20,6 +29,7 @@ public class TestPlayerInfo extends Application{
 	static Chasseur chasseur = new Chasseur(new Position(0,0));
 	static Monstre monstre = new Monstre(new Position(9,9));
 	boolean tourChasseur = true;
+	final double DECAL_X = 30;
 
 	
 	public static void main(String[] args) {
@@ -43,31 +53,53 @@ public class TestPlayerInfo extends Application{
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		
-		VBox pane = new VBox();
+		Pane pane = new Pane();
 		//ImageView logo = new ImageView();
 		//logo.setImage(plaine);
 		pane.setPrefSize(1000,1000);
 		
 		Canvas canvas = new Canvas(700,500);
 		
-		
+		pI.getPlayerStatut().setTextFill(Color.WHITE);
 		GraphicsContext plateau = canvas.getGraphicsContext2D();
 		
 		disP.affichagePlateau(plateau);
+		Label nbTours = new Label("Tour n°"+jeu.getTours());
+		Label typeCase = new Label("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
+		nbTours.setTextFill(Color.WHITE);
+		typeCase.setTextFill(Color.WHITE);
+		Button finDeTour = new Button("Fin de tour");
 		
-		pane.getChildren().add(canvas);
+		canvas.setLayoutX(pane.getPrefWidth()-canvas.getWidth());
+		finDeTour.setLayoutX(DECAL_X);
+		finDeTour.setLayoutY(100);
+		nbTours.setLayoutX(DECAL_X);
+		nbTours.setLayoutY(10);
+		typeCase.setLayoutX(DECAL_X);
+		typeCase.setLayoutY(nbTours.getLayoutY()+15);
 		
+		pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
 		
-		pane.setAlignment(Pos.CENTER);
 		
 		playerInfo.setAlignment(Pos.CENTER);
 		playerInfo.setMaxWidth(Double.MAX_VALUE);
+		
+	
+		
 		
 		root.getChildren().addAll(pane,playerInfo);
 		
 		pI.getInfoDisplay().setTxtBase(jeu.getTours(),false,0);
 		
-		Scene scene = new Scene(root, 1000, 1000);
+		Scene scene = new Scene(root, Double.MAX_VALUE, Double.MAX_VALUE);
+		
+		root.setBackground(new Background(
+				new BackgroundImage(
+						new Image("file:ressources/images/fond.png"), BackgroundRepeat.NO_REPEAT,
+																	   BackgroundRepeat.NO_REPEAT, 
+																	   BackgroundPosition.CENTER, 
+																	   null)));
+
 		
 		class KeyListenerMovement implements EventHandler<KeyEvent>{
 			public void handle(KeyEvent event) {
