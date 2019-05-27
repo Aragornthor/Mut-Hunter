@@ -30,7 +30,13 @@ public class MenuAlone extends Application {
 		//primaryStage.setMinHeight(720);
 	}
 	
-	
+	/**
+	 * 
+	 * @param s Stage principal
+	 * @param width Largeur souhaitée
+	 * @param height Hauteur souhaitée
+	 * @return Une scène du Menu
+	 */
 	public static Scene getScene(Stage s, double width, double height) {
 		VBox root = new VBox();
 		
@@ -41,6 +47,10 @@ public class MenuAlone extends Application {
 		return new Scene(root, width, height);
 	}
 	
+	/**
+	 * 
+	 * @return Un séparateur d'élément
+	 */
 	private static Separator getSep() {
 		Separator sep = new Separator();
 		sep.setPadding(new Insets(5));
@@ -48,6 +58,10 @@ public class MenuAlone extends Application {
 		return sep;
 	}
 	
+	/**
+	 * 
+	 * @return La sélection de la difficulté
+	 */
 	private static VBox getDifficulty() {
 		VBox root = new VBox();
 		
@@ -86,6 +100,10 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
+	/**
+	 * 
+	 * @return Choix du type de plateau
+	 */
 	private static VBox getPlateau() {
 		VBox root = new VBox();
 		
@@ -141,6 +159,10 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
+	/**
+	 * 
+	 * @return Choix du type du joueur
+	 */
 	private static VBox getPlayerType() {
 		VBox root = new VBox();
 		
@@ -166,6 +188,11 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
+	/**
+	 * 
+	 * @param s Stage principal
+	 * @return Saisie du pseudo
+	 */
 	private static HBox getPseudo(Stage s) {
 		HBox root = new HBox();
 		
@@ -203,6 +230,11 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
+	/**
+	 * 
+	 * @param s Stage principal
+	 * @return Statut (FULLSCREEN) du Stage
+	 */
 	private static boolean isFullscreen(Stage s) {
 		return s.isFullScreen();
 	}
