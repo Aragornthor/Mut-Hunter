@@ -2,7 +2,6 @@ package classes;
 
 import java.util.Scanner;
 
-import Exception.ManqueDeplacementException;
 import competences.Competences;
 import competences.Statut;
 import javafx.scene.image.Image;
