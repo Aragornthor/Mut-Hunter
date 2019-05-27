@@ -7,6 +7,7 @@ import classes.Monstre;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import classes.TestMainMenu;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -18,16 +19,25 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	
+	MainMenu menu = new MainMenu();
+	TestMainMenu mainM = new TestMainMenu();
 	Plateau jeu = new Plateau();
 	Personnage chasseur = new Chasseur(new Position(0,0));
 	Personnage monstre = new Monstre(new Position(9,9));
 	boolean tourChasseur = true;
+	boolean fini = false;
 
+	
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
 
 	public void start(Stage stage){
+		String[] args = new String[1];
+
+		
+		
 		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		
@@ -42,39 +52,80 @@ public class Main extends Application{
 		pane.getChildren().add(canvas);
 		
 		Scene scene = new Scene(pane, 1000, 1000);
+		//sScene mainMenu = new Scene(menu.getRoot(),Double.MAX_VALUE,Double.MAX_VALUE);
 		
 		class KeyListenerMovement implements EventHandler<KeyEvent>{
 			public void handle(KeyEvent event) {
 				if(KeyEvent.KEY_PRESSED != null) {
-					if(tourChasseur) {
-						chasseur.estDeplace(jeu, event.getCode().toString());
-						affichagePlateauVisionChasseur(plateau);
-						System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
-						if(chasseur.getDeplacement() == 0) {
-							chasseur.resetMouvement();
-							tourChasseur = false;
-							affichagePlateauVisionMonstre(plateau);
-						}
-					} else {
-						monstre.estDeplace(jeu, event.getCode().toString());
-						affichagePlateauVisionMonstre(plateau);
-						System.out.println(monstre.getDeplacement());
-						if(monstre.getDeplacement() <= 0) {
-							monstre.resetMouvement();
-							tourChasseur = true;
+					System.out.println(fini);
+					if(event.getCode().toString().equalsIgnoreCase("z") || event.getCode().toString().equalsIgnoreCase("q") || event.getCode().toString().equalsIgnoreCase("s") || event.getCode().toString().equalsIgnoreCase("d"))
+						if(tourChasseur) {
+							chasseur.estDeplace(jeu, event.getCode().toString());
+							fini = chasseur.changeCase(jeu);
 							affichagePlateauVisionChasseur(plateau);
+							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
+							if(chasseur.getDeplacement() == 0) {
+								chasseur.resetMouvement();
+								tourChasseur = false;
+								affichagePlateauVisionMonstre(plateau);
+								jeu.addTours();
+							}
+							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+								fini = true;
+								System.out.println("Victoire chasseur"+fini);
+							}
+							
+						} else {
+							monstre.estDeplace(jeu, event.getCode().toString());
+							fini = monstre.changeCase(jeu);
+							affichagePlateauVisionMonstre(plateau);
+							System.out.println(monstre.getDeplacement());
+							if(monstre.getDeplacement() <= 0) {
+								monstre.resetMouvement();
+								tourChasseur = true;
+								affichagePlateauVisionChasseur(plateau);
+								jeu.addTours();
+							}
+							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+								fini = true;
+								System.out.println("defaite monstre"+fini);
+							}
+							
+							
 						}
-					}	
+					else {
+						event.consume();
+					}
 				}
 			}
 		}
 		
-		stage.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement());
 		
+		stage.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement());
+		stage.addEventHandler(KeyEvent.KEY_PRESSED, e->{
+			if(fini) {
+				System.out.println("Bonjour");
+				try {
+					this.stop();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//TestMainMenu.launch(args);
+				try {
+					mainM.start(stage);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		stage.setTitle("Mut'Hunter");
 		stage.setScene(scene);
 		stage.show();
+		
+		
 		
 	}
 	
