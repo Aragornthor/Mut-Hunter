@@ -12,12 +12,7 @@ import java.util.List;
 
 import classes.Chasseur;
 import classes.Monstre;
-import classes.Plateau;
-import classes.Position;
-import competences.Acide;
 import competences.Competences;
-import competences.Missile;
-import competences.Saut;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -35,7 +30,6 @@ public class PlayerInfo /*extends Application*/{
 	private Label playerStatuts;
 	private Canvas playerIcon;
 	
-	private Plateau plateau;
 	private Chasseur chasseur;
 	private Monstre monstre;
 	private boolean tourChasseur;
@@ -66,8 +60,7 @@ public class PlayerInfo /*extends Application*/{
 	 * @param c Le chasseur
 	 * @param m Le monstre
 	 */
-	public PlayerInfo(Plateau p, Chasseur c, Monstre m) {
-		this.plateau = p;
+	public PlayerInfo(Chasseur c, Monstre m) {
 		this.chasseur = c;
 		this.monstre = m;
 		this.tourChasseur = true;
@@ -193,25 +186,6 @@ public class PlayerInfo /*extends Application*/{
 					this.infoComp.setText("Info - "+c.getNom());
 					this.infoComp.changeText(getCompDesc(c.getNom()));
 
-				});
-				this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
-					if(this.valueEnergy.getEnergyWidth()/2 > this.bt_Comp.get(idx).getComp().getCout()) {
-						this.valueEnergy.perdreEnergy(this.bt_Comp.get(idx).getComp().getCout());
-						if(this.tourChasseur) {
-							if(this.bt_Comp.get(idx).getComp().equals(new Saut()) || this.bt_Comp.get(idx).getComp().equals(new Acide()) || this.bt_Comp.get(idx).getComp().equals(new Missile())) {
-								
-							} else {
-								this.bt_Comp.get(idx).getComp().utilisation(this.plateau, this.chasseur, this.monstre, new Position(0,0));
-							}
-						} else {
-							if(this.bt_Comp.get(idx).getComp().equals(new Saut()) || this.bt_Comp.get(idx).getComp().equals(new Acide()) || this.bt_Comp.get(idx).getComp().equals(new Missile())) {
-								
-							} else {
-								this.bt_Comp.get(idx).getComp().utilisation(this.plateau, this.monstre, this.chasseur, new Position(0,0));
-							}
-						}
-						
-					}		
 				});
 			}
 		}

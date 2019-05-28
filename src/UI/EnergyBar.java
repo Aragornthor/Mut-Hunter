@@ -55,6 +55,7 @@ public class EnergyBar extends HBox {
 		this.BLANK.setHeight(this.energy.getHeight());
 		
 		this.energyValue = new Label(""+this.energy.getWidth()/this.MULTIPICATEUR);
+		this.energyValue.setTextFill(Color.WHITE);
 		
 		energyBar.getChildren().addAll(this.BORDER_REC,this.BLANK,this.energy);
 		

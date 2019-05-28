@@ -1,5 +1,9 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import Event.CompetenceEvent;
 import UI.DisplayPlateau;
 import UI.PlayerInfo;
 import competences.Acide;
@@ -9,6 +13,7 @@ import competences.Saut;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,6 +27,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -35,14 +43,13 @@ public class TestPlayerInfo extends Application{
 	static Monstre monstre = new Monstre(new Position(9,9));
 	boolean tourChasseur = true;
 	final double DECAL_X = 30;
-	int boutonComp = 0;
 	boolean compUtilise = false;
+	int boutontComp = 0;
 
 	
 	public static void main(String[] args) {
 		chasseur.setCompetence(new Missile(), 1);
 		chasseur.rechargeEnergie(25);
-		System.out.println(chasseur.getEnergie());
 		Application.launch(args);
 		
 
@@ -51,7 +58,7 @@ public class TestPlayerInfo extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		VBox root = new VBox();
-		PlayerInfo pI = new PlayerInfo(jeu,chasseur,monstre);
+		PlayerInfo pI = new PlayerInfo(chasseur,monstre);
 		GridPane playerInfo = pI.getGridPane();
 		pI.ajoutCompetence(chasseur.getCompetences());
 		pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
@@ -63,11 +70,12 @@ public class TestPlayerInfo extends Application{
 		jeu.startPersonnage(chasseur, monstre);
 		
 		Pane pane = new Pane();
+		pane.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, null, null)));
 		//ImageView logo = new ImageView();
 		//logo.setImage(plaine);
 		pane.setPrefSize(1000,1000);
 		
-		Canvas canvas = new Canvas(700,500);
+		Canvas canvas = new Canvas(1000,1000);
 		
 		pI.getPlayerStatut().setTextFill(Color.WHITE);
 		GraphicsContext plateau = canvas.getGraphicsContext2D();
@@ -83,7 +91,8 @@ public class TestPlayerInfo extends Application{
 		TextField positionY = new TextField();
 		Button utiliseComp = new Button("Activer compétence");
 		
-		canvas.setLayoutX(pane.getPrefWidth()-canvas.getWidth());
+		canvas.setLayoutX(canvas.getWidth()/2);
+		canvas.setLayoutY(150);
 		finDeTour.setLayoutX(DECAL_X);
 		finDeTour.setLayoutY(100);
 		nbTours.setLayoutX(DECAL_X);
@@ -108,7 +117,7 @@ public class TestPlayerInfo extends Application{
 			if(!compUtilise) {
 				Competences c = pI.getComp1().getComp();
 				if(c.equals(new Saut()) || c.equals(new Missile()) || c.equals(new Acide()) ) {
-					boutonComp = 0;
+					boutontComp = 0;
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
 				}else {
@@ -127,87 +136,35 @@ public class TestPlayerInfo extends Application{
 			if(!compUtilise) {
 				Competences c = pI.getComp2().getComp();
 				if(c.equals(new Saut()) || c.equals(new Missile()) || c.equals(new Acide()) ) {
-					boutonComp = 1;
+					boutontComp = 1;
+					System.out.println("BoutonComp = "+boutontComp);
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
 				}else {
 					pI.getEnergyValue().perdreEnergy(pI.getComp2().getComp().getCout());
+					System.out.println("Perte energie");
 					if(tourChasseur) {
-						pI.getComp2().getComp().utilisation(jeu, chasseur, monstre, new Position(0,0));
+						c.utilisation(jeu, chasseur, monstre, new Position(0,0));
 					}else {
-						pI.getComp2().getComp().utilisation(jeu, monstre, chasseur, new Position(0,0));
+						c.utilisation(jeu, monstre, chasseur, new Position(0,0));
 					}
 				}
 			}	
 		});
 		
 		
-		utiliseComp.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			System.out.println(Integer.parseInt(positionX.getText())+"  "+Integer.parseInt(positionY.getText()));
-			System.out.println(chasseur.getPosition().getX()+"  "+chasseur.getPosition().getY());
-			if(positionX.getText() != null && positionY.getText() != null) {
-				Competences comp = pI.getListBouton().get(boutonComp).getComp();
-				if(comp.equals(new Saut()) || comp.equals(new Acide())) {
-					if(tourChasseur) {
-						if(Integer.parseInt(positionX.getText()) < chasseur.getPosition().getX()-2 ||
-								Integer.parseInt(positionX.getText()) > chasseur.getPosition().getX()+2 ||
-								Integer.parseInt(positionY.getText()) < chasseur.getPosition().getY()-2 ||
-								Integer.parseInt(positionY.getText()) > chasseur.getPosition().getY()+2) {
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp,erreurComp);
-						}else {
-							pI.getEnergyValue().perdreEnergy(pI.getListBouton().get(boutonComp).getComp().getCout());
-							pI.getListBouton().get(boutonComp).getComp().utilisation(jeu, chasseur, monstre, new Position(Integer.parseInt(positionX.getText()),Integer.parseInt(positionY.getText())));
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
-						}
-					}else {
-						if(Integer.parseInt(positionX.getText()) < monstre.getPosition().getX()-2 ||
-								Integer.parseInt(positionX.getText()) > monstre.getPosition().getX()+2 ||
-								Integer.parseInt(positionY.getText()) < monstre.getPosition().getY()-2 ||
-								Integer.parseInt(positionY.getText()) > monstre.getPosition().getY()+2) {
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp,erreurComp);
-						}else {
-							pI.getEnergyValue().perdreEnergy(pI.getListBouton().get(boutonComp).getComp().getCout());
-							pI.getListBouton().get(boutonComp).getComp().utilisation(jeu, chasseur, monstre, new Position(Integer.parseInt(positionX.getText()),Integer.parseInt(positionY.getText())));
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
-						}
-					}
-				}else if(comp.equals(new Missile())) {
-					if(tourChasseur) {
-						if(Integer.parseInt(positionX.getText()) > chasseur.getPosition().getX()-2 ||
-								Integer.parseInt(positionX.getText()) < chasseur.getPosition().getX()+2 ||
-								Integer.parseInt(positionY.getText()) > chasseur.getPosition().getY()-2 ||
-								Integer.parseInt(positionY.getText()) < chasseur.getPosition().getY()+2) {
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp,erreurComp);
-						}else {
-							pI.getEnergyValue().perdreEnergy(pI.getListBouton().get(boutonComp).getComp().getCout());
-							pI.getListBouton().get(boutonComp).getComp().utilisation(jeu, chasseur, monstre, new Position(Integer.parseInt(positionX.getText()),Integer.parseInt(positionY.getText())));
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
-						}
-					}else {
-						if(Integer.parseInt(positionX.getText()) > monstre.getPosition().getX()-2 ||
-								Integer.parseInt(positionX.getText()) < monstre.getPosition().getX()+2 ||
-								Integer.parseInt(positionY.getText()) > monstre.getPosition().getY()-2 ||
-								Integer.parseInt(positionY.getText()) < monstre.getPosition().getY()+2) {							
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp,erreurComp);
-						}else {
-							pI.getEnergyValue().perdreEnergy(pI.getListBouton().get(boutonComp).getComp().getCout());
-							pI.getListBouton().get(boutonComp).getComp().utilisation(jeu, monstre, chasseur, new Position(Integer.parseInt(positionX.getText()),Integer.parseInt(positionY.getText())));
-							pane.getChildren().clear();
-							pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
-						}
-					}
-				}
-				
-			}
-			
-		});
+		utiliseComp.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				new CompetenceEvent(pI.getEnergyValue(),
+									pI.getComp2().getComp(),
+									pane,
+									new ArrayList<Node>(Arrays.asList(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp,erreurComp)),
+									new ArrayList<Node>(Arrays.asList(canvas,nbTours,finDeTour,typeCase)),
+									jeu,
+									chasseur,
+									monstre,
+									tourChasseur,
+									positionX,
+									positionY));
 		
 		playerInfo.setAlignment(Pos.CENTER);
 		playerInfo.setMaxWidth(Double.MAX_VALUE);
@@ -237,6 +194,7 @@ public class TestPlayerInfo extends Application{
 			}
 		});
 		
+		root.setAlignment(Pos.CENTER);
 		
 		root.getChildren().addAll(pane,playerInfo);
 				
