@@ -4,6 +4,7 @@ import classes.TestMainMenu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class RegleMenu extends Application{
@@ -31,8 +33,7 @@ public class RegleMenu extends Application{
 		top.setPrefWidth(1000);
 		this.title = new Label("Les règles");
 		this.title.setFont(new Font(50));
-		
-		this.title.setLayoutX(top.getPrefWidth()/2+this.title.getWidth());
+		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 		
 		Label tBut = new Label("Le but du jeu");
 		tBut.setFont(new Font(30));
@@ -59,10 +60,14 @@ public class RegleMenu extends Application{
 		VBox.setMargin(top, new Insets(5));
 		root.getChildren().addAll(top,sep, tBut, but, tRegle, regle);
 		root.setAlignment(Pos.TOP_CENTER);
-		Scene sc = new Scene(root,Double.MAX_VALUE,Double.MAX_VALUE);
+		Scene sc = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
 		stage = primaryStage;
 		stage.setScene(sc);
 		stage.setTitle("Mut'Hunter");
+		
+
+		this.title.setLayoutX(sc.getWidth()/2 - title.getWidth()/2);
+		
 		stage.show();		
 		
 	}
