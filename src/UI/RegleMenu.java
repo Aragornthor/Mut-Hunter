@@ -29,10 +29,25 @@ public class RegleMenu extends Application{
 		VBox root = new VBox();
 		Pane top = new Pane();
 		top.setPrefWidth(1000);
-		this.title = new Label("Regles");
+		this.title = new Label("Les règles");
 		this.title.setFont(new Font(50));
 		
 		this.title.setLayoutX(top.getPrefWidth()/2+this.title.getWidth());
+		
+		Label tBut = new Label("Le but du jeu");
+		tBut.setFont(new Font(30));
+		Label but = new Label("Au cours de la partie, deux entités vont s’affronter : un monstre et un chasseur. Le but pour le monstre est de parcourir tout le terrain sans se faire attraper par le chasseur et sans revenir sur ses pas. Le but du chasseur est d’attraper le monstre avant qu’il n’est pu explorer l’ensemble de la carte.");
+		but.setPadding(new Insets(25));
+		
+		Label tRegle = new Label("Les règles du jeu");
+		tRegle.setFont(new Font(30));
+		Label regle = new Label("Les règles sont simples, chaque entités disposent de trois points de déplacements qui seront consommés en quantité variable selon le type de la case cible (plaine, forêt, montagne, ville).\n" + 
+				"Durant votre tour, vous avez la possibilité d’utiliser des compétences qui vous sont fournies dès le début pour les plus rudimentaires et obtenables sur certaines cases pour les plus violentes. Toutefois, l’utilisation de ces compétences est réglementée par un niveau d’énergie et une portée… Vous pouvez, bien sûr, n’utiliser qu’une seule compétence par tour !\n" + 
+				"Lorsque vous avez terminé votre tour, il vous suffit d’appuyer sur le bouton « Fin de tour ».\n" + 
+				"Votre adversaire joue suivant le même schéma que vous et c’est de nouveau à votre tour.\n" + 
+				"\n" + 
+				"Il vous est possible de jouer seul, contre un ordinateur qui n’a ni foi ni loi !");
+		regle.setPadding(new Insets(25));
 		
 		Button retour = initRetour();
 		
@@ -42,7 +57,7 @@ public class RegleMenu extends Application{
 		sep.setPadding(new Insets(5));
 		
 		VBox.setMargin(top, new Insets(5));
-		root.getChildren().addAll(top,sep);
+		root.getChildren().addAll(top,sep, tBut, but, tRegle, regle);
 		root.setAlignment(Pos.TOP_CENTER);
 		Scene sc = new Scene(root,Double.MAX_VALUE,Double.MAX_VALUE);
 		stage = primaryStage;
