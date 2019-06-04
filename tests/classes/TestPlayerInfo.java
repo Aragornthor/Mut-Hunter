@@ -45,6 +45,7 @@ public class TestPlayerInfo extends Application{
 	final double DECAL_X = 30;
 	boolean compUtilise = false;
 	int boutontComp = 0;
+	boolean fini = false;
 
 	
 	public static void main(String[] args) {
@@ -172,7 +173,7 @@ public class TestPlayerInfo extends Application{
 		finDeTour.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			if(tourChasseur) {
 				tourChasseur = false;
-				monstre.resetMouvement();
+				chasseur.resetMouvement();
 				disP.affichagePlateauVisionMonstre(plateau);
 				pI.ajoutCompetence(monstre.getCompetences());
 				pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
@@ -182,7 +183,7 @@ public class TestPlayerInfo extends Application{
 				typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
 			}else {
 				tourChasseur = true;
-				chasseur.resetMouvement();
+				monstre.resetMouvement();
 				disP.affichagePlateauVisionChasseur(plateau);
 				pI.ajoutCompetence(chasseur.getCompetences());
 				pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
@@ -198,7 +199,7 @@ public class TestPlayerInfo extends Application{
 		
 		root.getChildren().addAll(pane,playerInfo);
 				
-		Scene scene = new Scene(root, Double.MAX_VALUE, Double.MAX_VALUE);
+		Scene scene = new Scene(root, 1920, 1000);
 		
 		root.setBackground(new Background(
 				new BackgroundImage(
@@ -209,26 +210,73 @@ public class TestPlayerInfo extends Application{
 
 		
 		class KeyListenerMovement implements EventHandler<KeyEvent>{
+			boolean tmp;
 			public void handle(KeyEvent event) {
 				if(KeyEvent.KEY_PRESSED != null) {
-					if(tourChasseur) {
-						chasseur.estDeplace(jeu, event.getCode().toString());
-						disP.affichagePlateauVisionChasseur(plateau);
-						chasseur.setDeplacement(chasseur.getDeplacement()-jeu.getCase(chasseur.getPosition()).getTypeTerrain().getDeplacement());
-						System.out.println(chasseur.getDeplacement());
-						typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
-
-					} else {
-						monstre.estDeplace(jeu, event.getCode().toString());
-						disP.affichagePlateauVisionMonstre(plateau);
-						monstre.setDeplacement(monstre.getDeplacement()-jeu.getCase(monstre.getPosition()).getTypeTerrain().getDeplacement());
-						System.out.println(monstre.getDeplacement());
-						typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
-
-					}	
+					System.out.println(fini);
+					if(event.getCode().toString().equalsIgnoreCase("z") || event.getCode().toString().equalsIgnoreCase("q") || event.getCode().toString().equalsIgnoreCase("s") || event.getCode().toString().equalsIgnoreCase("d"))
+						
+						if(tourChasseur) {
+							chasseur.estDeplace(jeu, event.getCode().toString());
+							fini = chasseur.changeCase(jeu);
+							disP.affichagePlateauVisionChasseur(plateau);
+							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
+							if(chasseur.getDeplacement() == 0) {
+								chasseur.resetMouvement();
+								tourChasseur = false;
+								disP.affichagePlateauVisionMonstre(plateau);
+								jeu.addTours();
+							}
+							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+								fini = true;
+								System.out.println("Victoire chasseur"+fini);
+							}
+							typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
+						} else {
+							
+							tmp = monstre.estDeplace(jeu, event.getCode().toString());
+							fini = monstre.changeCase(jeu);
+							if(!tmp) fini = false; // C'EST DU BRICOLAGE, A MODIFIER ABSOLUMENT !!!
+							disP.affichagePlateauVisionMonstre(plateau);
+							System.out.println("fini="+fini);
+							if(monstre.getDeplacement() <= 0) {
+								monstre.resetMouvement();
+								tourChasseur = true;
+								disP.affichagePlateauVisionChasseur(plateau);
+								jeu.addTours();
+							}
+							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+								fini = true;
+								System.out.println("defaite monstre"+fini);
+							}
+							typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
+							
+						}
+					else {
+						event.consume();
+					}
 				}
 			}
 		}
+		stage.addEventHandler(KeyEvent.KEY_RELEASED, e->{
+			if(fini) {
+				System.out.println("Bonjour");
+				try {
+					this.stop();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//TestMainMenu.launch(args);
+				try {
+					TestMainMenu mm = new TestMainMenu();
+					mm.start(stage);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		stage.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement());
 		

@@ -238,6 +238,7 @@ public abstract class Personnage {
 			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
 			this.deplacement = deplacement;
 			this.setPosition(pos);
+			reussite = false;
 		}
 		return reussite;
 	}

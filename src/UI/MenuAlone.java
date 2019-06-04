@@ -1,6 +1,7 @@
 package UI;
 
 
+import classes.TestPlayerInfo;
 import javafx.application.Application;
 //import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -220,8 +221,13 @@ public class MenuAlone extends Application {
 				+ "-fx-font: 24px Verdana;"
 				+ "-fx-height: 55px;");
 		start.setOnAction(e->{
-			Main m = new Main();
-			m.start(s);
+			TestPlayerInfo pi = new TestPlayerInfo();
+			try {
+				pi.start(s);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		
 		root.getChildren().addAll(pseudo, start);
