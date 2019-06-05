@@ -3,6 +3,7 @@ package competences;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -20,6 +21,7 @@ public class Shield extends Competences {
 		this.setNom("Shield");
 		this.setDuree(2);
 		this.cout = 50;
+		this.setIcon(new Image("file:ressources/images/boutonShield.png"));
 	}
 
 	@Override

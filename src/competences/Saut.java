@@ -3,6 +3,7 @@ package competences;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -20,6 +21,7 @@ public class Saut extends Competences {
 		this.setNom("Saut");
 		this.setDuree(2);
 		this.cout = 30;
+		this.setIcon(new Image("file:ressources/images/boutonSaut.png"));
 	}
 
 	@Override

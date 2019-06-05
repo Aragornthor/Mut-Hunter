@@ -3,6 +3,7 @@ package competences;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -23,10 +24,19 @@ public abstract class Competences {
 	private String nom;
 	private int duree;
 	protected int cout;
+	private Image icon;
 	
 	/**
 	 * 
-	 * @return Retourne l'element de la competence
+	 * @return Retourne l'icon de la competence
+	 */
+	public Image getIcon() {
+		return icon;
+	}
+	
+	/**
+	 * 
+	 * @return Retourne le nom de la competence
 	 */
 	public String getNom() {
 		return nom;
@@ -47,6 +57,7 @@ public abstract class Competences {
 	public int getCout() {
 		return this.cout;
 	}
+
 	
 	/**
 	 * 
@@ -54,6 +65,14 @@ public abstract class Competences {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	/**
+	 * Permet de changer l'icon de la compétence
+	 * @param icon Nouvel icon à attribuer
+	 */
+	public void setIcon(Image icon) {
+		this.icon = icon;
 	}
 	
 	/**

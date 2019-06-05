@@ -3,6 +3,7 @@ package competences;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -20,6 +21,7 @@ public class IEM  extends Competences {
 		this.setNom("IEM");
 		this.setDuree(1);
 		this.cout = 40;
+		this.setIcon(new Image("file:ressources/images/boutonIem.png"));
 	}
 
 	@Override

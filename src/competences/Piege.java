@@ -4,6 +4,7 @@ import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
 import classes.TypeCase;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -21,6 +22,7 @@ public class Piege extends Competences {
 		this.setNom("Piege");
 		this.setDuree(0);
 		this.cout = 10;
+		this.setIcon(new Image("file:ressources/images/boutonPiege.png"));
 	}
 
 	@Override

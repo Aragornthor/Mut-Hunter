@@ -3,6 +3,7 @@ package competences;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -20,6 +21,7 @@ public class Acide extends Competences {
 		this.setNom("Acide");
 		this.setDuree(3);
 		this.cout = 20;
+		this.setIcon(new Image("file:ressources/images/boutonAcide.png"));
 	}
 
 	@Override

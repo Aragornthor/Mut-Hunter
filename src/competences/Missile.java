@@ -3,6 +3,7 @@ package competences;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -20,6 +21,7 @@ public class Missile extends Competences {
 		this.setNom("Missile");
 		this.setDuree(0);
 		this.cout = 100;
+		this.setIcon(new Image("file:ressources/images/boutonMissile.png"));
 	}
 	
 	@Override

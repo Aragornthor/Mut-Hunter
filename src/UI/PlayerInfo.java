@@ -127,13 +127,7 @@ public class PlayerInfo /*extends Application*/{
 	 * @return Renvoie un bouton avec une compétence assignée 
 	 */
 	private BoutonCompetence initComp1() {
-		BoutonCompetence comp1 = new BoutonCompetence("Competences 1");
-		comp1.setMinSize(150, 25);
-		comp1.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
-			this.infoComp.setText("Info - Competences 1");
-			this.infoComp.changeText("Competence 1");
-		});
-		
+		BoutonCompetence comp1 = new BoutonCompetence("Competences 1",null);
 		comp1.addEventHandler(MouseEvent.MOUSE_EXITED, e ->{
 			this.infoComp.setText("Info");
 			this.infoComp.changeText(this.infoComp.getTxtBase());
@@ -146,13 +140,7 @@ public class PlayerInfo /*extends Application*/{
 	 * @return Renvoie un bouton avec une compétence assignée
 	 */
 	private BoutonCompetence initComp2() {
-		BoutonCompetence comp2 = new BoutonCompetence("Competences 2");
-		comp2.setMinSize(150, 25);
-		comp2.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
-			this.infoComp.setText("Info - Competences 2");
-			this.infoComp.changeText("Competence 2");
-		});
-		
+		BoutonCompetence comp2 = new BoutonCompetence("Competences 2",null);
 		comp2.addEventHandler(MouseEvent.MOUSE_EXITED, e ->{
 			this.infoComp.setText("Info");
 			this.infoComp.changeText(this.infoComp.getTxtBase());
@@ -169,19 +157,20 @@ public class PlayerInfo /*extends Application*/{
 		if(c == null) {
 			if(idx < 2 || idx >= 0) {
 				this.bt_Comp.get(idx).setComp(null);
-				this.bt_Comp.get(idx).setText(" ");
-				this.bt_Comp.get(idx).setDisable(true);
+				this.bt_Comp.get(idx).getCanvas().getGraphicsContext2D().clearRect(0, 0, 150, 25);;
 				this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
 					this.infoComp.setText("Info");
 					this.infoComp.changeText("");
 				});
-
+				this.bt_Comp.get(idx);
 			}
 		} else {
 			if(idx < 2 || idx >= 0) {
 				this.bt_Comp.get(idx).setDisable(false);
 				this.bt_Comp.get(idx).setComp(c);
-				this.bt_Comp.get(idx).setText(c.getNom());
+				this.bt_Comp.get(idx).getCanvas().getGraphicsContext2D().clearRect(0, 0, 150, 25);
+				this.bt_Comp.get(idx).setNewImage(c.getIcon());
+				this.bt_Comp.get(idx).getCanvas().getGraphicsContext2D().drawImage(this.bt_Comp.get(idx).getImage(), 0, 0);
 				this.bt_Comp.get(idx).addEventHandler(MouseEvent.MOUSE_ENTERED, e ->{
 					this.infoComp.setText("Info - "+c.getNom());
 					this.infoComp.changeText(getCompDesc(c.getNom()));
