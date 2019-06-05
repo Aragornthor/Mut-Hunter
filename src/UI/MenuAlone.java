@@ -7,12 +7,16 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -210,7 +214,10 @@ public class MenuAlone extends Application {
 				+ "-fx-faint-focus-color: transparent;"
 				+ "-fx-font: 24px Verdana;"
 				+ "-fx-height: 55px;");
-		
+		Pane btStart = new Pane();
+		btStart.setPrefSize(150, 70);
+		btStart.setMaxSize(150, 70);
+		/*
 		Button start = new Button("Jouer !");
 		start.setStyle("-fx-border-radius: 0 3 3 0;"
 				+ "-fx-background-radius: 0 3 3 0;"
@@ -220,17 +227,22 @@ public class MenuAlone extends Application {
 				+ "-fx-text-fill: rgb(77,100,141);"
 				+ "-fx-font: 24px Verdana;"
 				+ "-fx-height: 55px;");
-		start.setOnAction(e->{
-			TestPlayerInfo pi = new TestPlayerInfo();
+		*/
+		Canvas display = new Canvas(150,70);
+		Image start = new Image("file:ressources/images/boutonJouer.png");
+		display.getGraphicsContext2D().drawImage(start, 0, 0);
+		btStart.getChildren().add(display);
+		btStart.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+			TestPlayerInfo m = new TestPlayerInfo();
 			try {
-				pi.start(s);
+				m.start(s);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
 		
-		root.getChildren().addAll(pseudo, start);
+		root.getChildren().addAll(pseudo, btStart);
 		root.setAlignment(Pos.TOP_CENTER);
 		
 		return root;

@@ -6,13 +6,20 @@ import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -22,6 +29,7 @@ public class Main_v2 extends Application{
 	MainMenu menu = new MainMenu();
 	FadeTransition ft = new FadeTransition();
 	MediaPlayer music;
+	Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -36,7 +44,7 @@ public class Main_v2 extends Application{
 		music.setCycleCount(MediaPlayer.INDEFINITE);
 		music.setVolume(0.2);
 		
-		Scene sc = new Scene(menu.getRoot(),Double.MAX_VALUE,Double.MAX_VALUE);
+		Scene sc = new Scene(menu.getRoot(),screenSize.getWidth(),screenSize.getHeight());
 		
 		menu.getOnePlayer().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
 			ft.setDuration(Duration.millis(1000));
@@ -44,7 +52,7 @@ public class Main_v2 extends Application{
 			ft.setFromValue(1);
 			ft.setToValue(0);
 			ft.setOnFinished((ActionEvent event) ->{
-				Scene s = MenuAlone.getScene(stage, 1920, 1000);
+				Scene s = MenuAlone.getScene(stage, screenSize.getWidth(),screenSize.getHeight());
 				s.setFill(Color.BLACK);
 				stage.setScene(s);
 				menu.music.stop();
@@ -74,7 +82,7 @@ public class Main_v2 extends Application{
 					VBox newRoot = new VBox(menu.getTitle(),menu.getNbPlayer(),menu.getRegle(),menu.getPersonnage());
 					menu.setRoot(newRoot);
 					menu.getRoot().setAlignment(Pos.TOP_CENTER);
-					Scene newScene = new Scene(menu.getRoot(),1920,1000);
+					Scene newScene = new Scene(menu.getRoot(),screenSize.getWidth(),screenSize.getHeight());
 					newScene.setFill(Color.BLACK);
 					stage.setScene(newScene);
 				});
@@ -93,7 +101,13 @@ public class Main_v2 extends Application{
 					VBox newRoot = new VBox(menu.getTitle(),menu.getNbPlayer(),menu.getRegle(),menu.getPersonnage());
 					menu.setRoot(newRoot);
 					menu.getRoot().setAlignment(Pos.TOP_CENTER);
-					Scene newScene = new Scene(menu.getRoot(),1920,1000);
+					Scene newScene = new Scene(menu.getRoot(),screenSize.getWidth(),screenSize.getHeight());
+					newRoot.setBackground(new Background(
+							new BackgroundImage(
+									new Image("file:ressources/images/fondTest.png"),  BackgroundRepeat.NO_REPEAT,
+																				   BackgroundRepeat.NO_REPEAT, 
+																				   BackgroundPosition.CENTER, 
+																				   null)));
 					newScene.setFill(Color.BLACK);
 					stage.setScene(newScene);
 				});

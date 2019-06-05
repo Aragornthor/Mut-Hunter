@@ -8,6 +8,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -83,14 +87,16 @@ public class MainMenu /*extends Application*/{
 	private VBox initRoot() {
 		this.root  = new VBox();
 		this.title = new Label("Mut'Hunter");
+		this.title.setTextFill(Color.WHITE);
 		this.title.setFont(new Font(80));
 		
 		this.displayMenu = new Label("Appuyer sur une touche pour continuer ...");
+		this.displayMenu.setTextFill(Color.WHITE);
 		
 		this.onePlayer = initOnePlayer();
-		this.twoPlayer = new Button("Deux joueur");
+		this.twoPlayer = initTwoPlayer();
 		
-		this.regle = new Button("Regles");
+		this.regle = initRegle();
 		
 		this.nbPlayer = initNbPlayer();
 		
@@ -109,7 +115,12 @@ public class MainMenu /*extends Application*/{
 		music.setVolume(0.2);
 		
 		this.root.getChildren().addAll(this.title,this.displayMenu);	
-		
+		this.root.setBackground(new Background(
+				new BackgroundImage(
+						new Image("file:ressources/images/fondTest.png"),  BackgroundRepeat.NO_REPEAT,
+																	   BackgroundRepeat.NO_REPEAT, 
+																	   BackgroundPosition.CENTER, 
+																	   null)));
 		return root;
 	}
 	
@@ -151,8 +162,30 @@ public class MainMenu /*extends Application*/{
 	 * @return Renvoie le bouton en mode Solo
 	 */
 	private Button initOnePlayer() {
-		Button onePlayer = new Button("Un joueur");;
+		Button onePlayer = new Button("Un joueur");
+		onePlayer.setPrefSize(250, 70);
+		onePlayer.setMaxSize(250, 70);
 		return onePlayer;
+	}
+	
+	/**
+	 * 
+	 * @return Renvoie le bouton en mode Versus
+	 */
+	private Button initTwoPlayer() {
+		Button twoPlayer = new Button("Deux joueur");
+		twoPlayer.setPrefSize(250, 70);
+		return twoPlayer;
+	}
+	
+	/**
+	 * 
+	 * @return Renvoie le bouton en mode Solo
+	 */
+	private Button initRegle() {
+		Button regle = new Button("Regles");
+		regle.setPrefSize(250, 70);
+		return regle;
 	}
 	
 	/**

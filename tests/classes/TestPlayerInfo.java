@@ -203,7 +203,7 @@ public class TestPlayerInfo extends Application{
 		
 		root.setBackground(new Background(
 				new BackgroundImage(
-						new Image("file:ressources/images/fond.png"),  BackgroundRepeat.NO_REPEAT,
+						new Image("file:ressources/images/fondTest.png"),  BackgroundRepeat.NO_REPEAT,
 																	   BackgroundRepeat.NO_REPEAT, 
 																	   BackgroundPosition.CENTER, 
 																	   null)));

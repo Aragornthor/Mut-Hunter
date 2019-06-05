@@ -1,6 +1,5 @@
 package UI;
 
-import classes.TestMainMenu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,12 +27,26 @@ public class RegleMenu extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		VBox root = getRoot();
+		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+		Scene sc = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
+		stage = primaryStage;
+		stage.setScene(sc);
+		stage.setTitle("Mut'Hunter");
+		
+
+		this.title.setLayoutX(sc.getWidth()/2 - title.getWidth()/2);
+		
+		stage.show();	
+	}
+	
+	public VBox getRoot() {
 		VBox root = new VBox();
 		Pane top = new Pane();
 		top.setPrefWidth(1000);
 		this.title = new Label("Les règles");
 		this.title.setFont(new Font(50));
-		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+		
 		
 		Label tBut = new Label("Le but du jeu");
 		tBut.setFont(new Font(30));
@@ -60,16 +73,9 @@ public class RegleMenu extends Application{
 		VBox.setMargin(top, new Insets(5));
 		root.getChildren().addAll(top,sep, tBut, but, tRegle, regle);
 		root.setAlignment(Pos.TOP_CENTER);
-		Scene sc = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
-		stage = primaryStage;
-		stage.setScene(sc);
-		stage.setTitle("Mut'Hunter");
+			
 		
-
-		this.title.setLayoutX(sc.getWidth()/2 - title.getWidth()/2);
-		
-		stage.show();		
-		
+		return root;
 	}
 	
 	private Button initRetour() {
@@ -78,9 +84,11 @@ public class RegleMenu extends Application{
 		retour.setLayoutX(10);
 		
 		retour.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			TestMainMenu m = new TestMainMenu();
+			MainMenu m = new MainMenu();
 			try {
-				m.start(stage);
+				this.stage.setScene(new Scene(m.getRoot(),
+											  this.stage.getWidth(),
+											  this.stage.getHeight()));
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

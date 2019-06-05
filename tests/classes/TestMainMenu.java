@@ -4,13 +4,19 @@ import java.io.File;
 
 import UI.MainMenu;
 import UI.MenuAlone;
+import UI.RegleMenu;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -54,6 +60,21 @@ public class TestMainMenu extends Application{
 			});
 			ft.play();
 		});
+		
+		menu.getRegle().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			ft.setDuration(Duration.millis(1000));
+			ft.setNode(menu.getRoot());
+			ft.setFromValue(1);
+			ft.setToValue(0);
+			ft.setOnFinished((ActionEvent event) ->{
+				Scene s = new Scene(new RegleMenu().getRoot(),stage.getWidth(),stage.getHeight());
+				s.setFill(Color.BLACK);
+				stage.setScene(s);
+				menu.music.stop();
+				music.play();
+			});
+			ft.play();
+		});
 		sc.setFill(Color.BLACK);
 		stage.setScene(sc);
 		stage.setTitle("Mut-Hunter");
@@ -74,6 +95,12 @@ public class TestMainMenu extends Application{
 				ft.setToValue(0);
 				ft.setOnFinished((ActionEvent event) ->{
 					VBox newRoot = new VBox(menu.getTitle(),menu.getNbPlayer(),menu.getRegle(),menu.getPersonnage());
+					newRoot.setBackground(new Background(
+							new BackgroundImage(
+									new Image("file:ressources/images/fondTest.png"),  BackgroundRepeat.NO_REPEAT,
+																				   BackgroundRepeat.NO_REPEAT, 
+																				   BackgroundPosition.CENTER, 
+																				   null)));
 					menu.setRoot(newRoot);
 					menu.getRoot().setAlignment(Pos.TOP_CENTER);
 					Scene newScene = new Scene(menu.getRoot(),stage.getWidth(),stage.getHeight());
@@ -93,6 +120,12 @@ public class TestMainMenu extends Application{
 				ft.setToValue(0);
 				ft.setOnFinished((ActionEvent event) ->{
 					VBox newRoot = new VBox(menu.getTitle(),menu.getNbPlayer(),menu.getRegle(),menu.getPersonnage());
+					newRoot.setBackground(new Background(
+							new BackgroundImage(
+									new Image("file:ressources/images/fondTest.png"),  BackgroundRepeat.NO_REPEAT,
+																				   BackgroundRepeat.NO_REPEAT, 
+																				   BackgroundPosition.CENTER, 
+																				   null)));
 					menu.setRoot(newRoot);
 					menu.getRoot().setAlignment(Pos.TOP_CENTER);
 					Scene newScene = new Scene(menu.getRoot(),stage.getWidth(),stage.getHeight());
