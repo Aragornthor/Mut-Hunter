@@ -9,6 +9,7 @@ import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -21,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -29,6 +31,7 @@ public class TestMainMenu extends Application{
 	MainMenu menu = new MainMenu();
 	FadeTransition ft = new FadeTransition();
 	MediaPlayer music;
+	Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -44,7 +47,7 @@ public class TestMainMenu extends Application{
 		music.setCycleCount(MediaPlayer.INDEFINITE);
 		music.setVolume(0.2);
 		
-		Scene sc = new Scene(menu.getRoot(),Double.MAX_VALUE,Double.MAX_VALUE);
+		Scene sc = new Scene(menu.getRoot(),screenSize.getWidth(),screenSize.getHeight());
 		
 		menu.getOnePlayer().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
 			ft.setDuration(Duration.millis(1000));
@@ -61,13 +64,24 @@ public class TestMainMenu extends Application{
 			ft.play();
 		});
 		
+		RegleMenu rm = new RegleMenu();
+		rm.getRetour().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+			MainMenu m = new MainMenu();
+			try {
+				stage.setScene(new Scene(m.getRoot(),
+											  screenSize.getWidth(),
+											  screenSize.getHeight()));
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		menu.getRegle().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			ft.setDuration(Duration.millis(1000));
 			ft.setNode(menu.getRoot());
 			ft.setFromValue(1);
 			ft.setToValue(0);
-			ft.setOnFinished((ActionEvent event) ->{
-				Scene s = new Scene(new RegleMenu().getRoot(),stage.getWidth(),stage.getHeight());
+			ft.setOnFinished((ActionEvent event) ->{	
+				Scene s = rm.getScene();
 				s.setFill(Color.BLACK);
 				stage.setScene(s);
 				menu.music.stop();

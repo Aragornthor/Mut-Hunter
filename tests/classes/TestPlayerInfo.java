@@ -264,7 +264,6 @@ public class TestPlayerInfo extends Application{
 				try {
 					this.stop();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				//TestMainMenu.launch(args);
@@ -272,7 +271,6 @@ public class TestPlayerInfo extends Application{
 					TestMainMenu mm = new TestMainMenu();
 					mm.start(stage);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
