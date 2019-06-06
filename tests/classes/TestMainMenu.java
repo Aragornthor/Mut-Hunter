@@ -1,7 +1,5 @@
 package classes;
 
-import java.io.File;
-
 import UI.MainMenu;
 import UI.MenuAlone;
 import UI.RegleMenu;
@@ -19,7 +17,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -41,11 +38,11 @@ public class TestMainMenu extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		Media pick = new Media(new File("ressources/sounds/menuAlone.mp3").toURI().toString());
-		music = new MediaPlayer(pick);
+		//Media pick = new Media(new File("ressources/sounds/menuAlone.mp3").toURI().toString());
+		//music = new MediaPlayer(pick);
 		
-		music.setCycleCount(MediaPlayer.INDEFINITE);
-		music.setVolume(0.2);
+		//music.setCycleCount(MediaPlayer.INDEFINITE);
+		//music.setVolume(0.2);
 		
 		Scene sc = new Scene(menu.getRoot(),screenSize.getWidth(),screenSize.getHeight());
 		
@@ -58,8 +55,8 @@ public class TestMainMenu extends Application{
 				Scene s = MenuAlone.getScene(stage, stage.getWidth(), stage.getHeight());
 				s.setFill(Color.BLACK);
 				stage.setScene(s);
-				menu.music.stop();
-				music.play();
+			//	menu.music.stop();
+				//music.play();
 			});
 			ft.play();
 		});
@@ -84,8 +81,8 @@ public class TestMainMenu extends Application{
 				Scene s = rm.getScene();
 				s.setFill(Color.BLACK);
 				stage.setScene(s);
-				menu.music.stop();
-				music.play();
+			//	menu.music.stop();
+			//	music.play();
 			});
 			ft.play();
 		});
@@ -95,7 +92,7 @@ public class TestMainMenu extends Application{
 		addEvent(stage);
 		stage.show();
 		
-		menu.music.play();
+		//menu.music.play();
 		
 		
 	}

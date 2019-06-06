@@ -55,8 +55,8 @@ public class Main_v2 extends Application{
 				Scene s = MenuAlone.getScene(stage, screenSize.getWidth(),screenSize.getHeight());
 				s.setFill(Color.BLACK);
 				stage.setScene(s);
-				menu.music.stop();
-				music.play();
+			//	menu.music.stop();
+			//	music.play();
 			});
 			ft.play();
 		});
@@ -66,7 +66,7 @@ public class Main_v2 extends Application{
 		addEvent(stage);
 		stage.show();
 		
-		menu.music.play();
+		//menu.music.play();
 		
 		
 	}

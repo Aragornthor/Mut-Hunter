@@ -37,7 +37,7 @@ public class MainMenu /*extends Application*/{
 	private Button regle;
 	private Canvas personnage;
 	
-	public MediaPlayer music;
+	//public MediaPlayer music;
 	/*
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -108,11 +108,11 @@ public class MainMenu /*extends Application*/{
 		VBox.setMargin(this.regle, new Insets(5));
 		this.root.setAlignment(Pos.CENTER);
 		
-		Media pick = new Media(new File("ressources/sounds/MenuTheme.mp3").toURI().toString());
-		music = new MediaPlayer(pick);
+		//Media pick = new Media(new File("ressources/sounds/MenuTheme.mp3").toURI().toString());
+		//music = new MediaPlayer(pick);
 		
-		music.setCycleCount(MediaPlayer.INDEFINITE);
-		music.setVolume(0.2);
+		//music.setCycleCount(MediaPlayer.INDEFINITE);
+		//music.setVolume(0.2);
 		
 		this.root.getChildren().addAll(this.title,this.displayMenu);	
 		this.root.setBackground(new Background(

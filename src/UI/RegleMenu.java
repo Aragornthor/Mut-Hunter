@@ -1,5 +1,6 @@
 package UI;
 
+import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -19,12 +20,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 /**
  * Interface des regles du jeu
  * @author Bankaert Benoit
  *
  */
-public class RegleMenu /*extends Application*/{
+public class RegleMenu extends Application{
 	
 	private Label title;
 	private Button retour;
@@ -32,7 +34,7 @@ public class RegleMenu /*extends Application*/{
 	private Scene sc;
 
 	
-	/*
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -41,15 +43,16 @@ public class RegleMenu /*extends Application*/{
 	public void start(Stage primaryStage) throws Exception {
 		VBox root = getRoot();
 		Scene sc = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
-		stage = primaryStage;
-		stage.setScene(sc);
-		stage.setTitle("Mut'Hunter");
+		primaryStage.setScene(sc);
+		primaryStage.setTitle("Mut'Hunter");
 		
 		
 				
-		stage.show();	
+		primaryStage.show();	
 	}
-	*/
+
+	
+	
 	/**
 	 * Initialise le menu des regles
 	 */
