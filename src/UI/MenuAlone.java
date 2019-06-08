@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -114,11 +116,21 @@ public class MenuAlone extends Application {
 		
 		Label title = new Label("Plateau");
 		title.setStyle("-fx-font: 32px Verdana;");
+		
+		//Création des groupes des RadioButtons
+		ToggleGroup formePlateau = new ToggleGroup();
+		ToggleGroup typeClimat = new ToggleGroup();
 
 		HBox size = new HBox(); // Modifier les BUTTONs avec des IMG
-		Button square = new Button("Square");
-		Button rect = new Button("Rect");
-		Button circle = new Button("Circle");
+		RadioButton square = new RadioButton("Square");
+		RadioButton rect = new RadioButton("Rect");
+		RadioButton circle = new RadioButton("Circle");
+		
+		//Assignation des RadioButtons de la forme du plateau
+		square.setToggleGroup(formePlateau);
+		rect.setToggleGroup(formePlateau);
+		circle.setToggleGroup(formePlateau);
+		
 		size.getChildren().addAll(square, rect, circle);
 
 		square.setMinSize(64, 64);
@@ -134,10 +146,17 @@ public class MenuAlone extends Application {
 		size.setAlignment(Pos.CENTER);
 		
 		HBox type = new HBox(); // Modifier les BUTTONs avec des IMG
-		Button temp = new Button("Temp");
-		Button desert = new Button("Desertique");
-		Button frozen = new Button("Frozen");
-		Button mel = new Button("Mélange");
+		RadioButton temp = new RadioButton("Temp");
+		RadioButton desert = new RadioButton("Desertique");
+		RadioButton frozen = new RadioButton("Frozen");
+		RadioButton mel = new RadioButton("Mélange");
+		
+		//Assignation des RadioButtons du type de climat
+		temp.setToggleGroup(typeClimat);
+		desert.setToggleGroup(typeClimat);
+		frozen.setToggleGroup(typeClimat);
+		mel.setToggleGroup(typeClimat);
+		
 		type.getChildren().addAll(temp, desert, frozen, mel);
 		
 		temp.setMinSize(64, 64);
@@ -174,13 +193,21 @@ public class MenuAlone extends Application {
 		Label title = new Label("Joueur");
 		title.setStyle("-fx-font: 32px Verdana;");
 		
+		//Création du groupe des RadioButtons
+		ToggleGroup personnage = new ToggleGroup();
+		
 		HBox type = new HBox();
-		Button hunter = new Button("Chasseur");
+		RadioButton hunter = new RadioButton("Chasseur");
 		hunter.setMinSize(64, 64);
 		hunter.setMaxSize(64, 64);
-		Button monster = new Button("Monster");
+		RadioButton monster = new RadioButton("Monster");
 		monster.setMinSize(64, 64);
 		monster.setMaxSize(64, 64);
+		
+		//Assignation des RadioButtons du type de personnage
+		hunter.setToggleGroup(personnage);
+		monster.setToggleGroup(personnage);
+		
 		type.getChildren().addAll(hunter, monster);
 		HBox.setMargin(hunter, new Insets(30));
 		HBox.setMargin(monster, new Insets(30));

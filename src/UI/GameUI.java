@@ -225,7 +225,6 @@ public class GameUI {
 							if(monstre.getDeplacement() <= 0) {
 								finDeTour(plateau, typeCase);
 							}
-							System.out.println("finito1"+fini);
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
 								System.out.println("defaite monstre"+fini);
@@ -236,7 +235,6 @@ public class GameUI {
 					else {
 						e.consume();
 					}
-					System.out.println("finito2"+fini);
 				}
 			});
 		
