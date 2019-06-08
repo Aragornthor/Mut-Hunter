@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 
 public class LancementGameUI extends Application{
 
-	Plateau jeu = new Plateau();
+	Plateau jeu = new Plateau(20,20);
 	Chasseur chasseur = new Chasseur(new Position(0,0));
-	Monstre monstre = new Monstre(new Position(9,9));
+	Monstre monstre = new Monstre(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1));
 	boolean tourChasseur = true;
 	final double DECAL_X = 30;
 	boolean compUtilise = false;

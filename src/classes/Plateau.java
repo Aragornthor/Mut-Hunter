@@ -23,11 +23,11 @@ public class Plateau {
 	/**
 	 * PORTAIL1 représente la position dans le terrain du premier portail.
 	 */
-	private final Position PORTAIL1 = new Position(9,0);
+	private Position PORTAIL1;
 	/**
 	 * PORTAIL2 représente la position dans le terrain du second portail.
 	 */
-	private final Position PORTAIL2 = new Position(0,9);
+	private Position PORTAIL2;
 	/**
 	 * tourChasseur indique si c'est au chasseur de jouer.
 	 */
@@ -52,6 +52,14 @@ public class Plateau {
 		this.dernierLoot = 0;
 		this.nbCases = this.getHauteur()*this.getLargeur()-2;
 		this.compteurCasesDecouvertes = 1;
+	}
+	
+	/**
+	 * On instancie un terrain de longueur par largeur et on règle le nombre de tour sur 1.
+	 */
+	public Plateau(int largeur, int hauteur) {
+		this();
+		this.plateau = new Case[largeur][hauteur];
 	}
 	
 	/**
@@ -93,6 +101,10 @@ public class Plateau {
 	 * Ajoute les portails à leurs coordonnées sur le plateau
 	 */
 	private void generePortail() {
+		System.out.println("Largeur "+this.getLargeur());
+		System.out.println("Hauteur "+this.getHauteur());
+		PORTAIL1 = new Position(this.getLargeur()-1, 0);
+		PORTAIL2 = new Position(0, this.getHauteur()-1);
 		this.plateau[this.PORTAIL1.getX()][this.PORTAIL1.getY()].setEstPortail(true);
 		this.plateau[this.PORTAIL2.getX()][this.PORTAIL2.getY()].setEstPortail(true);
 		//System.out.println("Fin gen");
@@ -210,14 +222,14 @@ public class Plateau {
 	 * @return la hauteur du terrain
 	 */
 	public int getHauteur() {
-		return this.plateau.length;
+		return this.plateau[0].length;
 	}
 	
 	/**
 	 * @return la largeur du terrain
 	 */
 	public int getLargeur() {
-		return this.plateau[0].length;
+		return this.plateau.length;
 	}
 	
 	/**
