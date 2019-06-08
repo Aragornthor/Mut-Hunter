@@ -1,7 +1,7 @@
 package UI;
 
 
-import classes.TestPlayerInfo;
+
 import javafx.application.Application;
 //import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -233,7 +233,7 @@ public class MenuAlone extends Application {
 		display.getGraphicsContext2D().drawImage(start, 0, 0);
 		btStart.getChildren().add(display);
 		btStart.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
-			TestPlayerInfo m = new TestPlayerInfo();
+			LancementGameUI m = new LancementGameUI();
 			try {
 				m.start(s);
 			} catch (Exception e1) {

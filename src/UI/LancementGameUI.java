@@ -1,33 +1,33 @@
-package classes;
+package UI;
 
 import UI.GameUI;
-import UI.LancementGameUI;
-import competences.Missile;
+import classes.Chasseur;
+import classes.Monstre;
+import classes.Plateau;
+import classes.Position;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.stage.Stage;
 
-public class TestPlayerInfo extends Application{
+public class LancementGameUI extends Application{
 
-	static Plateau jeu = new Plateau();
-	static Chasseur chasseur = new Chasseur(new Position(0,0));
-	static Monstre monstre = new Monstre(new Position(9,9));
+	Plateau jeu = new Plateau();
+	Chasseur chasseur = new Chasseur(new Position(0,0));
+	Monstre monstre = new Monstre(new Position(9,9));
 	boolean tourChasseur = true;
 	final double DECAL_X = 30;
 	boolean compUtilise = false;
 	int boutontComp = 0;
 	boolean fini = false;
+	private static Stage stage;
 
 	
 	public static void main(String[] args) {
-		chasseur.setCompetence(new Missile(), 1);
-		chasseur.rechargeEnergie(25);
 		Application.launch(args);
 		
 
@@ -35,8 +35,9 @@ public class TestPlayerInfo extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		GameUI gUI = new GameUI(chasseur, monstre, jeu, new LancementGameUI());
-				
+		GameUI gUI = new GameUI(chasseur, monstre, jeu, this);
+		System.out.println("Création du GUI");
+		LancementGameUI.stage = stage;
 		Scene scene = gUI.getScene();
 		
 		gUI.getRoot().setBackground(new Background(
@@ -45,25 +46,6 @@ public class TestPlayerInfo extends Application{
 																	   BackgroundRepeat.NO_REPEAT, 
 																	   BackgroundPosition.CENTER, 
 																	   null)));
-
-		
-		stage.addEventHandler(KeyEvent.KEY_RELEASED, e->{
-			if(fini) {
-				System.out.println("Bonjour");
-				try {
-					this.stop();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				//TestMainMenu.launch(args);
-				try {
-					TestMainMenu mm = new TestMainMenu();
-					mm.start(stage);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
 		
 		
 		stage.setTitle("Mut'Hunter");
@@ -72,7 +54,8 @@ public class TestPlayerInfo extends Application{
 		
 		
 	}
-	
-	
 
+	public void stop() {
+		stage.close();
+	}
 }

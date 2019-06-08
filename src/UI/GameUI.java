@@ -12,7 +12,6 @@ import competences.Acide;
 import competences.Competences;
 import competences.Missile;
 import competences.Saut;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -49,14 +48,22 @@ public class GameUI {
 	boolean compUtilise = false;
 	int boutontComp = 0;
 	boolean fini = false;
+	LancementGameUI mv3;
 	
 	
-	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu) {
+	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
 		this.chasseur = chasseur;
 		this.monstre = monstre;
 		this.jeu = jeu;
 		this.pI = new PlayerInfo(this.chasseur, this.monstre);
 		this.dP = new DisplayPlateau(this.jeu, this.chasseur, this.monstre);
+		this.mv3 = mv3;
+		System.out.println("GUI CHASSEUR :"+chasseur.getPosition());
+		System.out.println("GUI MONSTRE :"+monstre.getPosition());
+		System.out.println("GUI TOUR "+jeu.getTours());
+		System.out.println("GUI MENU "+mv3);
+		System.out.println("GUI GUI "+this);
+		System.out.println("GUI PLATEAU "+jeu);
 	}
 	
 	public Scene getScene() {
@@ -208,16 +215,16 @@ public class GameUI {
 																	   BackgroundPosition.CENTER, 
 																	   null)));
 
+	
 		
-		class KeyListenerMovement implements EventHandler<KeyEvent>{
-			boolean tmp;
-			public void handle(KeyEvent event) {
+		//scene.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement(jeu, chasseur, monstre, tourChasseur, fini, plateau, dP));
+		
+		scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
 				if(KeyEvent.KEY_PRESSED != null) {
 					System.out.println(fini);
-					if(event.getCode().toString().equalsIgnoreCase("z") || event.getCode().toString().equalsIgnoreCase("q") || event.getCode().toString().equalsIgnoreCase("s") || event.getCode().toString().equalsIgnoreCase("d"))
-						
+					if(e.getCode().toString().equalsIgnoreCase("z") || e.getCode().toString().equalsIgnoreCase("q") || e.getCode().toString().equalsIgnoreCase("s") || e.getCode().toString().equalsIgnoreCase("d"))
 						if(tourChasseur) {
-							chasseur.estDeplace(jeu, event.getCode().toString());
+							chasseur.estDeplace(jeu, e.getCode().toString());
 							fini = chasseur.changeCase(jeu);
 							dP.affichagePlateauVisionChasseur(plateau);
 							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
@@ -231,40 +238,56 @@ public class GameUI {
 								fini = true;
 								System.out.println("Victoire chasseur"+fini);
 							}
-							typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
-						} else {
 							
-							tmp = monstre.estDeplace(jeu, event.getCode().toString());
+						} else {
+							monstre.estDeplace(jeu, e.getCode().toString());
 							fini = monstre.changeCase(jeu);
-							if(!tmp) fini = false; // C'EST DU BRICOLAGE, A MODIFIER ABSOLUMENT !!!
 							dP.affichagePlateauVisionMonstre(plateau);
-							System.out.println("fini="+fini);
+							System.out.println(monstre.getDeplacement());
 							if(monstre.getDeplacement() <= 0) {
 								monstre.resetMouvement();
 								tourChasseur = true;
 								dP.affichagePlateauVisionChasseur(plateau);
 								jeu.addTours();
 							}
+							System.out.println("finito1"+fini);
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
 								System.out.println("defaite monstre"+fini);
 							}
-							typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
+							
 							
 						}
 					else {
-						event.consume();
+						e.consume();
 					}
+					System.out.println("finito2"+fini);
+				}
+			});
+		
+		scene.addEventHandler(KeyEvent.KEY_RELEASED, e -> {
+			if(fini) {
+				System.out.println("Bonjour");
+				try {
+					mv3.stop();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				try {
+					Main mm = new Main();
+					mm.start(Main.getStage());
+					System.out.println("C FINI");
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
-		}
-		
-		scene.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement());
-		
+		});
 		
 		return scene;
 		
 	}
+	
+	
 	
 	public VBox getRoot() {
 		return this.root;
