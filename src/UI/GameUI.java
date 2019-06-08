@@ -82,7 +82,6 @@ public class GameUI {
 		//ImageView logo = new ImageView();
 		//logo.setImage(plaine);
 		pane.setPrefSize(1000,1000);
-		
 		Canvas canvas = new Canvas(1000,1000);
 		
 		this.pI.getPlayerStatut().setTextFill(Color.WHITE);
@@ -240,8 +239,9 @@ public class GameUI {
 							}
 							
 						} else {
-							monstre.estDeplace(jeu, e.getCode().toString());
-							fini = monstre.changeCase(jeu);
+							if(monstre.estDeplace(jeu, e.getCode().toString())) {
+								fini = monstre.changeCase(jeu);
+							}
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());
 							if(monstre.getDeplacement() <= 0) {

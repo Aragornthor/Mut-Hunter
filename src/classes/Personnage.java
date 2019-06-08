@@ -235,6 +235,8 @@ public abstract class Personnage {
 		}
 		if(this.deplacement<0) {
 			p.setCaseNormal(this.position);
+			this.position = pos;
+			this.changeCase(p);
 			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
 			this.deplacement = deplacement;
 			this.setPosition(pos);
