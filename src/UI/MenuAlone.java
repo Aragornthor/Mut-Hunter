@@ -25,6 +25,9 @@ import javafx.util.StringConverter;
 
 public class MenuAlone extends Application {
 	
+	static ToggleGroup formePlateau = new ToggleGroup();
+	static ToggleGroup typeClimat = new ToggleGroup();
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -118,8 +121,7 @@ public class MenuAlone extends Application {
 		title.setStyle("-fx-font: 32px Verdana;");
 		
 		//Création des groupes des RadioButtons
-		ToggleGroup formePlateau = new ToggleGroup();
-		ToggleGroup typeClimat = new ToggleGroup();
+		
 
 		HBox size = new HBox(); // Modifier les BUTTONs avec des IMG
 		RadioButton square = new RadioButton("Square");
@@ -146,9 +148,9 @@ public class MenuAlone extends Application {
 		size.setAlignment(Pos.CENTER);
 		
 		HBox type = new HBox(); // Modifier les BUTTONs avec des IMG
-		RadioButton temp = new RadioButton("Temp");
-		RadioButton desert = new RadioButton("Desertique");
-		RadioButton frozen = new RadioButton("Frozen");
+		RadioButton temp = new RadioButton("Tempéré");
+		RadioButton desert = new RadioButton("Désertique");
+		RadioButton frozen = new RadioButton("Glacial");
 		RadioButton mel = new RadioButton("Mélange");
 		
 		//Assignation des RadioButtons du type de climat
@@ -220,11 +222,28 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
+	public static int getClimat() {
+		if(typeClimat.getSelectedToggle().toString().contains("Tempéré")) {
+			System.out.println(typeClimat.getSelectedToggle().toString());
+			return 0;
+		} else if(typeClimat.getSelectedToggle().toString().contains("Désertique")) {
+			System.out.println(typeClimat.getSelectedToggle().toString());
+			return 1;
+		} else if(typeClimat.getSelectedToggle().toString().contains("Glacial")) {
+			System.out.println(typeClimat.getSelectedToggle().toString());
+			return 2;
+		} else { //si c'est Mélange qui est sélectionné
+			System.out.println(typeClimat.getSelectedToggle().toString());
+			return 4;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param s Stage principal
 	 * @return Saisie du pseudo
 	 */
+	
 	private static HBox getPseudo(Stage s) {
 		HBox root = new HBox();
 		

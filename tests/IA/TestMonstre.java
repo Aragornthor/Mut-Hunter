@@ -24,7 +24,7 @@ public class TestMonstre extends Application{
 	}
 
 	public void start(Stage stage){
-		jeu.initPlateau();
+		jeu.initPlateauTempere();
 		jeu.startPersonnage(chasseur, monstre);
 		
 		Pane pane = new Pane();

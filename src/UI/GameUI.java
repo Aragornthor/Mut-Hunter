@@ -74,7 +74,6 @@ public class GameUI {
 		this.pI.setPlayerIcon(chasseur.getImage());
 		
 
-		jeu.initPlateau();
 		jeu.startPersonnage(chasseur, monstre);
 		
 		Pane pane = new Pane();

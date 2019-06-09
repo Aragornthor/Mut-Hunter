@@ -26,7 +26,7 @@ public class TestCompetences extends Application{
 	
 	public static void testCompetences() {
 		
-		jeu.initPlateau();
+		jeu.initPlateauTempere();
 		jeu.startPersonnage(chasseur, monstre);
 		jeu.ajoutLoot(2);
 		

@@ -16,7 +16,7 @@ public class TestMain extends Application{
 	
 	public static void main(String[] args) {
 		
-		jeu.initPlateau();
+		jeu.initPlateauTempere();
 		jeu.startPersonnage(chasseur, monstre);
 		jeu.ajoutLoot(2);
 		

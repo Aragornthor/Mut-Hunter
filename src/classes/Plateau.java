@@ -52,6 +52,7 @@ public class Plateau {
 		this.dernierLoot = 0;
 		this.nbCases = this.getHauteur()*this.getLargeur()-2;
 		this.compteurCasesDecouvertes = 1;
+		initPlateauTempere();
 	}
 	
 	/**
@@ -60,12 +61,26 @@ public class Plateau {
 	public Plateau(int largeur, int hauteur) {
 		this();
 		this.plateau = new Case[largeur][hauteur];
+		initPlateauTempere();
+	}
+	
+	public Plateau(int largeur, int hauteur, int climat) {
+		this(largeur, hauteur);
+		if(climat == 0) {
+			initPlateauTempere();
+		} else if(climat == 1) {
+			initPlateauDesertique();
+		} else if(climat == 2) {
+			initPlateauGlacial();
+		} else {
+			initPlateauChaotique();
+		}
 	}
 	
 	/**
 	 * Permet d'initialise les cases de tout le terrain et on place les deux joueurs et les deux portails.
 	 */
-	public void initPlateau() {
+	public void initPlateauTempere() {
 		for(int i = 0; i < this.plateau.length; i++) {
 			for(int j = 0; j < this.plateau[i].length; j++) {
 				int entierRandom = rand.nextInt(100);
@@ -77,6 +92,79 @@ public class Plateau {
 					this.plateau[i][j] = new Case(TypeTerrain.MONTAGNE);
 				} else {
 					this.plateau[i][j] = new Case(TypeTerrain.EAU);
+				}
+			}
+		}
+		//System.out.println("Fin init");
+		this.generePortail();
+		
+	}
+	public void initPlateauDesertique() {
+		for(int i = 0; i < this.plateau.length; i++) {
+			for(int j = 0; j < this.plateau[i].length; j++) {
+				int entierRandom = rand.nextInt(100);
+				if(entierRandom > 30) {
+					this.plateau[i][j] = new Case(TypeTerrain.DESERT);
+				} else if(entierRandom > 10){
+					this.plateau[i][j] = new Case(TypeTerrain.PIC_ARID);
+				} else {
+					this.plateau[i][j] = new Case(TypeTerrain.EAU);
+				}
+			}
+		}
+		//System.out.println("Fin init");
+		this.generePortail();
+		
+	}
+	
+	public void initPlateauGlacial() {
+		for(int i = 0; i < this.plateau.length; i++) {
+			for(int j = 0; j < this.plateau[i].length; j++) {
+				int entierRandom = rand.nextInt(100);
+				if(entierRandom > 60) {
+					this.plateau[i][j] = new Case(TypeTerrain.PLAINE_ENNEIGEE);
+				} else if(entierRandom > 30){
+					this.plateau[i][j] = new Case(TypeTerrain.FORET_ENNEIGEE);
+				} else if(entierRandom > 15) {
+					this.plateau[i][j] = new Case(TypeTerrain.MONTAGNE_ENNEIGEE);
+				} else if(entierRandom > 5){
+					this.plateau[i][j] = new Case(TypeTerrain.LAC_GELE);
+				} else {
+					this.plateau[i][j] = new Case(TypeTerrain.EAU);
+				}
+			}
+		}
+		//System.out.println("Fin init");
+		this.generePortail();
+		
+	}
+	
+	public void initPlateauChaotique() {
+		for(int i = 0; i < this.plateau.length; i++) {
+			for(int j = 0; j < this.plateau[i].length; j++) {
+				int entierRandom = rand.nextInt(100);
+				if(entierRandom > 91) {
+					this.plateau[i][j] = new Case(TypeTerrain.PLAINE);
+				} else if(entierRandom > 82){
+					this.plateau[i][j] = new Case(TypeTerrain.FORET);
+				} else if(entierRandom > 73) {
+					this.plateau[i][j] = new Case(TypeTerrain.MONTAGNE);
+				} else if(entierRandom > 64){
+					this.plateau[i][j] = new Case(TypeTerrain.VILLE);
+				} else if(entierRandom > 55){
+					this.plateau[i][j] = new Case(TypeTerrain.PLAINE_ENNEIGEE);
+				} else if(entierRandom > 46){
+					this.plateau[i][j] = new Case(TypeTerrain.MONTAGNE_ENNEIGEE);
+				} else if(entierRandom > 37){
+					this.plateau[i][j] = new Case(TypeTerrain.FORET_ENNEIGEE);
+				} else if(entierRandom > 28){
+					this.plateau[i][j] = new Case(TypeTerrain.EAU);
+				} else if(entierRandom > 19){
+					this.plateau[i][j] = new Case(TypeTerrain.LAC_GELE);
+				} else if(entierRandom > 10){
+					this.plateau[i][j] = new Case(TypeTerrain.DESERT);
+				} else {
+					this.plateau[i][j] = new Case(TypeTerrain.PIC_ARID);
 				}
 			}
 		}
