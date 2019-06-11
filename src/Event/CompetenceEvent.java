@@ -121,7 +121,10 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 			System.out.println("Fin verif");
 			}
 		}
-			
+		else {
+			if(tourChasseur) this.comp.utilisation(this.terrain, this.chass, this.mons, new Position(0,0));
+			else this.comp.utilisation(this.terrain, this.mons, this.chass, new Position(0,0));
+		}
 
 	}
 	

@@ -267,27 +267,37 @@ public class GameUI {
 	
 	public void finDeTour(GraphicsContext plateau, Label typeCase, Label nbTours) {
 		if(tourChasseur) {
-			tourChasseur = false;
-			chasseur.resetMouvement();
-			dP.affichagePlateauVisionMonstre(plateau);
-			pI.ajoutCompetence(monstre.getCompetences());
-			pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
-			pI.setPlayerIcon(monstre.getImage());
-			pI.setTourChasseur(tourChasseur);
-			pI.displayEnergy();
-			typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
+			if(monstre.gestionStatuts()) {
+				tourChasseur = false;
+				chasseur.resetMouvement();
+				dP.affichagePlateauVisionMonstre(plateau);
+				pI.ajoutCompetence(monstre.getCompetences());
+				pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
+				pI.setPlayerIcon(monstre.getImage());
+				pI.setTourChasseur(tourChasseur);
+				pI.displayEnergy();
+				typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
+				monstre.rechargeEnergie();
+				jeu.ajoutLoot(1);
+				System.out.println("Chasseur "+chasseur);
+			}
 		}else {
-			tourChasseur = true;
-			monstre.resetMouvement();
-			dP.affichagePlateauVisionChasseur(plateau);
-			pI.ajoutCompetence(chasseur.getCompetences());
-			pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
-			pI.setPlayerIcon(chasseur.getImage());
-			pI.setTourChasseur(tourChasseur);
-			pI.displayEnergy();
-			typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
-			jeu.addTours();
-			nbTours.setText("Tour n°"+jeu.getTours());
+			if(chasseur.gestionStatuts()) {
+				tourChasseur = true;
+				monstre.resetMouvement();
+				dP.affichagePlateauVisionChasseur(plateau);
+				pI.ajoutCompetence(chasseur.getCompetences());
+				pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
+				pI.setPlayerIcon(chasseur.getImage());
+				pI.setTourChasseur(tourChasseur);
+				pI.displayEnergy();
+				typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
+				jeu.addTours();
+				nbTours.setText("Tour n°"+jeu.getTours());
+				chasseur.rechargeEnergie();
+				jeu.ajoutLoot(1);
+				System.out.println("Monstre "+monstre);
+			}
 		}
 	}
 	

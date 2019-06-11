@@ -97,6 +97,7 @@ public class Plateau {
 		}
 		//System.out.println("Fin init");
 		this.generePortail();
+		this.ajoutLoot();
 		
 	}
 	public void initPlateauDesertique() {
@@ -114,7 +115,7 @@ public class Plateau {
 		}
 		//System.out.println("Fin init");
 		this.generePortail();
-		
+		this.ajoutLoot();
 	}
 	
 	public void initPlateauGlacial() {
@@ -136,7 +137,7 @@ public class Plateau {
 		}
 		//System.out.println("Fin init");
 		this.generePortail();
-		
+		this.ajoutLoot();
 	}
 	
 	public void initPlateauChaotique() {
@@ -267,10 +268,17 @@ public class Plateau {
 					x = rand.nextInt(this.plateau.length);
 					y = rand.nextInt(this.plateau[0].length);
 				}while(this.plateau[x][y].getLoot() && this.plateau[x][y].getEstPortail() && this.plateau[x][y].getEstMonstre() && this.plateau[x][y].getEstChasseur() && this.plateau[x][y].getEstPiege());
-				
+				System.out.println("Coords loot "+x+","+y);
 				this.plateau[x][y].changeLoot();
 			}
 		}
+	}
+	
+	/**
+	 * Initialise les loots du départ
+	 */
+	public void ajoutLoot() {
+		this.ajoutLoot(2);
 	}
 	
 	/**
