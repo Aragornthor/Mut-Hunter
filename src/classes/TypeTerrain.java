@@ -13,16 +13,16 @@ public enum TypeTerrain {
 	FORET(1,2,new Image("file:ressources/images/foret.png"), new Image("file:ressources/images/foretNonVisible.png")), 
 	MONTAGNE(3,3,new Image("file:ressources/images/montagnes.png"), new Image("file:ressources/images/montagnesNonVisible.png")), 
 	EAU(2,2,new Image("file:ressources/images/eau.png"), new Image("file:ressources/images/eauNonVisible.png")), 
-	DESERT(0,1,new Image("file:ressources/images/desert.png"), new Image("file:ressources/images/desert.png")), 
-	VILLE(0,2,new Image("file:ressources/images/ville2.png"), new Image("file:ressources/images/ville2.png")), 
-	PLAINE_ENNEIGEE(0,1,new Image("file:ressources/images/plainesEnneigee.png"), new Image("file:ressources/images/plainesEnneigee.png")),
-	MONTAGNE_ENNEIGEE(0,3,new Image("file:ressources/images/montagnesEnneigees.png"), new Image("file:ressources/images/montagneEnneigees.png")),
-	FORET_ENNEIGEE(0,3,new Image("file:ressources/images/foretEnneigee.png"), new Image("file:ressources/images/foretEnneigee.png")),
-	LAC_GELE(0,2,new Image("file:ressources/images/eauGelee.png"), new Image("file:ressources/images/eauGelee.png")), 
-	PIC_ARID(0,3,new Image("file:ressources/images/picAride.png"), new Image("file:ressources/images/picAride.png")),
-	RIVIERE_ASSECHE(0,1,new Image("file:ressources/images/plaines.png"), new Image("file:ressources/images/plaines.png")), 
-	CENTRALE(0,2,new Image("file:ressources/images/plaines.png"), new Image("file:ressources/images/plaines.png")), 
-	MARAIS(0,2,new Image("file:ressources/images/plaines.png"), new Image("file:ressources/images/plaines.png"));
+	DESERT(1,1,new Image("file:ressources/images/desert.png"), new Image("file:ressources/images/desert.png")), 
+	VILLE(1,2,new Image("file:ressources/images/ville2.png"), new Image("file:ressources/images/ville2.png")), 
+	PLAINE_ENNEIGEE(1,1,new Image("file:ressources/images/plainesEnneigee.png"), new Image("file:ressources/images/plainesEnneigee.png")),
+	MONTAGNE_ENNEIGEE(1,3,new Image("file:ressources/images/montagnesEnneigees.png"), new Image("file:ressources/images/montagnesEnneigees.png")),
+	FORET_ENNEIGEE(1,3,new Image("file:ressources/images/foretEnneigee.png"), new Image("file:ressources/images/foretEnneigee.png")),
+	LAC_GELE(1,2,new Image("file:ressources/images/eauGelee.png"), new Image("file:ressources/images/eauGelee.png")), 
+	PIC_ARID(1,3,new Image("file:ressources/images/picAride.png"), new Image("file:ressources/images/picAride.png")),
+	RIVIERE_ASSECHE(1,1,new Image("file:ressources/images/plaines.png"), new Image("file:ressources/images/plaines.png")), 
+	CENTRALE(1,2,new Image("file:ressources/images/plaines.png"), new Image("file:ressources/images/plaines.png")), 
+	MARAIS(1,2,new Image("file:ressources/images/plaines.png"), new Image("file:ressources/images/plaines.png"));
 	
 	Image imageVisible;
 	Image imageNonVisible;
