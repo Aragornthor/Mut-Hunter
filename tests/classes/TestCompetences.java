@@ -1,12 +1,7 @@
 package classes;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import IA.IAMonstreConsole;
 import competences.Acide;
-import competences.IEM;
 import competences.Missile;
 import competences.Piege;
 import competences.Saut;

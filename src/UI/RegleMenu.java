@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -31,7 +32,7 @@ public class RegleMenu extends Application{
 	private Label title;
 	private Button retour;
 	private Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-	private Scene sc;
+	private static Scene sc;
 
 	
 	
@@ -46,7 +47,14 @@ public class RegleMenu extends Application{
 		primaryStage.setScene(sc);
 		primaryStage.setTitle("Mut'Hunter");
 		
-		
+		retour.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+			Main mm = new Main();
+			try {
+				mm.start(Main.getStage());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 				
 		primaryStage.show();	
 	}
@@ -57,13 +65,13 @@ public class RegleMenu extends Application{
 	 * Initialise le menu des regles
 	 */
 	public RegleMenu() {
-		this.sc = new Scene(getRoot(),screenSize.getWidth(),screenSize.getHeight());
+		RegleMenu.sc = new Scene(getRoot(),screenSize.getWidth(),screenSize.getHeight());
 	}
 	
 	/**
 	 * @return la scene du menu des regles
 	 */
-	public Scene getScene() {		
+	public static Scene getScene() {		
 		return sc;
 	}
 	
