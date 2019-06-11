@@ -133,6 +133,8 @@ public class MenuAlone extends Application {
 		rect.setToggleGroup(formePlateau);
 		circle.setToggleGroup(formePlateau);
 		
+		square.setSelected(true);
+		
 		size.getChildren().addAll(square, rect, circle);
 
 		square.setMinSize(64, 64);
@@ -158,6 +160,8 @@ public class MenuAlone extends Application {
 		desert.setToggleGroup(typeClimat);
 		frozen.setToggleGroup(typeClimat);
 		mel.setToggleGroup(typeClimat);
+		
+		temp.setSelected(true);
 		
 		type.getChildren().addAll(temp, desert, frozen, mel);
 		
@@ -209,6 +213,8 @@ public class MenuAlone extends Application {
 		//Assignation des RadioButtons du type de personnage
 		hunter.setToggleGroup(personnage);
 		monster.setToggleGroup(personnage);
+		
+		hunter.setSelected(true);
 		
 		type.getChildren().addAll(hunter, monster);
 		HBox.setMargin(hunter, new Insets(30));
