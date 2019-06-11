@@ -176,7 +176,7 @@ public class GameUI {
 		playerInfo.setMaxWidth(Double.MAX_VALUE);
 		
 		finDeTour.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			finDeTour(plateau, typeCase);
+			finDeTour(plateau, typeCase, nbTours);
 		});
 		
 		
@@ -208,7 +208,7 @@ public class GameUI {
 							dP.affichagePlateauVisionChasseur(plateau);
 							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
 							if(chasseur.getDeplacement() == 0) {
-								finDeTour(plateau, typeCase);
+								finDeTour(plateau, typeCase, nbTours);
 							}
 							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
@@ -222,7 +222,7 @@ public class GameUI {
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());
 							if(monstre.getDeplacement() <= 0) {
-								finDeTour(plateau, typeCase);
+								finDeTour(plateau, typeCase, nbTours);
 							}
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
@@ -265,7 +265,7 @@ public class GameUI {
 		return this.root;
 	}
 	
-	public void finDeTour(GraphicsContext plateau, Label typeCase) {
+	public void finDeTour(GraphicsContext plateau, Label typeCase, Label nbTours) {
 		if(tourChasseur) {
 			tourChasseur = false;
 			chasseur.resetMouvement();
@@ -286,7 +286,8 @@ public class GameUI {
 			pI.setTourChasseur(tourChasseur);
 			pI.displayEnergy();
 			typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
-
+			jeu.addTours();
+			nbTours.setText("Tour n°"+jeu.getTours());
 		}
 	}
 	
