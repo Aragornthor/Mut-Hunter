@@ -64,6 +64,7 @@ public class Plateau {
 		initPlateauTempere();
 	}
 	
+	
 	public Plateau(int largeur, int hauteur, int climat) {
 		this(largeur, hauteur);
 		if(climat == 0) {

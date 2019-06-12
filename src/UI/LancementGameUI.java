@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 
 public class LancementGameUI extends Application{
 
-	Plateau jeu = new Plateau(10,10, MenuAlone.getClimat());
-	Chasseur chasseur = new Chasseur(new Position(0,0));
-	Monstre monstre = new Monstre(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1));
+	Plateau jeu;
+	Chasseur chasseur;
+	Monstre monstre;
 	final double DECAL_X = 30;
 	boolean compUtilise = false;
 	int boutontComp = 0;
@@ -34,6 +34,15 @@ public class LancementGameUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		if(MenuAlone.getForme() == 0) {
+			jeu = new Plateau(10,10, MenuAlone.getClimat());
+		} else if(MenuAlone.getForme() == 1) {
+			jeu = new Plateau(14,8, MenuAlone.getClimat());
+		} else if(MenuAlone.getForme() == 2) {
+			jeu = new Plateau(10,10, MenuAlone.getClimat());
+		}
+		chasseur =  new Chasseur(new Position(0,0));
+		monstre = new Monstre(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1));
 		GameUI gUI = new GameUI(chasseur, monstre, jeu, this);
 		System.out.println("Création du GUI");
 		LancementGameUI.stage = stage;
