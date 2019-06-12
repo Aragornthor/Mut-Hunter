@@ -36,6 +36,7 @@ public class MenuVictoire extends Application{
 	private static Scene sc;
 	private String vainqueur;
 	private String persoJoueur;
+	private boolean victoireJoueur;
 	
 	
 	public static void main(String[] args) {
@@ -47,6 +48,7 @@ public class MenuVictoire extends Application{
 		if(MenuAlone.getPerso() == 0) persoJoueur = "Chasseur";
 		else persoJoueur = "Monstre";
 		vainqueur = GameUI.getVainqueur();
+		if(vainqueur==persoJoueur) victoireJoueur=true;
 		VBox root = getRoot();
 		Scene sc = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
 		primaryStage.setScene(sc);

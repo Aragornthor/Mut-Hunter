@@ -32,6 +32,7 @@ public class MenuAlone extends Application {
 	static ToggleGroup formePlateau = new ToggleGroup();
 	static ToggleGroup typeClimat = new ToggleGroup();
 	static ToggleGroup personnage = new ToggleGroup();
+	static TextField pseudo;
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -285,6 +286,7 @@ public class MenuAlone extends Application {
 		HBox root = new HBox();
 		
 		TextField pseudo = new TextField();
+		MenuAlone.pseudo = pseudo;
 		pseudo.setPromptText("Saisissez votre pseudo");
 		pseudo.setStyle("-fx-border-radius: 3 0 0 3;"
 				+ "-fx-background-radius: 3 0 0 3;"
@@ -338,5 +340,10 @@ public class MenuAlone extends Application {
 	 */
 	private static boolean isFullscreen(Stage s) {
 		return s.isFullScreen();
+	}
+	
+	private static String getPseudo() {
+		if(pseudo.getText().equals("")) return pseudo.getText();
+		else return "Aucun nom";
 	}
 }
