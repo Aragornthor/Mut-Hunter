@@ -59,10 +59,6 @@ public class GameUI {
 	private Button finDeTour;
 	private Label nbTours;
 	private Label typeCase;
-	/*private TextField posX;
-	private TextField posY;
-	private Button utiliseComp;
-	private Label erreurComp;*/
 	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
@@ -269,6 +265,24 @@ public class GameUI {
 				}
 			});
 		
+		scene.addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
+			if(fini) {
+				System.out.println("Bonjour");
+				try {
+					mv3.stop();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				try {
+					Main mm = new Main();
+					mm.start(Main.getStage());
+					System.out.println("C FINI");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		scene.addEventHandler(KeyEvent.KEY_RELEASED, e -> {
 			if(fini) {
 				System.out.println("Bonjour");
@@ -290,6 +304,8 @@ public class GameUI {
 		scene.addEventHandler(MouseEvent.MOUSE_MOVED, e ->{
 			if(tourChasseur) this.pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
 			else this.pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
+
+			if(monstre.getStatut() == Statut.Mort) fini = true;
 		});
 		
 		this.pane = pane;

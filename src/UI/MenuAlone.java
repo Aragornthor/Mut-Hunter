@@ -16,9 +16,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -48,7 +53,12 @@ public class MenuAlone extends Application {
 	 */
 	public static Scene getScene(Stage s, double width, double height) {
 		VBox root = new VBox();
-		
+		root.setBackground(new Background(
+				new BackgroundImage(
+						new Image("file:ressources/images/fondTest.png"),  BackgroundRepeat.NO_REPEAT,
+																	   BackgroundRepeat.NO_REPEAT, 
+																	   BackgroundPosition.CENTER, 
+																	   null)));
 		root.getChildren().addAll(getDifficulty(), getSep(), getPlateau(), getSep(), getPlayerType(), getSep(), getPseudo(s));
 		root.setAlignment(Pos.CENTER);
 		if(isFullscreen(s)) root.setPadding(new Insets(500));
@@ -76,6 +86,7 @@ public class MenuAlone extends Application {
 		
 		Label title = new Label("Difficulté");
 		title.setStyle("-fx-font: 32px Verdana;");
+		title.setTextFill(Color.WHITE);
 		Slider slide = new Slider(0, 1, 0);
 		slide.setMaxWidth(200);
 		slide.setBlockIncrement(1.0);
@@ -118,6 +129,7 @@ public class MenuAlone extends Application {
 		
 		Label title = new Label("Plateau");
 		title.setStyle("-fx-font: 32px Verdana;");
+		title.setTextFill(Color.WHITE);
 		
 		//Création des groupes des RadioButtons
 		
@@ -131,6 +143,10 @@ public class MenuAlone extends Application {
 		square.setToggleGroup(formePlateau);
 		rect.setToggleGroup(formePlateau);
 		circle.setToggleGroup(formePlateau);
+		
+		square.setTextFill(Color.WHITE);
+		rect.setTextFill(Color.WHITE);
+		circle.setTextFill(Color.WHITE);
 		
 		square.setSelected(true);
 		
@@ -153,6 +169,11 @@ public class MenuAlone extends Application {
 		RadioButton desert = new RadioButton("Désertique");
 		RadioButton frozen = new RadioButton("Glacial");
 		RadioButton mel = new RadioButton("Mélange");
+		
+		temp.setTextFill(Color.WHITE);
+		desert.setTextFill(Color.WHITE);
+		frozen.setTextFill(Color.WHITE);
+		mel.setTextFill(Color.WHITE);
 		
 		//Assignation des RadioButtons du type de climat
 		temp.setToggleGroup(typeClimat);
@@ -197,6 +218,7 @@ public class MenuAlone extends Application {
 		
 		Label title = new Label("Joueur");
 		title.setStyle("-fx-font: 32px Verdana;");
+		title.setTextFill(Color.WHITE);
 		
 		//Création du groupe des RadioButtons
 		ToggleGroup personnage = new ToggleGroup();
@@ -205,9 +227,11 @@ public class MenuAlone extends Application {
 		RadioButton hunter = new RadioButton("Chasseur");
 		hunter.setMinSize(64, 64);
 		hunter.setMaxSize(64, 64);
+		hunter.setTextFill(Color.WHITE);
 		RadioButton monster = new RadioButton("Monster");
 		monster.setMinSize(64, 64);
 		monster.setMaxSize(64, 64);
+		monster.setTextFill(Color.WHITE);
 		
 		//Assignation des RadioButtons du type de personnage
 		hunter.setToggleGroup(personnage);
