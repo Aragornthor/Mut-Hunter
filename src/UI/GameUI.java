@@ -61,9 +61,7 @@ public class GameUI {
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
 		this.chasseur = chasseur;
-		chasseur.setCompetence(new Missile(), 1);
 		this.monstre = monstre;
-		monstre.setCompetence(new Acide(), 1);
 		this.jeu = jeu;
 		this.pI = new PlayerInfo(this.chasseur, this.monstre);
 		this.dP = new DisplayPlateau(this.jeu, this.chasseur, this.monstre);
@@ -232,11 +230,9 @@ public class GameUI {
 					if(e.getCode().toString().equalsIgnoreCase("z") || e.getCode().toString().equalsIgnoreCase("q") || e.getCode().toString().equalsIgnoreCase("s") || e.getCode().toString().equalsIgnoreCase("d"))
 						if(tourChasseur) {
 							if(chasseur.estDeplace(jeu, e.getCode().toString())) {
-								//monstre.eventCase(jeu);
 								fini = chasseur.changeCase(jeu);
 							}
 							dP.affichagePlateauVisionChasseur(plateau);
-							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
 							if(chasseur.getDeplacement() == 0) {
 								finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
 							}
@@ -248,9 +244,9 @@ public class GameUI {
 							
 						} else {
 							if(monstre.estDeplace(jeu, e.getCode().toString())) {
+								System.out.println(monstre.getDeplacement()+" "+monstre.getPosition());
 								//monstre.eventCase(jeu);
 								fini = monstre.changeCase(jeu);
-								monstre.eventCase(jeu);
 							}
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());

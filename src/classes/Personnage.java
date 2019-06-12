@@ -198,7 +198,7 @@ public abstract class Personnage {
 			supprimePersonnage(p);
 			this.position = anciennePosition;
 			this.changeCase(p);
-			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
+			//System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
 			this.deplacement = deplacement;
 			return false;
 		}
