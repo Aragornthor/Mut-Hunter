@@ -3,6 +3,7 @@ package Event;
 import java.util.List;
 
 import UI.EnergyBar;
+import UI.GameUI;
 import classes.Chasseur;
 import classes.Monstre;
 import classes.Plateau;
@@ -29,9 +30,9 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 	private boolean tourChasseur;
 	private TextField posX, posY;
 	private EnergyBar energy;
+	private GameUI gUI;
 	
-	public CompetenceEvent(EnergyBar eb,Competences c,Pane pane,List<Node> error,List<Node> success,Plateau jeu,Chasseur chass,Monstre mons,boolean b,TextField posX,TextField posY) {
-		this.comp = c;
+	public CompetenceEvent(EnergyBar eb, GameUI gUI,Pane pane,List<Node> error,List<Node> success,Plateau jeu,Chasseur chass,Monstre mons,boolean b,TextField posX,TextField posY) {
 		this.pane = pane;
 		this.error = error;
 		this.success = success;
@@ -42,10 +43,16 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 		this.posX = posX;
 		this.posY = posY;
 		this.energy = eb;
+		this.gUI = gUI;
 	}
 	
 	@Override
 	public void handle(MouseEvent arg0) {
+		if(gUI.getNbComp() == 0) this.comp = gUI.getpI().getComp1().getComp();
+		else this.comp = gUI.getpI().getComp2().getComp();
+		System.out.println("La comp3 :"+comp);
+		System.out.println("Le chasseur :"+chass);
+		System.out.println();
 		int x = 0;
 		int y = 0;
 		if(!this.posX.getText().isEmpty() && !this.posY.getText().isEmpty()) {
@@ -73,8 +80,8 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 					pane.getChildren().clear();
 					pane.getChildren().addAll(this.success);
 				}	
-			}else if(comp.equals(new Saut()) /*|| comp.equals(new Acide())*/) {
-				System.out.println("Start verif Saut");
+			}else if(comp.equals(new Saut()) || comp.equals(new Acide())) {
+				System.out.println("Start verif Saut ou Acide");
 				if(x < this.mons.getPosition().getX()-2 ||
 					x > this.mons.getPosition().getX()+2 ||
 					y < this.mons.getPosition().getY()-2 ||

@@ -356,7 +356,7 @@ public abstract class Personnage {
 			return false;
 		}
 		else if(this.getStatut() == Statut.Acide) {
-			this.rechargeEnergie(-10);
+			this.rechargeEnergie(-20);
 			this.getStatut().setTour(this.getStatut().getNbTour()-1);
 			if(this.getStatut().getNbTour() == -1) {
 				this.setStatut(Statut.Vivant);

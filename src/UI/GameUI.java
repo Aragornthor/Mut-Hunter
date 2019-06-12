@@ -52,6 +52,7 @@ public class GameUI {
 	int boutonComp = 0;
 	boolean fini = false;
 	LancementGameUI mv3;
+	private int nbComp;
 	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
@@ -132,6 +133,7 @@ public class GameUI {
 			System.out.println(p);
 			if(!compUtilisee && p.getEnergie()>=c.getCout()) {
 				if(c.equals(new Saut()) || c.equals(new Missile()) || c.equals(new Acide()) ) {
+					nbComp = 0;
 					boutonComp = 0;
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
@@ -156,6 +158,7 @@ public class GameUI {
 			System.out.println(p);
 			if(!compUtilisee && p.getEnergie()>=c.getCout()) {
 				if(c.equals(new Saut()) || c.equals(new Missile()) || c.equals(new Acide()) ) {
+					nbComp = 1;
 					boutonComp = 1;
 					System.out.println("BoutonComp = "+boutonComp);
 					pane.getChildren().clear();
@@ -176,7 +179,7 @@ public class GameUI {
 		
 		utiliseComp.addEventHandler(MouseEvent.MOUSE_CLICKED,
 				new CompetenceEvent(this.pI.getEnergyValue(),
-									this.pI.getComp2().getComp(),
+									this,
 									pane,
 									new ArrayList<Node>(Arrays.asList(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp,erreurComp)),
 									new ArrayList<Node>(Arrays.asList(canvas,nbTours,finDeTour,typeCase)),
@@ -327,5 +330,9 @@ public class GameUI {
 	
 	public PlayerInfo getpI() {
 		return pI;
+	}
+	
+	public int getNbComp() {
+		return nbComp;
 	}
 }
