@@ -54,6 +54,16 @@ public class GameUI {
 	LancementGameUI mv3;
 	private int nbComp;
 	
+	private Pane pane;
+	private Canvas canvas;
+	private Button finDeTour;
+	private Label nbTours;
+	private Label typeCase;
+	/*private TextField posX;
+	private TextField posY;
+	private Button utiliseComp;
+	private Label erreurComp;*/
+	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
 		this.chasseur = chasseur;
@@ -151,6 +161,7 @@ public class GameUI {
 		
 	
 		this.pI.getComp2().addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			System.out.println("Utilisee "+compUtilisee);
 			Competences c = pI.getComp2().getComp();
 			Personnage p;
 			if(tourChasseur) p = chasseur;
@@ -176,6 +187,9 @@ public class GameUI {
 			}	
 		});
 		
+		utiliseComp.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> {
+			compUtilisee = true;
+		});
 		
 		utiliseComp.addEventHandler(MouseEvent.MOUSE_CLICKED,
 				new CompetenceEvent(this.pI.getEnergyValue(),
@@ -278,6 +292,12 @@ public class GameUI {
 			else this.pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
 		});
 		
+		this.pane = pane;
+		this.canvas = canvas;
+		this.nbTours = nbTours;
+		this.finDeTour = finDeTour;
+		this.typeCase = typeCase;
+		
 		return scene;
 		
 	}
@@ -306,6 +326,8 @@ public class GameUI {
 			this.pI.getEnergyValue().gainEnergy(10);
 			jeu.ajoutLoot(1);
 			compUtilisee = false;
+			pane.getChildren().clear();
+			pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
 		}else {
 			if(chasseur.gestionStatuts()) {
 				tourChasseur = true;
@@ -325,6 +347,8 @@ public class GameUI {
 			jeu.addTours();
 			nbTours.setText("Tour n°"+jeu.getTours());
 			compUtilisee = false;
+			pane.getChildren().clear();
+			pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
 		}
 	}
 	
