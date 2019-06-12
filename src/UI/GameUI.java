@@ -85,8 +85,6 @@ public class GameUI {
 		
 		Pane pane = new Pane();
 		pane.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, null, null)));
-		//ImageView logo = new ImageView();
-		//logo.setImage(plaine);
 		pane.setPrefSize(1000,1000);
 		Canvas canvas = new Canvas(1000,1000);
 		
@@ -239,12 +237,14 @@ public class GameUI {
 							}
 							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
+								vainqueur = chasseur;
 								System.out.println("Victoire chasseur"+fini);
 							}
 							
 						} else {
 							if(monstre.estDeplace(jeu, e.getCode().toString())) {
 								fini = monstre.changeCase(jeu);
+								if(fini) vainqueur = chasseur;
 							}
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());
@@ -253,6 +253,8 @@ public class GameUI {
 							}
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
+								if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) vainqueur = chasseur;
+								else vainqueur = monstre;
 								System.out.println("defaite monstre"+fini);
 							}
 							
