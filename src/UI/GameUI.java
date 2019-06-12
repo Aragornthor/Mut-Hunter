@@ -6,12 +6,15 @@ import java.util.Arrays;
 import Event.CompetenceEvent;
 import classes.Chasseur;
 import classes.Monstre;
+import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
 import competences.Acide;
 import competences.Competences;
 import competences.Missile;
+import competences.Piege;
 import competences.Saut;
+import competences.Statut;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -45,15 +48,17 @@ public class GameUI {
 	private Plateau jeu;
 	boolean tourChasseur = true;
 	final double DECAL_X = 30;
-	boolean compUtilise = false;
-	int boutontComp = 0;
+	boolean compUtilisee = false;
+	int boutonComp = 0;
 	boolean fini = false;
 	LancementGameUI mv3;
 	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
 		this.chasseur = chasseur;
+		chasseur.setCompetence(new Missile(), 1);
 		this.monstre = monstre;
+		monstre.setCompetence(new Acide(), 1);
 		this.jeu = jeu;
 		this.pI = new PlayerInfo(this.chasseur, this.monstre);
 		this.dP = new DisplayPlateau(this.jeu, this.chasseur, this.monstre);
@@ -118,12 +123,16 @@ public class GameUI {
 		erreurComp.setLayoutY(utiliseComp.getLayoutY()-35);
 		
 		pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
-		
+	
 		this.pI.getComp1().addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if(!compUtilise) {
-				Competences c = pI.getComp1().getComp();
+			Competences c = pI.getComp1().getComp();
+			Personnage p;
+			if(tourChasseur) p = chasseur;
+			else p = monstre;
+			System.out.println(p);
+			if(!compUtilisee && p.getEnergie()>=c.getCout()) {
 				if(c.equals(new Saut()) || c.equals(new Missile()) || c.equals(new Acide()) ) {
-					boutontComp = 0;
+					boutonComp = 0;
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
 				}else {
@@ -133,17 +142,22 @@ public class GameUI {
 					}else {
 						this.pI.getComp1().getComp().utilisation(jeu, monstre, chasseur, new Position(0,0));
 					}
-					compUtilise = true;
+					compUtilisee = true;
 				}
 			}
 		});
+		
 	
 		this.pI.getComp2().addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if(!compUtilise) {
-				Competences c = pI.getComp2().getComp();
+			Competences c = pI.getComp2().getComp();
+			Personnage p;
+			if(tourChasseur) p = chasseur;
+			else p = monstre;
+			System.out.println(p);
+			if(!compUtilisee && p.getEnergie()>=c.getCout()) {
 				if(c.equals(new Saut()) || c.equals(new Missile()) || c.equals(new Acide()) ) {
-					boutontComp = 1;
-					System.out.println("BoutonComp = "+boutontComp);
+					boutonComp = 1;
+					System.out.println("BoutonComp = "+boutonComp);
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
 				}else {
@@ -154,6 +168,7 @@ public class GameUI {
 					}else {
 						c.utilisation(jeu, monstre, chasseur, new Position(0,0));
 					}
+					compUtilisee = true;
 				}
 			}	
 		});
@@ -221,7 +236,7 @@ public class GameUI {
 							}
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());
-							if(monstre.getDeplacement() <= 0) {
+							if(monstre.getDeplacement() <= 0 || monstre.getStatut() == Statut.Stun) {
 								finDeTour(plateau, typeCase, nbTours);
 							}
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
@@ -255,6 +270,11 @@ public class GameUI {
 			}
 		});
 		
+		scene.addEventHandler(MouseEvent.MOUSE_MOVED, e ->{
+			if(tourChasseur) this.pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
+			else this.pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
+		});
+		
 		return scene;
 		
 	}
@@ -277,10 +297,12 @@ public class GameUI {
 				pI.setTourChasseur(tourChasseur);
 				pI.displayEnergy();
 				typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
-				monstre.rechargeEnergie();
-				jeu.ajoutLoot(1);
 				System.out.println("Chasseur "+chasseur);
 			}
+			monstre.rechargeEnergie();
+			this.pI.getEnergyValue().gainEnergy(10);
+			jeu.ajoutLoot(1);
+			compUtilisee = false;
 		}else {
 			if(chasseur.gestionStatuts()) {
 				tourChasseur = true;
@@ -292,13 +314,18 @@ public class GameUI {
 				pI.setTourChasseur(tourChasseur);
 				pI.displayEnergy();
 				typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
-				jeu.addTours();
-				nbTours.setText("Tour n°"+jeu.getTours());
-				chasseur.rechargeEnergie();
-				jeu.ajoutLoot(1);
 				System.out.println("Monstre "+monstre);
 			}
+			chasseur.rechargeEnergie();
+			this.pI.getEnergyValue().gainEnergy(10);
+			jeu.ajoutLoot(1);
+			jeu.addTours();
+			nbTours.setText("Tour n°"+jeu.getTours());
+			compUtilisee = false;
 		}
 	}
 	
+	public PlayerInfo getpI() {
+		return pI;
+	}
 }

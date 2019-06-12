@@ -15,7 +15,7 @@ public class EnergyBar extends HBox {
 	
 	private final double MAX_ENERGY = 100;
 	private final double MAX_LENGTH = 200;
-	private final double MULTIPICATEUR = this.MAX_LENGTH / this.MAX_ENERGY;
+	private final double MULTIPLICATEUR = this.MAX_LENGTH / this.MAX_ENERGY;
 	private final Rectangle BLANK;
 	private final Rectangle BORDER_REC;
 	private Label energyValue;
@@ -54,7 +54,7 @@ public class EnergyBar extends HBox {
 		this.BLANK.setWidth(this.MAX_LENGTH);
 		this.BLANK.setHeight(this.energy.getHeight());
 		
-		this.energyValue = new Label(""+this.energy.getWidth()/this.MULTIPICATEUR);
+		this.energyValue = new Label(""+this.energy.getWidth()/this.MULTIPLICATEUR);
 		this.energyValue.setTextFill(Color.WHITE);
 		
 		energyBar.getChildren().addAll(this.BORDER_REC,this.BLANK,this.energy);
@@ -74,7 +74,7 @@ public class EnergyBar extends HBox {
 	 * @param d est la valeur de l'énergie
 	 */
 	public void setEnergyWidth(double d) {
-		this.energy.setWidth(d*this.MULTIPICATEUR);
+		this.energy.setWidth(d*this.MULTIPLICATEUR);
 		this.energyValue.setText(""+d);
 		this.colorRec();
 	}
@@ -101,12 +101,12 @@ public class EnergyBar extends HBox {
 	 * @param perte est la perte d'énergie subit
  	 */
 	public void perdreEnergy(double perte) {
-		if(this.energy.getWidth() - perte*this.MULTIPICATEUR > 0) {
-			this.energy.setWidth(this.energy.getWidth()-perte*this.MULTIPICATEUR);
+		if(this.energy.getWidth() - perte*this.MULTIPLICATEUR > 0) {
+			this.energy.setWidth(this.energy.getWidth()-perte*this.MULTIPLICATEUR);
 		}else {
 			this.energy.setWidth(0);
 		}
-		this.energyValue.setText(""+this.energy.getWidth()/this.MULTIPICATEUR);
+		this.energyValue.setText(""+this.energy.getWidth()/this.MULTIPLICATEUR);
 		this.colorRec();
 	}
 	
@@ -116,12 +116,12 @@ public class EnergyBar extends HBox {
 	 * @param gain est le gain d'énergie subit
  	 */
 	public void gainEnergy(double gain) {
-		if(this.energy.getWidth()+gain*this.MULTIPICATEUR < this.MAX_LENGTH) {
-			this.energy.setWidth(this.energy.getWidth()+gain*this.MULTIPICATEUR);
+		if(this.energy.getWidth()+gain*this.MULTIPLICATEUR < this.MAX_LENGTH) {
+			this.energy.setWidth(this.energy.getWidth()+gain*this.MULTIPLICATEUR);
 		}else {
 			this.energy.setWidth(MAX_LENGTH);
 		}
-		this.energyValue.setText(""+this.energy.getWidth()/this.MULTIPICATEUR);
+		this.energyValue.setText(""+this.energy.getWidth()/this.MULTIPLICATEUR);
 		this.colorRec();
 	}
 	
@@ -129,11 +129,11 @@ public class EnergyBar extends HBox {
 	 * Changer la couleur de la barre d'énergie en fonction de sa valeur
 	 */
 	private void colorRec() {
-		if(this.energy.getWidth()/this.MULTIPICATEUR <= this.MAX_ENERGY*0.2) {
+		if(this.energy.getWidth()/this.MULTIPLICATEUR <= this.MAX_ENERGY*0.2) {
 			this.energy.setFill(Color.RED);
-		}else if(this.energy.getWidth()/this.MULTIPICATEUR <= this.MAX_ENERGY*0.5) {
+		}else if(this.energy.getWidth()/this.MULTIPLICATEUR <= this.MAX_ENERGY*0.5) {
 			this.energy.setFill(Color.ORANGE);
-		}else if(this.energy.getWidth()/this.MULTIPICATEUR <= this.MAX_ENERGY*0.75) {
+		}else if(this.energy.getWidth()/this.MULTIPLICATEUR <= this.MAX_ENERGY*0.75) {
 			this.energy.setFill(Color.DEEPSKYBLUE);
 		}else {
 			this.energy.setFill(Color.LIMEGREEN);

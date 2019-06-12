@@ -20,7 +20,7 @@ public class Saut extends Competences {
 		this.setId(4);
 		this.setNom("Saut");
 		this.setDuree(2);
-		this.cout = 30;
+		this.cout = 50;
 		this.setIcon(new Image("file:ressources/images/boutonSaut.png"));
 	}
 

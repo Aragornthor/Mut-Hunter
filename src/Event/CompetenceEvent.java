@@ -46,86 +46,65 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 	
 	@Override
 	public void handle(MouseEvent arg0) {
+		int x = 0;
+		int y = 0;
 		if(!this.posX.getText().isEmpty() && !this.posY.getText().isEmpty()) {
-			System.out.println(Integer.parseInt(this.posX.getText())+"  "+Integer.parseInt(this.posY.getText()));
+			if(this.estUnInt(this.posX.getText()) && this.estUnInt(this.posY.getText())) {
+				x = Integer.parseInt(this.posX.getText());
+				y = Integer.parseInt(this.posY.getText());
+			}
+			System.out.println(x+"  "+y);
 			System.out.println(this.chass.getPosition().getX()+"  "+this.chass.getPosition().getY());
 			if(this.comp.equals(new Missile())){
 				System.out.println("Start verif Missile");
-				if(tourChasseur) {
-					if(Integer.parseInt(this.posX.getText()) < this.chass.getPosition().getX()-2 &&
-							Integer.parseInt(this.posX.getText()) > this.chass.getPosition().getX()+2 &&
-							Integer.parseInt(this.posY.getText()) < this.chass.getPosition().getY()-2 &&
-							Integer.parseInt(this.posY.getText()) > this.chass.getPosition().getY()+2) {
+				if(x < this.chass.getPosition().getX()-2 ||
+					x > this.chass.getPosition().getX()+2 ||
+					y < this.chass.getPosition().getY()-2 ||
+					y > this.chass.getPosition().getY()+2 || 
+					!this.estUnInt(this.posX.getText()) || 
+					!this.estUnInt(this.posY.getText())){
 						System.out.println("failed");
 						pane.getChildren().clear();
 						pane.getChildren().addAll(this.error);
-					}else {
-						this.energy.perdreEnergy(this.comp.getCout());
-						this.comp.utilisation(this.terrain, this.chass, this.mons, new Position(Integer.parseInt(this.posX.getText()),Integer.parseInt(this.posY.getText())));
-						System.out.println("success");
-						pane.getChildren().clear();
-						pane.getChildren().addAll(this.success);
-					}
 				}else {
-					if(Integer.parseInt(this.posX.getText()) < this.mons.getPosition().getX()-2 &&
-							Integer.parseInt(this.posX.getText()) > this.mons.getPosition().getX()+2 &&
-							Integer.parseInt(this.posY.getText()) < this.mons.getPosition().getY()-2 &&
-							Integer.parseInt(this.posY.getText()) > this.mons.getPosition().getY()+2) {
-						System.out.println("failed");
-						pane.getChildren().clear();
-						pane.getChildren().addAll(this.error);
-					}else {
-						this.energy.perdreEnergy(this.comp.getCout());
-						this.comp.utilisation(this.terrain, this.mons, this.chass, new Position(Integer.parseInt(this.posX.getText()),Integer.parseInt(this.posY.getText())));
-						System.out.println("success");
-						pane.getChildren().clear();
-						pane.getChildren().addAll(this.success);
-					}
-				}
-				
-			}else if(comp.equals(new Saut()) || comp.equals(new Acide())) {
+					this.energy.perdreEnergy(this.comp.getCout());
+					this.comp.utilisation(this.terrain, this.chass, this.mons, new Position(x,y));
+					System.out.println("success");
+					pane.getChildren().clear();
+					pane.getChildren().addAll(this.success);
+				}	
+			}else if(comp.equals(new Saut()) /*|| comp.equals(new Acide())*/) {
 				System.out.println("Start verif Saut");
-				if(tourChasseur) {
-					if(Integer.parseInt(this.posX.getText()) < this.chass.getPosition().getX()-2 &&
-							Integer.parseInt(this.posX.getText()) > this.chass.getPosition().getX()+2 &&
-							Integer.parseInt(this.posY.getText()) < this.chass.getPosition().getY()-2 &&
-							Integer.parseInt(this.posY.getText()) > this.chass.getPosition().getY()+2) {
-						
+				if(x < this.mons.getPosition().getX()-2 ||
+					x > this.mons.getPosition().getX()+2 ||
+					y < this.mons.getPosition().getY()-2 ||
+					y > this.mons.getPosition().getY()+2 || 
+					!this.estUnInt(this.posX.getText()) || 
+					!this.estUnInt(this.posY.getText())){	
 						System.out.println("failed");
 						pane.getChildren().clear();
 						pane.getChildren().addAll(this.error);
-					}else {
-						this.energy.perdreEnergy(this.comp.getCout());
-						this.comp.utilisation(this.terrain, this.chass, this.mons, new Position(Integer.parseInt(this.posX.getText()),Integer.parseInt(this.posY.getText())));
-						System.out.println("success");
-						pane.getChildren().clear();
-						pane.getChildren().addAll(this.success);
-					}
 				}else {
-					if(Integer.parseInt(this.posX.getText()) < this.mons.getPosition().getX()-2 &&
-							Integer.parseInt(this.posX.getText()) > this.mons.getPosition().getX()+2 &&
-							Integer.parseInt(this.posY.getText()) < this.mons.getPosition().getY()-2 &&
-							Integer.parseInt(this.posY.getText()) > this.mons.getPosition().getY()+2) {
-						
-						System.out.println("failed");
-						pane.getChildren().clear();
-						pane.getChildren().addAll(this.error);
-					}else {
-						this.energy.perdreEnergy(this.comp.getCout());
-						this.comp.utilisation(this.terrain, this.mons, this.chass, new Position(Integer.parseInt(this.posX.getText()),Integer.parseInt(this.posY.getText())));
-						System.out.println("success");
-						pane.getChildren().clear();
-						pane.getChildren().addAll(this.success);
-					}
+					this.energy.perdreEnergy(this.comp.getCout());
+					this.comp.utilisation(this.terrain, this.mons, this.chass, new Position(x,y));
+					System.out.println("success");
+					pane.getChildren().clear();
+					pane.getChildren().addAll(this.success);
+
 				}
 			System.out.println("Fin verif");
 			}
 		}
-		else {
-			if(tourChasseur) this.comp.utilisation(this.terrain, this.chass, this.mons, new Position(0,0));
-			else this.comp.utilisation(this.terrain, this.mons, this.chass, new Position(0,0));
-		}
 
 	}
 	
+	private boolean estUnInt(String chaine) {
+		try {
+			Double.parseDouble(chaine);
+		} catch (NumberFormatException e){
+			return false;
+		}
+ 
+		return true;
+	}
 }
