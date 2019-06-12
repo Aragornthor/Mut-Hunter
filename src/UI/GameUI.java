@@ -205,7 +205,9 @@ public class GameUI {
 									monstre,
 									tourChasseur,
 									positionX,
-									positionY));
+									positionY,
+									dP,
+									plateau));
 		
 		playerInfo.setAlignment(Pos.CENTER);
 		playerInfo.setMaxWidth(Double.MAX_VALUE);
@@ -234,53 +236,69 @@ public class GameUI {
 		//scene.addEventHandler(KeyEvent.KEY_PRESSED, new KeyListenerMovement(jeu, chasseur, monstre, tourChasseur, fini, plateau, dP));
 		
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-			System.out.println(monstre.getClass().toString());
-				if(KeyEvent.KEY_PRESSED != null) {
-					System.out.println(fini);
-					if(e.getCode().toString().equalsIgnoreCase("z") || e.getCode().toString().equalsIgnoreCase("q") || e.getCode().toString().equalsIgnoreCase("s") || e.getCode().toString().equalsIgnoreCase("d"))
-						if(!chasseur.getClass().equals(IAChasseurGUI.class) && tourChasseur) {
-							System.out.println(monstre.getClass().toString());
-							if(chasseur.estDeplace(jeu, e.getCode().toString())) {
-								fini = chasseur.changeCase(jeu);
-							}
-							dP.affichagePlateauVisionChasseur(plateau);
-							if(chasseur.getDeplacement() == 0) {
-								finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
-							}
-							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
-								fini = true;
-								vainqueur = 0;
-								System.out.println("Victoire chasseur"+fini);
-							}
-						} else if(!monstre.getClass().equals(IAMonstreGUI.class)) {
-							if(monstre.estDeplace(jeu, e.getCode().toString())) {
-								System.out.println(monstre.getDeplacement()+" "+monstre.getPosition());
-								//monstre.eventCase(jeu);
-								fini = monstre.changeCase(jeu);
-							}
-							dP.affichagePlateauVisionMonstre(plateau);
-							System.out.println(monstre.getDeplacement());
-							if(monstre.getDeplacement() <= 0 || monstre.getStatut() == Statut.Stun) {
-								finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
-								if(this.chasseur.getClass().equals(IAChasseurGUI.class)) {
-									((IAChasseurGUI)this.chasseur).jouer(jeu);
-									tourChasseur = false;
+			if(KeyEvent.KEY_PRESSED != null) {
+				System.out.println("Fini event Key : "+fini);
+				if(e.getCode().toString().equalsIgnoreCase("z") || e.getCode().toString().equalsIgnoreCase("q") || e.getCode().toString().equalsIgnoreCase("s") || e.getCode().toString().equalsIgnoreCase("d"))
+					if(tourChasseur) {
+						if(chasseur.getStatut().equals(Statut.Stun)) {
+							finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
+						}
+						else {
+							if(!chasseur.getClass().equals(IAChasseurGUI.class) && tourChasseur) {
+								System.out.println(monstre.getClass().toString());
+								if(chasseur.estDeplace(jeu, e.getCode().toString())) {
+									fini = chasseur.changeCase(jeu);
+								}
+								dP.affichagePlateauVisionChasseur(plateau);
+								if(chasseur.getDeplacement() == 0) {
+									finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
+								}
+								if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+									fini = true;
+									vainqueur = 0;
+									System.out.println("Victoire chasseur"+fini);
 								}
 							}
-							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
-								fini = true;
-								if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) vainqueur = 0;
-								else vainqueur = 1;
-								System.out.println("defaite monstre"+fini);
-							}
-							
-							
 						}
-					else {
-						e.consume();
+						
+					} else {
+						if(monstre.getStatut().equals(Statut.Stun)) {
+							finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
+						}
+						else {
+							if(!monstre.getClass().equals(IAMonstreGUI.class)) {
+								if(monstre.estDeplace(jeu, e.getCode().toString())) {
+									System.out.println(monstre.getDeplacement()+" "+monstre.getPosition());
+									//monstre.eventCase(jeu);
+									fini = monstre.changeCase(jeu);
+								}
+								dP.affichagePlateauVisionMonstre(plateau);
+								System.out.println(monstre.getDeplacement());
+								if(monstre.getDeplacement() <= 0) {
+									finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
+									if(this.chasseur.getClass().equals(IAChasseurGUI.class)) {
+										((IAChasseurGUI)this.chasseur).jouer(jeu);
+										tourChasseur = false;
+									}
+								}
+								if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
+									fini = true;
+									if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) vainqueur = 0;
+									else vainqueur = 1;
+									System.out.println("defaite monstre"+fini);
+								}
+								
+								
+							}
+						}
+						
+						
 					}
+				else {
+					e.consume();
 				}
-			});
+			}
+		});
 		
 		scene.addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
 			if(fini) {
@@ -318,6 +336,24 @@ public class GameUI {
 			}
 		});
 		
+		scene.addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
+			if(fini) {
+				System.out.println("Bonjour");
+				try {
+					mv3.stop();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				try {
+					MenuVictoire mv = new MenuVictoire();
+					mv.start(Main.getStage());
+					System.out.println("C FINI");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		scene.addEventHandler(MouseEvent.MOUSE_MOVED, e ->{
 			if(tourChasseur) this.pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
 			else this.pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
@@ -337,19 +373,18 @@ public class GameUI {
 	
 	public void finDeTour(GraphicsContext plateau, Label typeCase, Label nbTours, Pane pane, Canvas canvas, Button finDeTour) {
 		if(tourChasseur) {
-			if(monstre.gestionStatuts()) {
-				tourChasseur = false;
-				chasseur.resetMouvement();
-				if(!monstre.getClass().equals(IAMonstreGUI.class)) {
-					dP.affichagePlateauVisionMonstre(plateau);
-					pI.ajoutCompetence(monstre.getCompetences());
-					pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
-					pI.setPlayerIcon(monstre.getImage());
-					pI.setTourChasseur(tourChasseur);
-					pI.displayEnergy();
-					typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
-					System.out.println("Chasseur "+chasseur);
-				}
+			monstre.gestionStatuts();
+			tourChasseur = false;
+			chasseur.resetMouvement();
+			if(!monstre.getClass().equals(IAMonstreGUI.class)) {
+				dP.affichagePlateauVisionMonstre(plateau);
+				pI.ajoutCompetence(monstre.getCompetences());
+				pI.setPlayerStatut(monstre.getStatut().name().toLowerCase());
+				pI.setPlayerIcon(monstre.getImage());
+				pI.setTourChasseur(tourChasseur);
+				pI.displayEnergy();
+				typeCase.setText("Type de case : "+jeu.getCase(monstre.getPosition()).getTypeTerrain().toString().toLowerCase());
+				System.out.println("Chasseur "+chasseur);
 			}
 			monstre.rechargeEnergie();
 			this.pI.getEnergyValue().gainEnergy(10);
@@ -363,20 +398,20 @@ public class GameUI {
 				tourChasseur = true;
 			}
 		}else {
-			if(chasseur.gestionStatuts()) {
-				tourChasseur = true;
-				monstre.resetMouvement();
-				if(!chasseur.getClass().equals(IAChasseurGUI.class)) {
-					dP.affichagePlateauVisionChasseur(plateau);
-					pI.ajoutCompetence(chasseur.getCompetences());
-					pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
-					pI.setPlayerIcon(chasseur.getImage());
-					pI.setTourChasseur(tourChasseur);
-					pI.displayEnergy();
-					typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
-					System.out.println("Monstre "+monstre);
-				}
+			chasseur.gestionStatuts();
+			tourChasseur = true;
+			monstre.resetMouvement();
+			if(!chasseur.getClass().equals(IAChasseurGUI.class)) {
+				dP.affichagePlateauVisionChasseur(plateau);
+				pI.ajoutCompetence(chasseur.getCompetences());
+				pI.setPlayerStatut(chasseur.getStatut().name().toLowerCase());
+				pI.setPlayerIcon(chasseur.getImage());
+				pI.setTourChasseur(tourChasseur);
+				pI.displayEnergy();
+				typeCase.setText("Type de case : "+jeu.getCase(chasseur.getPosition()).getTypeTerrain().toString().toLowerCase());
+				System.out.println("Monstre "+monstre);
 			}
+				
 			chasseur.rechargeEnergie();
 			this.pI.getEnergyValue().gainEnergy(10);
 			jeu.ajoutLoot(1);
@@ -388,7 +423,7 @@ public class GameUI {
 			if(chasseur.getClass().equals(IAChasseurGUI.class) && tourChasseur) {
 				((IAChasseurGUI)chasseur).jouer(jeu);
 				chasseur.changeCase(jeu);
-				tourChasseur = true;
+				tourChasseur = false;
 			}
 		}
 	}

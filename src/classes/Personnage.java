@@ -322,7 +322,7 @@ public abstract class Personnage {
 	
 	/**
 	 * 
-	 * @return Renvoie VRAI si le joueur est affecté par une compétence sinon FAUX
+	 * @return Renvoie VRAI si le joueur peut bouger sinon FAUX
 	 */
 	public boolean gestionStatuts() {
 		if(this.getStatut() == Statut.Stun) {

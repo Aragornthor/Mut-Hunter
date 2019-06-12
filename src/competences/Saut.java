@@ -1,5 +1,6 @@
 package competences;
 
+import UI.DisplayPlateau;
 import classes.Personnage;
 import classes.Plateau;
 import classes.Position;
@@ -27,6 +28,7 @@ public class Saut extends Competences {
 	@Override
 	public void utilisation(Plateau p, Personnage perso, Personnage cible, Position tmp) {
 		
+		p.setCaseNormal(perso.getPosition());
 		perso.setPosition(tmp);
 		
 		Position zone = new Position(perso.getPosition().getX()-1, perso.getPosition().getY()-1);

@@ -2,6 +2,7 @@ package Event;
 
 import java.util.List;
 
+import UI.DisplayPlateau;
 import UI.EnergyBar;
 import UI.GameUI;
 import classes.Chasseur;
@@ -14,6 +15,7 @@ import competences.Missile;
 import competences.Saut;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,8 +33,10 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 	private TextField posX, posY;
 	private EnergyBar energy;
 	private GameUI gUI;
+	private DisplayPlateau dP;
+	private GraphicsContext gc;
 	
-	public CompetenceEvent(EnergyBar eb, GameUI gUI,Pane pane,List<Node> error,List<Node> success,Plateau jeu,Chasseur chass,Monstre mons,boolean b,TextField posX,TextField posY) {
+	public CompetenceEvent(EnergyBar eb, GameUI gUI,Pane pane,List<Node> error,List<Node> success,Plateau jeu,Chasseur chass,Monstre mons,boolean b,TextField posX,TextField posY, DisplayPlateau dP, GraphicsContext gc) {
 		this.pane = pane;
 		this.error = error;
 		this.success = success;
@@ -44,6 +48,8 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 		this.posY = posY;
 		this.energy = eb;
 		this.gUI = gUI;
+		this.dP = dP;
+		this.gc = gc;
 	}
 	
 	@Override
@@ -69,7 +75,8 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 					y < this.chass.getPosition().getY()-2 ||
 					y > this.chass.getPosition().getY()+2 || 
 					!this.estUnInt(this.posX.getText()) || 
-					!this.estUnInt(this.posY.getText())){
+					!this.estUnInt(this.posY.getText())||
+					!terrain.contains(new Position(x,y))){
 						System.out.println("failed");
 						pane.getChildren().clear();
 						pane.getChildren().addAll(this.error);
@@ -87,13 +94,21 @@ public class CompetenceEvent implements EventHandler<MouseEvent>{
 					y < this.mons.getPosition().getY()-2 ||
 					y > this.mons.getPosition().getY()+2 || 
 					!this.estUnInt(this.posX.getText()) || 
-					!this.estUnInt(this.posY.getText())){	
+					!this.estUnInt(this.posY.getText()) ||
+					!terrain.contains(new Position(x,y))){	
 						System.out.println("failed");
 						pane.getChildren().clear();
 						pane.getChildren().addAll(this.error);
 				}else {
 					this.energy.perdreEnergy(this.comp.getCout());
+					mons.supprimePersonnage(terrain);
 					this.comp.utilisation(this.terrain, this.mons, this.chass, new Position(x,y));
+					if(comp.equals(new Saut())){
+						mons.changeCase(terrain);
+						terrain.setCompteurCasesDecouvertes();
+						mons.eventCase(terrain);
+						dP.affichagePlateauVisionMonstre(gc);
+					}
 					System.out.println("success");
 					pane.getChildren().clear();
 					pane.getChildren().addAll(this.success);
