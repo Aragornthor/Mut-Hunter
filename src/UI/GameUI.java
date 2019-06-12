@@ -359,6 +359,7 @@ public class GameUI {
 			pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
 			if(this.monstre.getClass().equals(IAMonstreGUI.class)) {
 				((IAMonstreGUI)this.monstre).jouer(jeu);
+				this.monstre.changeCase(jeu);
 				tourChasseur = true;
 			}
 		}else {
@@ -386,6 +387,7 @@ public class GameUI {
 			pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase);
 			if(chasseur.getClass().equals(IAChasseurGUI.class) && tourChasseur) {
 				((IAChasseurGUI)chasseur).jouer(jeu);
+				chasseur.changeCase(jeu);
 				tourChasseur = true;
 			}
 		}
