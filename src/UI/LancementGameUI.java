@@ -1,5 +1,7 @@
 package UI;
 
+import IA.IAChasseurGUI;
+import IA.IAMonstreGUI;
 import UI.GameUI;
 import classes.Chasseur;
 import classes.Monstre;
@@ -34,6 +36,7 @@ public class LancementGameUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		GameUI gUI;
 		if(MenuAlone.getForme() == 0) {
 			jeu = new Plateau(10,10, MenuAlone.getClimat());
 		} else if(MenuAlone.getForme() == 1) {
@@ -41,9 +44,15 @@ public class LancementGameUI extends Application{
 		} else if(MenuAlone.getForme() == 2) {
 			jeu = new Plateau(10,10, MenuAlone.getClimat());
 		}
-		chasseur =  new Chasseur(new Position(0,0));
-		monstre = new Monstre(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1));
-		GameUI gUI = new GameUI(chasseur, monstre, jeu, this);
+		if(MenuAlone.getPerso() == 0) {
+			chasseur =  new Chasseur(new Position(0,0));
+			gUI = new GameUI(chasseur, new IAMonstreGUI(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1)), jeu, this);
+		} else {
+			chasseur =  new IAChasseurGUI(new Position(0,0));
+			monstre = new Monstre(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1));
+			gUI = new GameUI(new IAChasseurGUI(new Position(0,0)), monstre, jeu, this);
+		}
+		
 		System.out.println("Création du GUI");
 		LancementGameUI.stage = stage;
 		Scene scene = gUI.getScene();
