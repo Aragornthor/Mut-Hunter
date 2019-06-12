@@ -137,9 +137,9 @@ public class MenuAlone extends Application {
 		
 
 		HBox size = new HBox(); // Modifier les BUTTONs avec des IMG
-		RadioButton square = new RadioButton("Square");
-		RadioButton rect = new RadioButton("Rect");
-		RadioButton circle = new RadioButton("Circle");
+		RadioButton square = new RadioButton("Carré");
+		RadioButton rect = new RadioButton("Rectangulaire");
+		RadioButton circle = new RadioButton("Circulaire");
 		
 		//Assignation des RadioButtons de la forme du plateau
 		square.setToggleGroup(formePlateau);
@@ -248,6 +248,16 @@ public class MenuAlone extends Application {
 		root.setAlignment(Pos.TOP_CENTER);
 		
 		return root;
+	}
+	
+	public static int getForme() {
+		if(formePlateau.getSelectedToggle().toString().contains("Carré")) {
+			return 0;
+		} else if(formePlateau.getSelectedToggle().toString().contains("Rectangulaire")) {
+			return 1;
+		} else {
+			return 2;
+		}
 	}
 	
 	public static int getClimat() {
