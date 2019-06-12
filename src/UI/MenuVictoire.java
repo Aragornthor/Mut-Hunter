@@ -94,8 +94,9 @@ public class MenuVictoire extends Application{
 		VBox root = new VBox();
 		Pane top = new Pane();
 		top.setPrefWidth(1000);
-		if(victoireJoueur) this.title = new Label("VICTOIRE "+MenuAlone.getPseudo()+" !");
-		else this.title = new Label("DEFAITE "+MenuAlone.getPseudo()+"...");
+		System.out.println("Pseudo  "+MenuAlone.getPseudo());
+		if(victoireJoueur) this.title = new Label("VICTOIRE" /*"+MenuAlone.getPseudo()+"*/+" !");
+		else this.title = new Label("DEFAITE" /*+MenuAlone.getPseudo()*/+"...");
 		this.title.setFont(new Font(50));
 		this.title.setPrefWidth(275);
 		this.title.setLayoutX(screenSize.getWidth()/2 - this.title.getPrefWidth()/2);

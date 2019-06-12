@@ -343,7 +343,7 @@ public class MenuAlone extends Application {
 	}
 	
 	public static String getPseudo() {
-		if(pseudo.getText().equals("")) return pseudo.getText();
+		if(!pseudo.getText().equals("")) return pseudo.getText();
 		else return "Aucun nom";
 	}
 }
