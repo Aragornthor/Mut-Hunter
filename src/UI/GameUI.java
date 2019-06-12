@@ -278,8 +278,8 @@ public class GameUI {
 					e1.printStackTrace();
 				}
 				try {
-					Main mm = new Main();
-					mm.start(Main.getStage());
+					MenuVictoire mv = new MenuVictoire();
+					mv.start(Main.getStage());
 					System.out.println("C FINI");
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -296,8 +296,8 @@ public class GameUI {
 					e1.printStackTrace();
 				}
 				try {
-					Main mm = new Main();
-					mm.start(Main.getStage());
+					MenuVictoire mv = new MenuVictoire();
+					mv.start(Main.getStage());
 					System.out.println("C FINI");
 				} catch (Exception e1) {
 					e1.printStackTrace();
