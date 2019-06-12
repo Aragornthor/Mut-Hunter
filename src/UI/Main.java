@@ -69,6 +69,26 @@ public class Main extends Application{
 		addEvent(stage);
 		stage.show();
 		
+		menu.getTwoPlayer().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+			ft.setDuration(Duration.millis(1000));
+			ft.setNode(menu.getRoot());
+			ft.setFromValue(1);
+			ft.setToValue(0);
+			ft.setOnFinished((ActionEvent event) ->{
+				Scene s = MenuAlone2J.getScene(stage, screenSize.getWidth(),screenSize.getHeight());
+				s.setFill(Color.BLACK);
+				stage.setScene(s);
+			//	menu.music.stop();
+			//	music.play();
+			});
+			ft.play();
+		});
+		sc.setFill(Color.BLACK);
+		stage.setScene(sc);
+		stage.setTitle("Mut-Hunter");
+		addEvent(stage);
+		stage.show();
+		
 		//menu.music.play();
 		
 		menu.getRegle().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{

@@ -27,7 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class MenuAlone extends Application {
+public class MenuAlone2J extends Application {
 	
 	static ToggleGroup formePlateau = new ToggleGroup();
 	static ToggleGroup typeClimat = new ToggleGroup();
@@ -40,7 +40,7 @@ public class MenuAlone extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setScene(MenuAlone.getScene(primaryStage, primaryStage.getWidth(), primaryStage.getHeight()));
+		primaryStage.setScene(MenuAlone2J.getScene(primaryStage, primaryStage.getWidth(), primaryStage.getHeight()));
 		primaryStage.show();
 		//primaryStage.setMinWidth(1280);
 		//primaryStage.setMinHeight(720);
@@ -61,7 +61,7 @@ public class MenuAlone extends Application {
 																	   BackgroundRepeat.NO_REPEAT, 
 																	   BackgroundPosition.CENTER, 
 																	   null)));
-		root.getChildren().addAll(getDifficulty(), getSep(), getPlateau(), getSep(), getPlayerType(), getSep(), getPseudo(s));
+		root.getChildren().addAll(getSep(), getPlateau(), getSep(), getPseudo(s));
 		root.setAlignment(Pos.CENTER);
 		if(isFullscreen(s)) root.setPadding(new Insets(500));
 		else root.setPadding(new Insets(200));
@@ -77,49 +77,6 @@ public class MenuAlone extends Application {
 		sep.setPadding(new Insets(5));
 		
 		return sep;
-	}
-	
-	/**
-	 * 
-	 * @return La sélection de la difficulté
-	 */
-	private static VBox getDifficulty() {
-		VBox root = new VBox();
-		
-		Label title = new Label("Difficulté");
-		title.setStyle("-fx-font: 32px Verdana;");
-		title.setTextFill(Color.WHITE);
-		Slider slide = new Slider(0, 1, 0);
-		slide.setMaxWidth(200);
-		slide.setBlockIncrement(1.0);
-		slide.setMajorTickUnit(1);
-		slide.setMinorTickCount(0);
-		slide.setShowTickLabels(true);
-		slide.setShowTickMarks(true);
-		slide.setSnapToTicks(true);
-		slide.setLabelFormatter(new StringConverter<Double>() {
-
-			@Override
-			public String toString(Double n) {
-				if(n == 0) return "Normal";
-				if(n == 1) return "Difficile";
-				return "Default";
-			}
-
-			@Override
-			public Double fromString(String string) {
-				if(string.equals("Normal")) return 0d;
-				if(string.equals("Difficile")) return 1d;
-				return -1d;
-			}
-			
-		});
-		slide.setStyle("-fx-font: 14px Verdana;");
-		root.getChildren().addAll(title, slide);
-		VBox.setMargin(title, new Insets(25));
-		root.setAlignment(Pos.TOP_CENTER);
-		
-		return root;
 	}
 	
 	/**
@@ -211,45 +168,6 @@ public class MenuAlone extends Application {
 		return root;
 	}
 	
-	/**
-	 * 
-	 * @return Choix du type du joueur
-	 */
-	private static VBox getPlayerType() {
-		VBox root = new VBox();
-		
-		Label title = new Label("Joueur");
-		title.setStyle("-fx-font: 32px Verdana;");
-		title.setTextFill(Color.WHITE);
-		
-		HBox type = new HBox();
-		RadioButton hunter = new RadioButton("Chasseur");
-		hunter.setMinSize(64, 64);
-		hunter.setMaxSize(64, 64);
-		hunter.setTextFill(Color.WHITE);
-		RadioButton monster = new RadioButton("Monstre");
-		monster.setMinSize(64, 64);
-		monster.setMaxSize(64, 64);
-		monster.setTextFill(Color.WHITE);
-		
-		//Assignation des RadioButtons du type de personnage
-		hunter.setToggleGroup(personnage);
-		monster.setToggleGroup(personnage);
-		
-		hunter.setSelected(true);
-		
-		type.getChildren().addAll(hunter, monster);
-		HBox.setMargin(hunter, new Insets(30));
-		HBox.setMargin(monster, new Insets(30));
-		type.setAlignment(Pos.CENTER);
-		
-		root.getChildren().addAll(title, type);
-		VBox.setMargin(title, new Insets(5));
-		root.setAlignment(Pos.TOP_CENTER);
-		
-		return root;
-	}
-	
 	public static int getForme() {
 		if(formePlateau.getSelectedToggle().toString().contains("Carré")) {
 			return 0;
@@ -276,16 +194,6 @@ public class MenuAlone extends Application {
 		}
 	}
 	
-	public static int getPerso() {
-		if(personnage.getSelectedToggle().toString().contains("Chasseur")) {
-			//System.out.println(personnage.getSelectedToggle().toString());
-			return 0;
-		} else {
-			//System.out.println(personnage.getSelectedToggle().toString());
-			return 1;
-		}
-	}
-	
 	/**
 	 * 
 	 * @param s Stage principal
@@ -296,7 +204,7 @@ public class MenuAlone extends Application {
 		HBox root = new HBox();
 		
 		TextField pseudo = new TextField();
-		MenuAlone.pseudo = pseudo;
+		MenuAlone2J.pseudo = pseudo;
 		pseudo.setPromptText("Saisissez votre pseudo");
 		pseudo.setStyle("-fx-border-radius: 3 0 0 3;"
 				+ "-fx-background-radius: 3 0 0 3;"
