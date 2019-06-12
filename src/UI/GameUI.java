@@ -16,6 +16,7 @@ import competences.Piege;
 import competences.Saut;
 import competences.Statut;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -37,6 +38,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 
 public class GameUI {
 	
@@ -54,6 +56,7 @@ public class GameUI {
 	LancementGameUI mv3;
 	private int nbComp;
 	private static int vainqueur;
+	Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
@@ -102,8 +105,8 @@ public class GameUI {
 		TextField positionY = new TextField();
 		Button utiliseComp = new Button("Activer compétence");
 		
-		canvas.setLayoutX(canvas.getWidth()/2);
-		canvas.setLayoutY(150);
+		canvas.setLayoutX(screenSize.getWidth()/2-canvas.getWidth()/2);
+		canvas.setLayoutY(100);
 		finDeTour.setLayoutX(DECAL_X);
 		finDeTour.setLayoutY(100);
 		nbTours.setLayoutX(DECAL_X);
@@ -210,7 +213,7 @@ public class GameUI {
 		
 		root.getChildren().addAll(pane,playerInfo);
 				
-		Scene scene = new Scene(root, 1920, 1000);
+		Scene scene = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
 		
 		root.setBackground(new Background(
 				new BackgroundImage(
