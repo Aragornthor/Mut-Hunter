@@ -53,12 +53,7 @@ public class GameUI {
 	boolean fini = false;
 	LancementGameUI mv3;
 	private int nbComp;
-	
-	private Pane pane;
-	private Canvas canvas;
-	private Button finDeTour;
-	private Label nbTours;
-	private Label typeCase;
+	private Personnage vainqueur;
 	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
@@ -143,6 +138,8 @@ public class GameUI {
 					boutonComp = 0;
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
+					positionX.setText("");
+					positionY.setText("");
 				}else {
 					this.pI.getEnergyValue().perdreEnergy(pI.getComp1().getComp().getCout());
 					if(tourChasseur) {
@@ -170,6 +167,8 @@ public class GameUI {
 					System.out.println("BoutonComp = "+boutonComp);
 					pane.getChildren().clear();
 					pane.getChildren().addAll(canvas,nbTours,finDeTour,typeCase,positionX,positionY,utiliseComp);
+					positionX.setText("");
+					positionY.setText("");
 				}else {
 					this.pI.getEnergyValue().perdreEnergy(pI.getComp2().getComp().getCout());
 					System.out.println("Perte energie");
@@ -204,7 +203,7 @@ public class GameUI {
 		playerInfo.setMaxWidth(Double.MAX_VALUE);
 		
 		finDeTour.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			finDeTour(plateau, typeCase, nbTours);
+			finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
 		});
 		
 		
@@ -236,7 +235,7 @@ public class GameUI {
 							dP.affichagePlateauVisionChasseur(plateau);
 							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
 							if(chasseur.getDeplacement() == 0) {
-								finDeTour(plateau, typeCase, nbTours);
+								finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
 							}
 							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
@@ -250,7 +249,7 @@ public class GameUI {
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());
 							if(monstre.getDeplacement() <= 0 || monstre.getStatut() == Statut.Stun) {
-								finDeTour(plateau, typeCase, nbTours);
+								finDeTour(plateau, typeCase, nbTours, pane, canvas, finDeTour);
 							}
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
@@ -308,12 +307,6 @@ public class GameUI {
 			if(monstre.getStatut() == Statut.Mort) fini = true;
 		});
 		
-		this.pane = pane;
-		this.canvas = canvas;
-		this.nbTours = nbTours;
-		this.finDeTour = finDeTour;
-		this.typeCase = typeCase;
-		
 		return scene;
 		
 	}
@@ -324,7 +317,7 @@ public class GameUI {
 		return this.root;
 	}
 	
-	public void finDeTour(GraphicsContext plateau, Label typeCase, Label nbTours) {
+	public void finDeTour(GraphicsContext plateau, Label typeCase, Label nbTours, Pane pane, Canvas canvas, Button finDeTour) {
 		if(tourChasseur) {
 			if(monstre.gestionStatuts()) {
 				tourChasseur = false;
