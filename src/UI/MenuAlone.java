@@ -31,6 +31,7 @@ public class MenuAlone extends Application {
 	
 	static ToggleGroup formePlateau = new ToggleGroup();
 	static ToggleGroup typeClimat = new ToggleGroup();
+	static ToggleGroup personnage = new ToggleGroup();
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -220,15 +221,12 @@ public class MenuAlone extends Application {
 		title.setStyle("-fx-font: 32px Verdana;");
 		title.setTextFill(Color.WHITE);
 		
-		//Création du groupe des RadioButtons
-		ToggleGroup personnage = new ToggleGroup();
-		
 		HBox type = new HBox();
 		RadioButton hunter = new RadioButton("Chasseur");
 		hunter.setMinSize(64, 64);
 		hunter.setMaxSize(64, 64);
 		hunter.setTextFill(Color.WHITE);
-		RadioButton monster = new RadioButton("Monster");
+		RadioButton monster = new RadioButton("Monstre");
 		monster.setMinSize(64, 64);
 		monster.setMaxSize(64, 64);
 		monster.setTextFill(Color.WHITE);
@@ -264,6 +262,16 @@ public class MenuAlone extends Application {
 		} else { //si c'est Mélange qui est sélectionné
 			System.out.println(typeClimat.getSelectedToggle().toString());
 			return 4;
+		}
+	}
+	
+	public static int getPerso() {
+		if(personnage.getSelectedToggle().toString().contains("Chasseur")) {
+			System.out.println(personnage.getSelectedToggle().toString());
+			return 0;
+		} else {
+			System.out.println(personnage.getSelectedToggle().toString());
+			return 1;
 		}
 	}
 	

@@ -53,7 +53,7 @@ public class GameUI {
 	boolean fini = false;
 	LancementGameUI mv3;
 	private int nbComp;
-	private Personnage vainqueur;
+	private static int vainqueur;
 	
 	
 	public GameUI(Chasseur chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
@@ -237,14 +237,14 @@ public class GameUI {
 							}
 							if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
-								vainqueur = chasseur;
+								vainqueur = 0;
 								System.out.println("Victoire chasseur"+fini);
 							}
 							
 						} else {
 							if(monstre.estDeplace(jeu, e.getCode().toString())) {
 								fini = monstre.changeCase(jeu);
-								if(fini) vainqueur = chasseur;
+								if(fini) vainqueur = 0;
 							}
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());
@@ -253,8 +253,8 @@ public class GameUI {
 							}
 							if(jeu.victoireMonstre() || jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) {
 								fini = true;
-								if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) vainqueur = chasseur;
-								else vainqueur = monstre;
+								if(jeu.victoireChasseur(chasseur.getPosition(), monstre.getPosition())) vainqueur = 0;
+								else vainqueur = 1;
 								System.out.println("defaite monstre"+fini);
 							}
 							
@@ -369,5 +369,10 @@ public class GameUI {
 	
 	public int getNbComp() {
 		return nbComp;
+	}
+	
+	public static String getVainqueur() {
+		if(vainqueur == 0) return "Chasseur";
+		else return "Monstre";
 	}
 }
