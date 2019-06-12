@@ -26,8 +26,8 @@ public class LancementGameUI extends Application{
 	int boutontComp = 0;
 	boolean fini = false;
 	private static Stage stage;
-	MenuAlone ma = new MenuAlone();
-	MenuAlone2J ma2 = new MenuAlone2J();
+	//MenuAlone ma = new MenuAlone();
+	//MenuAlone2J ma2 = new MenuAlone2J();
 
 	
 	public static void main(String[] args) {
@@ -38,18 +38,22 @@ public class LancementGameUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
-		ma.start(stage);
+		int climat;
+		if(MenuAlone2J.use) {
+			climat = MenuAlone2J.getClimat();
+		} else {
+			climat = MenuAlone.getClimat();
+		}
 		
 		GameUI gUI;
 		if(MenuAlone.getForme() == 0 || MenuAlone2J.getForme() == 0) {
-			jeu = new Plateau(10,10, MenuAlone.getClimat());
+			jeu = new Plateau(10,10, climat);
 		} else if(MenuAlone.getForme() == 1 || MenuAlone2J.getForme() == 1) {
-			jeu = new Plateau(14,8, MenuAlone.getClimat());
+			jeu = new Plateau(14,8, climat);
 		} else if(MenuAlone.getForme() == 2 || MenuAlone2J.getForme() == 2) {
-			jeu = new Plateau(10,10, MenuAlone.getClimat());
+			jeu = new Plateau(10,10, climat);
 		}
-		if(MenuAlone2J.getPseudo() != null) {
+		if(MenuAlone2J.use) {
 			chasseur =  new Chasseur(new Position(0,0));
 			monstre = new Monstre(new Position(jeu.getLargeur()-1,jeu.getHauteur()-1));
 			gUI = new GameUI(chasseur, monstre, jeu, this);

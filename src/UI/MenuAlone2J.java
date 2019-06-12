@@ -29,6 +29,7 @@ import javafx.util.StringConverter;
 
 public class MenuAlone2J extends Application {
 	
+	static boolean use = false;
 	static ToggleGroup formePlateau = new ToggleGroup();
 	static ToggleGroup typeClimat = new ToggleGroup();
 	static ToggleGroup personnage = new ToggleGroup();
@@ -169,7 +170,8 @@ public class MenuAlone2J extends Application {
 	}
 	
 	public static int getForme() {
-		if(formePlateau.getSelectedToggle().toString().contains("Carré")) {
+		if(formePlateau.getSelectedToggle() == null) return 0;
+		else if(formePlateau.getSelectedToggle().toString().contains("Carré")) {
 			return 0;
 		} else if(formePlateau.getSelectedToggle().toString().contains("Rectangulaire")) {
 			return 1;
@@ -179,6 +181,7 @@ public class MenuAlone2J extends Application {
 	}
 	
 	public static int getClimat() {
+		if(typeClimat.getSelectedToggle() == null) return 0;
 		if(typeClimat.getSelectedToggle().toString().contains("Tempéré")) {
 			//System.out.println(typeClimat.getSelectedToggle().toString());
 			return 0;
@@ -238,6 +241,7 @@ public class MenuAlone2J extends Application {
 		btStart.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
 			LancementGameUI m = new LancementGameUI();
 			try {
+				use = true;
 				m.start(s);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

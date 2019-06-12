@@ -251,7 +251,8 @@ public class MenuAlone extends Application {
 	}
 	
 	public static int getForme() {
-		if(formePlateau.getSelectedToggle().toString().contains("Carré")) {
+	if(formePlateau.getSelectedToggle() == null) return 4;
+	else if(formePlateau.getSelectedToggle().toString().contains("Carré")) {
 			return 0;
 		} else if(formePlateau.getSelectedToggle().toString().contains("Rectangulaire")) {
 			return 1;
@@ -261,7 +262,8 @@ public class MenuAlone extends Application {
 	}
 	
 	public static int getClimat() {
-		if(typeClimat.getSelectedToggle().toString().contains("Tempéré")) {
+		if(typeClimat.getSelectedToggle() == null) return 4;
+	else if(typeClimat.getSelectedToggle().toString().contains("Tempéré")) {
 			//System.out.println(typeClimat.getSelectedToggle().toString());
 			return 0;
 		} else if(typeClimat.getSelectedToggle().toString().contains("Désertique")) {
@@ -272,7 +274,7 @@ public class MenuAlone extends Application {
 			return 2;
 		} else { //si c'est Mélange qui est sélectionné
 			//System.out.println(typeClimat.getSelectedToggle().toString());
-			return 4;
+			return 3;
 		}
 	}
 	

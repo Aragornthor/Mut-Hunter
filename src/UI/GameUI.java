@@ -77,6 +77,7 @@ public class GameUI {
 	
 	public GameUI(IAChasseurGUI chasseur, Monstre monstre, Plateau jeu, LancementGameUI mv3) {
 		this((Chasseur)chasseur, (Monstre)monstre, jeu, mv3);
+		tourChasseur = false;
 	}
 	
 	public GameUI(Chasseur chasseur, IAMonstreGUI monstre, Plateau jeu, LancementGameUI mv3) {
