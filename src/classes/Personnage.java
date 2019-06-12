@@ -190,6 +190,7 @@ public abstract class Personnage {
 			this.setPosition(pos);
 			reussite = false;
 		}
+		if(reussite && this.getType().equalsIgnoreCase("monstre")) p.setCompteurCasesDecouvertes();
 		return reussite;
 	}
 	

@@ -342,7 +342,7 @@ public class MenuAlone extends Application {
 		return s.isFullScreen();
 	}
 	
-	private static String getPseudo() {
+	public static String getPseudo() {
 		if(pseudo.getText().equals("")) return pseudo.getText();
 		else return "Aucun nom";
 	}

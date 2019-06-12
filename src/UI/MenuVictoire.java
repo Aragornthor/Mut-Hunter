@@ -24,8 +24,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 /**
- * Interface des regles du jeu
- * @author Bankaert Benoit
+ * Interface du menu de victoire ou défaite
+ * @author Gallifa Robin
  *
  */
 public class MenuVictoire extends Application{
@@ -45,10 +45,6 @@ public class MenuVictoire extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		if(MenuAlone.getPerso() == 0) persoJoueur = "Chasseur";
-		else persoJoueur = "Monstre";
-		vainqueur = GameUI.getVainqueur();
-		if(vainqueur==persoJoueur) victoireJoueur=true;
 		VBox root = getRoot();
 		Scene sc = new Scene(root, screenSize.getWidth(), screenSize.getHeight());
 		primaryStage.setScene(sc);
@@ -69,36 +65,54 @@ public class MenuVictoire extends Application{
 	
 	
 	/**
-	 * Initialise le menu des regles
+	 * Initialise le menu de victoire ou défaite
 	 */
 	public MenuVictoire() {
 		MenuVictoire.sc = new Scene(getRoot(),screenSize.getWidth(),screenSize.getHeight());
 	}
 	
 	/**
-	 * @return la scene du menu des regles
+	 * @return la scene du menu de victoire ou défaite
 	 */
 	public static Scene getScene() {		
 		return sc;
 	}
 	
 	/**
-	 * @return le menu des regles
+	 * @return le menu de victoire ou défaite
 	 */
 	public VBox getRoot() {
+		System.out.println("GetPerso "+MenuAlone.getPerso());
+		System.out.println("Perso 1  "+persoJoueur);
+		if(MenuAlone.getPerso() == 0) persoJoueur = "Chasseur";
+		else persoJoueur = "Monstre";
+		System.out.println("Perso 2  "+persoJoueur);
+		vainqueur = GameUI.getVainqueur();
+		if(vainqueur==persoJoueur) victoireJoueur=true;
+		else victoireJoueur=false;
+		System.out.println("Victoire "+victoireJoueur);
 		VBox root = new VBox();
 		Pane top = new Pane();
 		top.setPrefWidth(1000);
-		if(victoireJoueur) this.title = new Label("VICTOIRE !");
-		else this.title = new Label("DEFAITE...");
+		if(victoireJoueur) this.title = new Label("VICTOIRE "+MenuAlone.getPseudo()+" !");
+		else this.title = new Label("DEFAITE "+MenuAlone.getPseudo()+"...");
 		this.title.setFont(new Font(50));
 		this.title.setPrefWidth(275);
 		this.title.setLayoutX(screenSize.getWidth()/2 - this.title.getPrefWidth()/2);
 
 		this.title.setTextFill(Color.WHITE);
 	
-		
-		
+		Label message = new Label("Le monstre ne causera plus de soucis dans la région. Vous l'avez éliminé et il ne reviendra plus ! Les habitants seront heureux de l'apprendre.");	
+		message.setTextFill(Color.WHITE);
+		message.setPadding(new Insets(50));
+		message.setWrapText(true);
+		message.setFont(new Font(35));
+		System.out.println("VicJ "+victoireJoueur);
+		System.out.println("Perso "+persoJoueur);
+		System.out.println("Label "+message);
+		if(victoireJoueur && persoJoueur.equals("Monstre")) message.setText("Vous avez réussi à fuir la région ! Le chasseur ne devrait plus vous suivre ici. Ces terres sont fertiles et accueillantes, l'endroit idéal pour s'installer. La vengeance sera pour plus tard...");
+		else if(!victoireJoueur && persoJoueur.equals("Monstre")) message.setText("Vous êtes mort. Le chasseur s'en va fièrement montrer votre tête aux siens. C'est ici que l'aventure se finit...");
+		else if(!victoireJoueur && persoJoueur.equals("Chasseur")) message.setText("Le monstre s'est enfuit... Vous revenez les mains bredouilles et les habitants de la région doivent maintenant vivre dans la peur constante de voir ce monstre revenir...");
 		this.retour = initRetour();
 		
 		top.getChildren().addAll(this.title,retour);
@@ -107,7 +121,7 @@ public class MenuVictoire extends Application{
 		sep.setPadding(new Insets(5));
 		
 		VBox.setMargin(top, new Insets(5));
-		root.getChildren().addAll(top,sep);
+		root.getChildren().addAll(top,sep, message);
 		root.setAlignment(Pos.TOP_CENTER);
 			
 		
