@@ -231,8 +231,10 @@ public class GameUI {
 					System.out.println(fini);
 					if(e.getCode().toString().equalsIgnoreCase("z") || e.getCode().toString().equalsIgnoreCase("q") || e.getCode().toString().equalsIgnoreCase("s") || e.getCode().toString().equalsIgnoreCase("d"))
 						if(tourChasseur) {
-							chasseur.estDeplace(jeu, e.getCode().toString());
-							fini = chasseur.changeCase(jeu);
+							if(chasseur.estDeplace(jeu, e.getCode().toString())) {
+								monstre.eventCase(jeu);
+								fini = chasseur.changeCase(jeu);
+							}
 							dP.affichagePlateauVisionChasseur(plateau);
 							System.out.println(chasseur.getDeplacement()+" "+chasseur.getPosition());
 							if(chasseur.getDeplacement() == 0) {
@@ -246,8 +248,9 @@ public class GameUI {
 							
 						} else {
 							if(monstre.estDeplace(jeu, e.getCode().toString())) {
+								monstre.eventCase(jeu);
 								fini = monstre.changeCase(jeu);
-								if(fini) vainqueur = 0;
+								monstre.eventCase(jeu);
 							}
 							dP.affichagePlateauVisionMonstre(plateau);
 							System.out.println(monstre.getDeplacement());

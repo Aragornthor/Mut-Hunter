@@ -50,5 +50,9 @@ public class Chasseur extends Personnage{
 		return false;
 	}
 	
+	public void supprimePersonnage(Plateau p) {
+		p.getCase(this.getPosition()).setEstChasseur(false);
+	}
+	
 	
 }

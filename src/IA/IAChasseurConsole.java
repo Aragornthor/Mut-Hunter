@@ -61,4 +61,9 @@ public class IAChasseurConsole extends Personnage {
 		p.getCase(this.getPosition()).setEstChasseur(true);
 		return false;
 	}
+
+	@Override
+	public void supprimePersonnage(Plateau p) {
+		p.getCase(this.getPosition()).setEstChasseur(false);
+	}
 }

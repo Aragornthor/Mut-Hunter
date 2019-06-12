@@ -69,5 +69,11 @@ public class IAMonstreConsole extends Personnage {
 		p.getCase(this.getPosition()).setTempsDecouvert(p.getTours());
 		return p.defaiteMonstre(this.getPosition());
 	}
+
+	@Override
+	public void supprimePersonnage(Plateau p) {
+		p.getCase(this.getPosition()).setEstMonstre(false);
+		
+	}
 	
 }

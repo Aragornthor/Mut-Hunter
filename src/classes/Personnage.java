@@ -142,22 +142,6 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()-1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
-				/*if(this.deplacement < 0) {
-					throw new ManqueDeplacementException();
-					
-				}*/
-				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				else if(p.getCase(this.getPosition()).getLoot()) {
-					p.ajoutCompetence(this);
-					p.setDernierLoot();
-				}
-				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
-					if(!this.getStatut().equals(Statut.Shield)) {
-						this.setStatut(Statut.Stun);
-						this.getStatut().setTour(2);
-					}
-					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
-				}
 				reussite = true;
 			}
 		}
@@ -170,18 +154,6 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setY(this.position.getY()+1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
-				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				else if(p.getCase(this.getPosition()).getLoot()) {
-					p.ajoutCompetence(this);
-					p.setDernierLoot();
-				}
-				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
-					if(!this.getStatut().equals(Statut.Shield)) {
-						this.setStatut(Statut.Stun);
-						this.getStatut().setTour(2);
-					}
-					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
-				}
 				reussite = true;
 			}
 		}
@@ -194,18 +166,6 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()-1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
-				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				else if(p.getCase(this.getPosition()).getLoot()) {
-					p.ajoutCompetence(this);
-					p.setDernierLoot();
-				}
-				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
-					if(!this.getStatut().equals(Statut.Shield)) {
-						this.setStatut(Statut.Stun);
-						this.getStatut().setTour(2);
-					}
-					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
-				}
 				reussite = true;
 			}
 		}
@@ -218,23 +178,11 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
-				if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
-				if(p.getCase(this.getPosition()).getLoot()) {
-					p.ajoutCompetence(this);
-					p.setDernierLoot();
-				}
-				else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
-					if(!this.getStatut().equals(Statut.Shield)) {
-						this.setStatut(Statut.Stun);
-						this.getStatut().setTour(2);
-					}
-					p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
-				}
 				reussite = true;
 			}
 		}
 		if(this.deplacement<0) {
-			p.setCaseNormal(this.position);
+			supprimePersonnage(p);
 			this.position = pos;
 			this.changeCase(p);
 			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
@@ -243,6 +191,24 @@ public abstract class Personnage {
 			reussite = false;
 		}
 		return reussite;
+	}
+	
+	public abstract void supprimePersonnage(Plateau p);
+	
+	public void eventCase(Plateau p) {
+		if(p.getCase(this.position).getEstPortail()) this.setPosition(p.teleportation(this.position));
+		if(p.getCase(this.getPosition()).getLoot()) {
+			p.ajoutCompetence(this);
+			p.setDernierLoot();
+			p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);;
+		}
+		else if(p.getCase(this.getPosition()).getEstPiege() && this.type.equalsIgnoreCase("monstre")) {
+			if(!this.getStatut().equals(Statut.Shield)) {
+				this.setStatut(Statut.Stun);
+				this.getStatut().setTour(2);
+			}
+			p.getCase(this.getPosition()).setTypeCase(TypeCase.VIDE);
+		}
 	}
 	
 	/**

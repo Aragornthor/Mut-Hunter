@@ -53,4 +53,8 @@ public class Monstre extends Personnage {
 		p.getCase(this.getPosition()).setTempsDecouvert(p.getTours());
 		return passeParLa;
 	}
+	
+	public void supprimePersonnage(Plateau p) {
+		p.getCase(this.getPosition()).setEstMonstre(false);
+	}
 }

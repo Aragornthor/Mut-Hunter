@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
  */
 public enum TypeCase {
 
-	VIDE(new Image("file:ressources/images/vide.png")), PORTAIL(new Image("file:ressources/images/portail.png")), LOOT(new Image("file:ressources/images/loot.png")), PIEGE(null);
+	VIDE(null), PORTAIL(new Image("file:ressources/images/portail.png")), LOOT(new Image("file:ressources/images/loot.png")), PIEGE(null);
 	
 	private Image image;
 	
