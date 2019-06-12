@@ -84,11 +84,11 @@ public class DisplayPlateau {
 					p.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible(),
 							((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getWidth()/2),
 							  j*jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getHeight()/6));
-					if(jeu.getPlateau()[i][j].getEstPortail()) {
-						p.drawImage(jeu.getPlateau()[i][j].getTypeCase().getImage(),
-								((9-j))*(jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2),
-								  j*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6));
-					}
+				}
+				if(jeu.getPlateau()[i][j].getEstPortail()) {
+					p.drawImage(jeu.getPlateau()[i][j].getTypeCase().getImage(),
+							((9-j))*(jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2),
+							  j*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6));
 				}
 			}
 		}
@@ -129,11 +129,11 @@ public class DisplayPlateau {
 					p.drawImage(jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible(),
 							((9-j))*(jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getWidth()/2),
 							  j*jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeTerrain().getImageNonVisible().getHeight()/6));
-					if(jeu.getPlateau()[i][j].getEstPortail()) {
-						p.drawImage(jeu.getPlateau()[i][j].getTypeCase().getImage(),
-								((9-j))*(jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2),
-								  j*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6));
-					}
+				}
+				if(jeu.getPlateau()[i][j].getEstPortail()) {
+					p.drawImage(jeu.getPlateau()[i][j].getTypeCase().getImage(),
+							((9-j))*(jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2)+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getWidth()/2),
+							  j*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6+(i*jeu.getPlateau()[i][j].getTypeCase().getImage().getHeight()/6));
 				}
 			}
 		}

@@ -232,7 +232,7 @@ public class GameUI {
 					if(e.getCode().toString().equalsIgnoreCase("z") || e.getCode().toString().equalsIgnoreCase("q") || e.getCode().toString().equalsIgnoreCase("s") || e.getCode().toString().equalsIgnoreCase("d"))
 						if(tourChasseur) {
 							if(chasseur.estDeplace(jeu, e.getCode().toString())) {
-								monstre.eventCase(jeu);
+								//monstre.eventCase(jeu);
 								fini = chasseur.changeCase(jeu);
 							}
 							dP.affichagePlateauVisionChasseur(plateau);
@@ -248,7 +248,7 @@ public class GameUI {
 							
 						} else {
 							if(monstre.estDeplace(jeu, e.getCode().toString())) {
-								monstre.eventCase(jeu);
+								//monstre.eventCase(jeu);
 								fini = monstre.changeCase(jeu);
 								monstre.eventCase(jeu);
 							}

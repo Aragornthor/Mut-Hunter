@@ -143,6 +143,7 @@ public abstract class Personnage {
 				this.position.setY(this.position.getY()-1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				reussite = true;
+				reussite = horsLimite(p, pos, deplacement);
 			}
 		}
 		
@@ -155,6 +156,7 @@ public abstract class Personnage {
 				this.position.setY(this.position.getY()+1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				reussite = true;
+				reussite = horsLimite(p, pos, deplacement);
 			}
 		}
 		
@@ -167,6 +169,7 @@ public abstract class Personnage {
 				this.position.setX(this.position.getX()-1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
 				reussite = true;
+				reussite = horsLimite(p, pos, deplacement);
 			}
 		}
 		
@@ -178,20 +181,28 @@ public abstract class Personnage {
 				p.setCaseNormal(this.position);
 				this.position.setX(this.position.getX()+1);
 				this.deplacement -= p.getCase(this.getPosition()).getTypeTerrain().getDeplacement();
-				reussite = true;
+				reussite = horsLimite(p, pos, deplacement);
 			}
 		}
+		if(reussite) {
+			if(this.getType().equalsIgnoreCase("monstre")) {
+				p.setCompteurCasesDecouvertes();
+			}
+			eventCase(p);
+		}
+		return reussite;
+	}
+	
+	public boolean horsLimite(Plateau p, Position anciennePosition, int deplacement) {
 		if(this.deplacement<0) {
 			supprimePersonnage(p);
-			this.position = pos;
+			this.position = anciennePosition;
 			this.changeCase(p);
 			System.out.println("Vous ne pouvez pas vous déplacer ici, vous manquez de points de déplacements");
 			this.deplacement = deplacement;
-			this.setPosition(pos);
-			reussite = false;
+			return false;
 		}
-		if(reussite && this.getType().equalsIgnoreCase("monstre")) p.setCompteurCasesDecouvertes();
-		return reussite;
+		return true;
 	}
 	
 	public abstract void supprimePersonnage(Plateau p);

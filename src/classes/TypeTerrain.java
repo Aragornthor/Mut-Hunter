@@ -9,9 +9,9 @@ import javafx.scene.image.Image;
  */
 public enum TypeTerrain {
 
-	PLAINE(10,1,new Image("file:ressources/images/plaines.png"),new Image("file:ressources/images/plainesNonVisible.png")), 
-	FORET(10,2,new Image("file:ressources/images/foret.png"), new Image("file:ressources/images/foretNonVisible.png")), 
-	MONTAGNE(10,3,new Image("file:ressources/images/montagnes.png"), new Image("file:ressources/images/montagnesNonVisible.png")), 
+	PLAINE(2,1,new Image("file:ressources/images/plaines.png"),new Image("file:ressources/images/plainesNonVisible.png")), 
+	FORET(1,2,new Image("file:ressources/images/foret.png"), new Image("file:ressources/images/foretNonVisible.png")), 
+	MONTAGNE(3,3,new Image("file:ressources/images/montagnes.png"), new Image("file:ressources/images/montagnesNonVisible.png")), 
 	EAU(2,2,new Image("file:ressources/images/eau.png"), new Image("file:ressources/images/eauNonVisible.png")), 
 	DESERT(2,1,new Image("file:ressources/images/desert.png"), new Image("file:ressources/images/desertNonVisible.png")), 
 	VILLE(3,2,new Image("file:ressources/images/ville2.png"), new Image("file:ressources/images/ville2NonVisible.png")), 
