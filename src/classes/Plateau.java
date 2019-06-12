@@ -75,6 +75,8 @@ public class Plateau {
 		} else {
 			initPlateauChaotique();
 		}
+		this.generePortail();
+		this.ajoutLoot();
 	}
 	
 	/**
@@ -171,6 +173,7 @@ public class Plateau {
 		}
 		//System.out.println("Fin init");
 		this.generePortail();
+		this.ajoutLoot();
 		
 	}
 	
